@@ -10,6 +10,7 @@
   (add-to-list 'default-frame-alist '(background-color . "#282d3d")))
 (set-background-color "#282d3d")
 
+
 ;; (use-package doom-themes
 ;;   :ensure t
 ;;   :config

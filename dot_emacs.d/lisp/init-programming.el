@@ -1,4 +1,5 @@
 
+
 ;;; Code:
 (use-package smartparens
   :ensure t
@@ -29,22 +30,99 @@
   )
 
 ;; 撤销记录
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-enable-undo-in-region nil)
-(setq undo-tree-history-directory-alist '(("" . "~/.emacs.d/undohist")))
-
-(use-package company
-  :ensure t
+(use-package undo-tree
   :config
-  (setq company-idle-delay 0.08)
-  (setq company-minimum-prefix-length 3)
-  (add-hook 'after-init-hook #'global-company-mode)
-  (bind-key "<backtab>" 'company-select-previous-or-abort company-active-map)
+  (progn
+    (defun modi/undo-tree-enable-save-history ()
+      "Enable auto saving of the undo history."
+      (interactive)
 
-  ;; 只有一个可选的时候也显示出来
-  (setq company-frontends '(company-pseudo-tooltip-frontend
-                            company-echo-metadata-frontend))
-  )
+      (setq undo-tree-auto-save-history t)
+
+      ;; Compress the history files as .gz files
+      ;; (advice-add 'undo-tree-make-history-save-file-name :filter-return
+      ;;             (lambda (return-val) (concat return-val ".gz")))
+
+      ;; Persistent undo-tree history across emacs sessions
+      (setq modi/undo-tree-history-dir (let ((dir (concat user-emacs-directory
+                                                          "undo-tree-history/")))
+                                         (make-directory dir :parents)
+                                         dir))
+      (setq undo-tree-history-directory-alist `(("." . ,modi/undo-tree-history-dir)))
+
+      (add-hook 'write-file-functions #'undo-tree-save-history-hook)
+      (add-hook 'find-file-hook #'undo-tree-load-history-hook))
+
+    (defun modi/undo-tree-disable-save-history ()
+      "Disable auto saving of the undo history."
+      (interactive)
+
+      (setq undo-tree-auto-save-history nil)
+
+      (remove-hook 'write-file-functions #'undo-tree-save-history-hook)
+      (remove-hook 'find-file-hook #'undo-tree-load-history-hook))
+
+    (modi/undo-tree-enable-save-history)
+
+    (global-undo-tree-mode 1)))
+
+
+;; (use-package company
+;;   :ensure t
+;;   :config
+;;   (setq company-idle-delay 0.08)
+;;   (setq company-minimum-prefix-length 3)
+;;   (add-hook 'after-init-hook #'global-company-mode)
+;;   (bind-key "<backtab>" 'company-select-previous-or-abort company-active-map)
+
+;;   ;; 只有一个可选的时候也显示出来
+;;   (setq company-frontends '(company-pseudo-tooltip-frontend
+;;                             company-echo-metadata-frontend))
+;;   )
+(use-package company
+  :defer 5
+  :bind (("M-/" . company-complete)
+         :map company-active-map
+         ("<backtab>" . company-select-previous-or-abort)
+         ("M-i" . company-complete-selection)
+         ("C-n" . company-select-next)
+         ("C-p" . company-select-previous)
+         ("M-n" . company-select-next)
+         ("M-p" . company-select-previous))
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+  (setq company-selection-wrap-around t)
+  (setq company-show-numbers t)
+  (setq company-tooltip-limit 10)
+  (setq company-echo-delay 0)
+  (setq company-global-modes
+        '(not message-mode git-commit-mode eshell-mode))
+
+  ;; company-dabbrev
+  (setq company-dabbrev-char-regexp "[[:word:]_:@.-]+")
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-ignore-case nil)
+  (setq company-require-match nil)
+  (setq company-dabbrev-minimum-length 2)
+
+  (setq company-backends
+        '((company-capf company-dabbrev company-files)
+          (company-dabbrev-code company-gtags company-etags
+                                company-keywords)))
+  (setq company-transformers
+        '(company-sort-by-occurrence))
+
+  (setq company-frontends
+        '(company-pseudo-tooltip-frontend
+          company-echo-metadata-frontend))
+
+  (if (and (fboundp 'daemonp) (daemonp))
+      (add-hook 'after-make-frame-functions
+                (lambda (x)
+                  (global-company-mode)))
+    (global-company-mode)))
+
 
 
 (use-package flycheck
@@ -149,6 +227,10 @@
   :config
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode)
+  )
+
+(use-package devdocs
+  :ensure t
   )
 
 

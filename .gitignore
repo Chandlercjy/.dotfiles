@@ -21,3 +21,12 @@ eshell/lastdir
 tramp
 eshell/*
 recentf~
+
+.mypy_cache
+.vim
+.netrwhist
+custom.vim
+dot_emacs.d/.emacs.d
+nvim/nvim
+dot_emacs.d/undo-tree-history/
+dot_emacs.d/dot_emacs.d
