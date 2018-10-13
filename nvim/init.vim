@@ -561,8 +561,9 @@ let g:ycm_python_binary_path = '/Users/chandler/anaconda/bin/python'
 " 通用快捷键
 " ==============================
 " 打开配置文件
-nmap <Space>v :e ~/.config/nvim/init.vim<CR>
+nmap <Space>v :FZF ~/.config/nvim<CR>
 nmap <Space>e :FZF ~/.emacs.d<CR>
+nmap <Space>a :Ag<CR>
 
 " FZF搜索文件
 nmap <C-p> :FZF ~/Documents/<CR>
