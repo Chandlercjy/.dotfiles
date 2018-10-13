@@ -27,29 +27,30 @@ def main():
 
     if not is_exist(neovim_dir.parent):
         os.mkdir(neovim_dir.parent)
-        print(f"检测不到 {neovim_dir.parent}, 已新建该文件夹。")
+        print(f"Establishing {neovim_dir.parent}.")
 
     if is_exist(neovim_dir):
         move_to_backup(neovim_dir)
-        print(f"{neovim_dir} 已存在, 进行备份，添加后缀为bak。")
+        print(f"Backup old config:  {neovim_dir} to {neovim_dir}.bak ")
 
     if create_link("~/.dotfiles/nvim", neovim_dir):
         print("Neovim 链接创建成功!")
-    os.system("nvim -c PlugInstall -c wqa!")
-    print("Neovim 插件更新成功!")
+    print("Link Neovim dotfile successed!")
 
     # Link Emacs
     if is_exist(emacs_dir):
         move_to_backup(emacs_dir)
-        print(f"{emacs_dir} 已存在, 进行备份，添加后缀为bak。")
+        print(f"Backup old config:  {emacs_dir} to {emacs_dir}.bak ")
 
     if create_link("~/.dotfiles/dot_emacs.d", emacs_dir):
-        print("Emacs 链接创建成功!")
+        print("Link Emacs dotfile successed!")
 
     #settle Term Xterm24
     os.system("/bin/bash ~/.dotfiles/dot_terminfo/setup.sh")
-    print("Term Xterm24 配置成功!")
+    print("Term=xterm-24bits has been settled!")
 
 
 if __name__ == "__main__":
+    print("======= Start to link Chandler's dotfiles!! =======")
     main()
+    print("======= Enjoy Chandler's dotfiles!! ===============")

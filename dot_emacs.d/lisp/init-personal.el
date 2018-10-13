@@ -1,6 +1,4 @@
 
-(setq wakatime-api-key "ad806a82-3012-4905-bada-8c81cd3b0465")
-
 ;; 个性化配置快捷键:
 (define-key evil-normal-state-map (kbd "<SPC> p") 'search-Document)
 

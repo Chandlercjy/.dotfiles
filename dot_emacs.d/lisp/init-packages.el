@@ -22,16 +22,6 @@
   :config
   (popwin-mode t))
 
-(use-package wakatime-mode
-  :ensure t
-  :config
-  (global-wakatime-mode)
-  ;; 设置API
-  ;; (setq wakatime-api-key "")
-  (setq wakatime-cli-path "wakatime")
-  (setq wakatime-python-bin nil)
-  )
-
 ;; (use-package diff-hl
 ;;   :ensure t
 ;;   :init
