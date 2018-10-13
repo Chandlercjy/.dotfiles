@@ -39,13 +39,16 @@ def main():
     print("Neovim 插件更新成功!")
 
     # Link Emacs
-
     if is_exist(emacs_dir):
         move_to_backup(emacs_dir)
         print(f"{emacs_dir} 已存在, 进行备份，添加后缀为bak。")
 
     if create_link("~/.dotfiles/dot_emacs.d", emacs_dir):
         print("Emacs 链接创建成功!")
+
+    #settle Term Xterm24
+    os.system("/bin/bash ~/.dotfiles/dot_terminfo/setup.sh")
+    print("Term Xterm24 配置成功!")
 
 
 if __name__ == "__main__":
