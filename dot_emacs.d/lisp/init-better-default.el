@@ -73,6 +73,11 @@
 (set-default 'truncate-lines t)
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
+(use-package smart-tabs-mode
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'smart-tabs-mode)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;             Ibuffer 配置           ;

@@ -5,14 +5,14 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-childframe company-posframe pyim linear-undo goto-last-change devdocs-search devdocs fill-column-indicator dockerfile-mode docker better-shell wgrep-ag wgrep ag erefactor dired-hide-dotfiles evil-magit evil-vimish-fold embrace workgroups2 ace-jump-mode evil-search-highlight-persist evil-nerd-commenter dumb-jump ranger counsel-projectile counsel-gtags tide cmake-mode cpputils-cmake ein flycheck-pycheckers highlight-defined aggressive-indent yasnippet-snippets format-all gtags flycheck-ycmd company-ycmd evil-smartparens treemacs-projectile treemacs-evil dashboard rich-minority spaceline linum-relative color-theme-approximate atom-one-dark-theme which-key vimrc-mode fzf evil-matchit diminish wakatime-mode popwin hungry-delete evil-mc use-package)))
+	(smart-tabs-mode company-childframe company-posframe pyim linear-undo goto-last-change devdocs-search devdocs fill-column-indicator dockerfile-mode docker better-shell wgrep-ag wgrep ag erefactor dired-hide-dotfiles evil-magit evil-vimish-fold embrace workgroups2 ace-jump-mode evil-search-highlight-persist evil-nerd-commenter dumb-jump ranger counsel-projectile counsel-gtags tide cmake-mode cpputils-cmake ein flycheck-pycheckers highlight-defined aggressive-indent yasnippet-snippets format-all gtags flycheck-ycmd company-ycmd evil-smartparens treemacs-projectile treemacs-evil dashboard rich-minority spaceline linum-relative color-theme-approximate atom-one-dark-theme which-key vimrc-mode fzf evil-matchit diminish wakatime-mode popwin hungry-delete evil-mc use-package)))
  '(pyim-dicts nil)
  '(shell-pop-full-span t)
  '(shell-pop-shell-type
    (quote
-    ("ansi-term" "*ansi-term*"
-     (lambda nil
-       (ansi-term shell-pop-term-shell)))))
+	("ansi-term" "*ansi-term*"
+	 (lambda nil
+	   (ansi-term shell-pop-term-shell)))))
  '(wakatime-python-bin nil))
 
 (custom-set-faces
