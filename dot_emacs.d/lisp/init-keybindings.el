@@ -148,7 +148,7 @@
   :after evil
   :config
   ;; (define-key evil-normal-state-map "t" 'ace-jump-char-mode)
-  (define-key evil-normal-state-map "f" 'ace-jump-word-mode)
+  (define-key evil-normal-state-map "f" 'ace-jump-char-mode)
   )
 
 
@@ -250,11 +250,6 @@
 (global-set-key (kbd "C-h C-v") 'find-variable)
 (global-set-key (kbd "C-h C-k") 'find-function-on-key)
 
-
-;; 系统功能增强
-(global-set-key (kbd "<escape>")
-                (kbd "C-g"))
-
 ;; 编译
 (global-set-key (kbd "<f5>") 'compile)
 
@@ -276,9 +271,5 @@
 	    try-complete-lisp-symbol-partially
 	    try-complete-lisp-symbol))
 
-
 ;; (global-set-key (kbd "\C-c t") 'toggle-truncate-lines)
-
-
-
 (provide 'init-keybindings)

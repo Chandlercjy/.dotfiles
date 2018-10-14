@@ -41,9 +41,12 @@ def main():
     if is_exist(emacs_dir):
         move_to_backup(emacs_dir)
         print(f"Backup old config:  {emacs_dir} to {emacs_dir}.bak ")
-
     if create_link("~/.dotfiles/dot_emacs.d", emacs_dir):
         print("Link Emacs dotfile successed!")
+
+    print("Copy Emacs diy elpa packages successed!")
+    os.system("mkdir ~/.dotfiles/dot_emacs.d/elpa")
+    os.system("cp ~/.dotfiles/emacs_diy_elpa/* ~/.dotfiles/dot_emacs.d/elpa")
 
     #settle Term Xterm24
     os.system("/bin/bash ~/.dotfiles/dot_terminfo/setup.sh")
