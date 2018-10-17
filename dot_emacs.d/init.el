@@ -1,21 +1,33 @@
 
 (require 'package )
-(package-initialize)
 (setq gc-cons-threshold 100000000)
 (setq package-enable-at-startup nil)
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-(add-to-list 'package-archives '("MELPA" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
+;; (add-to-list 'package-archives '("MELPA-tuna" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
 (add-to-list 'package-archives '("Marmalad" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/marmalade/")
              t)
 (add-to-list 'package-archives '("Org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/marmalade/") t)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+;; (package-refresh-contents)
+
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
   )
+
+(use-package benchmark-init
+  :ensure t
+  :init
+  (benchmark-init/activate)
+  :hook
+  (after-init . benchmark-init/deactivate))
 
 (require 'init-packages)
 (require 'init-ui)
@@ -104,4 +116,7 @@
 
 
 (put 'dired-find-alternate-file 'disabled nil )
+
+(setq initial-scratch-message ";; Hi Chandler! Today's is also a beautiful day~")
+
 

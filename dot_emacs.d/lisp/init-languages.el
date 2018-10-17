@@ -8,9 +8,11 @@
   (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode))
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                Python               ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 (use-package python
   :mode ("\\.py\\'" . python-mode)
@@ -28,6 +30,10 @@
   (setq flycheck-pycheckers-checkers (quote (pylint pep8)))
   )
 
+(use-package py-isort
+  :ensure t
+  :config
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;           Python Notebook           ;
@@ -100,6 +106,15 @@
   (add-to-list 'auto-mode-alist '("\\CMakeLists.txt\\'" . cmake-mode))
   )
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                        ;                  Go                 ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package go-mode
+  :ensure t
+  )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                TypeScript           ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -124,3 +139,74 @@
   )
 
 (provide 'init-languages)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                        ;               JavaScript            ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package js2-mode
+  :ensure t
+  :mode ("\\.js\\'" . js2-mode)
+  :config
+  (add-hook 'js2-mode-hook 'ycmd-mode)
+  (add-hook 'js2-mode-hook 'company-mode)
+  (add-hook 'js2-mode-hook 'js2-mode-hide-warnings-and-errors)
+  (add-hook 'js2-mode-hook #'setup-tide-mode)
+  )
+
+(use-package nodejs-repl
+  :ensure t
+  :after js2-mode
+  :config
+  (add-hook 'js-mode-hook
+            (lambda ()
+              (define-key js-mode-map (kbd "C-c C-c") 'nodejs-repl-send-buffer)
+              (define-key js-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-expression)
+              (define-key js-mode-map (kbd "C-c C-l") 'nodejs-repl-send-line)
+              (define-key js-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
+              (define-key js-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)))
+
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (define-key js2-mode-map (kbd "C-c C-c") 'nodejs-repl-send-buffer)
+              (define-key js2-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-expression)
+              (define-key js2-mode-map (kbd "C-c C-l") 'nodejs-repl-send-line)
+              (define-key js2-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
+              (define-key js2-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)))
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                        ;                 Web                 ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package web-mode
+  :ensure t
+  :mode
+  (("\\.html?\\'" . web-mode)
+   ("\\.phtml\\'" . web-mode)
+   ("\\.tpl\\.php\\'" . web-mode)
+   ("\\.[agj]sp\\'" . web-mode)
+   ("\\.as[cp]x\\'" . web-mode)
+   ("\\.erb\\'" . web-mode)
+   ("\\.mustache\\'" . web-mode)
+   ("\\.djhtml\\'" . web-mode)
+   ;; associate a content type
+   ("\\.api\\'" . web-mode)
+   ("/some/react/path/.*\\.js[x]?\\'" . web-mode))
+  :config
+  ;; (add-hook 'web-mode-hook 'ycmd-mode)
+  ;; (add-hook 'web-mode-hook 'company-mode)
+
+  (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
+  (setq web-mode-css-indent-offset 2)    ; web-mode, css in html file
+  (setq web-mode-code-indent-offset 2)   ; web-mode, js code in html file
+
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-block-padding 2
+        web-mode-comment-style 2
+        web-mode-enable-auto-expanding t
+        web-mode-enable-css-colorization t
+        web-mode-enable-auto-pairing t
+        web-mode-enable-current-element-highlight t)
+  ) ; this fixes the quote problem I mentioned

@@ -65,15 +65,12 @@
   )
 
 
-
-;; 最近打开的文件
 (use-package evil
   :ensure t
   :config (evil-mode 1)
   (evil-add-hjkl-bindings recentf-dialog-mode-map 'emacs)
   (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  ;; 模仿Vim
   (define-key evil-normal-state-map (kbd "<SPC> e") 'open-my-emacs-init-file)
   (define-key evil-normal-state-map (kbd "<SPC> v") 'open-my-vim-init-file)
 
@@ -82,12 +79,12 @@
   (define-key evil-normal-state-map (kbd "<SPC> o") 'counsel-fzf)
   (define-key evil-normal-state-map ",cd" 'back_to_current_dir)
 
-  (define-key evil-normal-state-map (kbd "<SPC> gd") 'counsel-gtags-find-definition)
-  (define-key evil-normal-state-map (kbd "<SPC> gr") 'counsel-gtags-find-reference)
+  ;; (define-key evil-normal-state-map (kbd "<SPC> gd") 'counsel-gtags-find-definition)
+  ;; (define-key evil-normal-state-map (kbd "<SPC> gr") 'counsel-gtags-find-reference)
+  (define-key evil-normal-state-map (kbd ",g") 'ycmd-goto)
 
-  (define-key evil-normal-state-map ",g" 'dumb-jump-go)
+  (define-key evil-normal-state-map ",d" 'dumb-jump-go)
   (define-key evil-normal-state-map ",b" 'dumb-jump-back)
-  (define-key evil-normal-state-map (kbd "<SPC> yi") 'ycmd-goto-include)
   (define-key evil-normal-state-map (kbd "<SPC> yf") 'ycmd-fixit)
   (define-key evil-normal-state-map ",f" 'format-all-buffer)
 
@@ -97,8 +94,6 @@
   (define-key evil-normal-state-map (kbd "<SPC> a") 'counsel-ag)
   (define-key evil-normal-state-map (kbd "<SPC> b") 'counsel-ibuffer)
   (define-key evil-normal-state-map (kbd "<SPC> f") 'counsel-fzf)
-  ;; (define-key evil-normal-state-map (kbd "/") 'swiper)
-
 
   (define-key evil-normal-state-map (kbd "<SPC> ]") 'flycheck-next-error)
   (define-key evil-normal-state-map (kbd "<SPC> [") 'flycheck-previous-error)
@@ -111,8 +106,6 @@
   (define-key evil-insert-state-map "\C-a" 'company-yasnippet)
   )
 
-
-
 (use-package evil-nerd-commenter
   :ensure t
   :after evil
@@ -121,9 +114,6 @@
   (define-key evil-normal-state-map ",cc" 'evilnc-comment-or-uncomment-lines)
   (define-key evil-normal-state-map ",cp" 'evilnc-comment-or-uncomment-paragraphs)
   )
-
-
-
 
 ;; 高亮搜索
 (use-package evil-search-highlight-persist
@@ -210,32 +200,7 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;                 Git                 ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package magit
-  :ensure t
-  :config
-  (add-to-list 'display-buffer-alist
-               `(,(rx bos "*magit:")
-                 (display-buffer-reuse-window
-                  display-buffer-below-selected)
-                 (reusable-frames . visible)
-                 (side            . bottom)
-                 (window-height   . 0.4)))
-  )
-
-(use-package evil-magit
-  :ensure t
-  :after evil magit
-  )
-
-;; (use-package git-gutter
-;;   :ensure t
-;;   :init
-;;   (global-git-gutter-mode +1))
-
+(global-set-key (kbd "C-x g") 'magit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;               系统相关             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -252,24 +217,9 @@
 
 ;; 编译
 (global-set-key (kbd "<f5>") 'compile)
-
-
+(global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(global-set-key (kbd "M-/") 'hippie-expand)
-
-(setq hippie-expand-try-functions-list 
-      '(try-expand-dabbrev
-	    try-expand-dabbrev-visible
-	    try-expand-dabbrev-all-buffers
-	    try-expand-dabbrev-from-kill
-	    try-complete-file-name-partially
-	    try-complete-file-name
-	    try-expand-all-abbrevs
-	    try-expand-list
-	    try-expand-line
-	    try-complete-lisp-symbol-partially
-	    try-complete-lisp-symbol))
 
 ;; (global-set-key (kbd "\C-c t") 'toggle-truncate-lines)
 (provide 'init-keybindings)

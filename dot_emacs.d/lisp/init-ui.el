@@ -15,7 +15,7 @@
 ;;   :ensure t
 ;;   :config
 ;;   ;; (load-theme 'doom-opera t)
-;;   ;; (load-theme 'doom-one t)
+;;   (load-theme 'doom-one t)
 ;;   )
 
 ;; (use-package zenburn-theme
@@ -25,11 +25,11 @@
 ;;   )
 
 
-(use-package color-theme-approximate
-  :ensure t
-  :config
-  (color-theme-approximate-on)
-  )
+;; (use-package color-theme-approximate
+;;   :ensure t
+;;   :config
+;;   (color-theme-approximate-on)
+;;   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                主界面              ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

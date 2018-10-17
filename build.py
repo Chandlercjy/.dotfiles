@@ -12,7 +12,6 @@ def is_exist(dir_path):
 
 def create_link(obj_path, link_path):
     os.chdir(link_path.parent)
-
     return not os.system(f"ln -s {str(obj_path)} {link_path.name}")
 
 
@@ -48,7 +47,7 @@ def main():
     os.system("mkdir ~/.dotfiles/dot_emacs.d/elpa")
     os.system("cp ~/.dotfiles/emacs_diy_elpa/* ~/.dotfiles/dot_emacs.d/elpa")
 
-    #settle Term Xterm24
+    # settle Term Xterm24
     os.system("/bin/bash ~/.dotfiles/dot_terminfo/setup.sh")
     print("Term=xterm-24bits has been settled!")
 
