@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package magit
   :ensure t
-  :defer 5
+  :defer 1
   :config
   (add-to-list 'display-buffer-alist
                `(,(rx bos "*magit:")
@@ -16,7 +16,7 @@
 
 (use-package evil-magit
   :ensure t
-  :defer 5
+  :defer 1
   :after magit
   )
 

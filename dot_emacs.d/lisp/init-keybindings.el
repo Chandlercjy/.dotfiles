@@ -194,7 +194,6 @@
   :defer 3
   )
 
-
 (use-package  expand-region
   :ensure t
   :defer 3
@@ -211,8 +210,6 @@
 
 
 (global-set-key (kbd "C-x g") 'magit)
-;; (global-set-key (kbd "<f1>") 'which-key-show-keymap)
-(global-set-key (kbd "<f1>") 'benchmark-init/show-durations-tree)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;               系统相关             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -20,6 +20,7 @@
 ;; 用来调试启动时间
 (use-package benchmark-init
   :ensure t
+  :bind ( "<f1>" . benchmark-init/show-durations-tree)
   :init
   (benchmark-init/activate)
   :hook
@@ -51,8 +52,6 @@
   (define-key dired-mode-map "." #'dired-hide-dotfiles-mode)
   (add-hook 'dired-mode-hook #'dired-hide-dotfiles-mode)
   )
-
-
 
 (use-package erefactor
   :ensure t
