@@ -3,6 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package magit
   :ensure t
+  :defer 5
   :config
   (add-to-list 'display-buffer-alist
                `(,(rx bos "*magit:")
@@ -15,11 +16,16 @@
 
 (use-package evil-magit
   :ensure t
-  :after evil magit
+  :defer 5
+  :after magit
   )
 
 (use-package projectile
   :ensure t
+  :bind(
+        :map projectile-mode-map
+        ( "C-c p" . projectile-command-map)
+        )
   )
 
 ;; (use-package git-gutter
@@ -30,45 +36,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;               代码补全             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq hippie-expand-try-functions-list 
-      '(try-expand-dabbrev
-	    try-expand-dabbrev-visible
-	    try-expand-dabbrev-all-buffers
-	    try-expand-dabbrev-from-kill
-	    try-complete-file-name-partially
-	    try-complete-file-name
-	    try-expand-all-abbrevs
-	    try-expand-list
-	    try-expand-line
-	    try-complete-lisp-symbol-partially
-	    try-complete-lisp-symbol))
-
-(use-package yasnippet
-  :ensure t
-  :after company evil
-  :config
-  (yas-global-mode 1)
-  (setq yas-snippet-dirs
-        '("~/.emacs.d/snippets"                 ;; personal snippets
-          ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-          ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-          ))
-  (defun chandler/company-to-yasnippet ()
-    (interactive)
-    (company-abort)
-    (call-interactively 'company-yasnippet))
-  (bind-key "C-a" 'chandler/company-to-yasnippet company-active-map)
-  )
-
-
-(use-package yasnippet-snippets
-  :ensure t
-  :config
-  )
-
-
 (use-package company
-  :defer 5
+  :defer 3
   :bind (("M-/" . company-complete)
          :map company-active-map
          ("<backtab>" . company-select-previous-or-abort)
@@ -112,12 +81,11 @@
                   (global-company-mode)))
     (global-company-mode)))
 
-
 ;; YouCompleteMe
 (use-package ycmd
   :ensure t
+  :defer 5
   :config
-  ;; (add-hook 'after-init-hook #'global-ycmd-mode)
   (set-variable 'ycmd-startup-timeout 5)
   (setq ycmd-tag-files 'auto)
   (setq ycmd-request-message-level -1)
@@ -135,8 +103,53 @@
 
 (use-package company-ycmd
   :ensure t
+  :defer 5
+  :hook(company-mode . company-ycmd-setup)
+  )
+
+
+(use-package hippie-expand
+  :defer 5
   :config
-  (add-hook 'after-init-hook #'company-ycmd-setup))
+  (setq hippie-expand-try-functions-list
+        '(try-expand-dabbrev
+	      try-expand-dabbrev-visible
+	      try-expand-dabbrev-all-buffers
+	      try-expand-dabbrev-from-kill
+	      try-complete-file-name-partially
+	      try-complete-file-name
+	      try-expand-all-abbrevs
+	      try-expand-list
+	      try-expand-line
+	      try-complete-lisp-symbol-partially
+	      try-complete-lisp-symbol))
+  )
+
+(use-package yasnippet
+  :ensure t
+  :after company
+  :defer 5
+  :config
+  (yas-global-mode 1)
+  (setq yas-snippet-dirs
+        '("~/.emacs.d/snippets"                 ;; personal snippets
+          ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+          ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+          ))
+  (defun chandler/company-to-yasnippet ()
+    (interactive)
+    (company-abort)
+    (call-interactively 'company-yasnippet))
+  (bind-key "C-a" 'chandler/company-to-yasnippet company-active-map)
+  )
+
+
+(use-package yasnippet-snippets
+  :ensure t
+  :defer 5
+  )
+
+
 
 
 
@@ -147,6 +160,7 @@
 
 (use-package flycheck
   :ensure t
+  :defer 2
   :config
   ;; 控制buffer行为
   (add-to-list 'display-buffer-alist
@@ -159,12 +173,14 @@
 
 (use-package flycheck-ycmd
   :ensure t
+  :defer 2
   :config
-  (add-hook 'after-init-hook #'flycheck-ycmd-setup))
+  (add-hook 'flycheck-mode-hook #'flycheck-ycmd-setup))
 
 
 (use-package format-all
   :ensure t
+  :defer 2
   )
 
 
@@ -177,10 +193,12 @@
 
 (use-package gtags
   :ensure t
+  :defer 2
   )
 
 (use-package aggressive-indent
   :ensure t
+  :defer 2
   :config
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode)
@@ -188,6 +206,7 @@
 
 (use-package devdocs
   :ensure t
+  :defer 5
   )
 
 ;; 自动换行
@@ -209,6 +228,7 @@
 
 (use-package smartparens
   :ensure t
+  :defer 2
   :config
   ;; 括号补全
   (smartparens-global-mode t)
@@ -230,6 +250,7 @@
 
 (use-package evil-smartparens
   :ensure t
+  :defer 2
   :after evil smartparens
   :config
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
@@ -237,6 +258,8 @@
 
 ;; 撤销记录
 (use-package undo-tree
+  :ensure t
+  :defer 1
   :config
   (progn
     (defun modi/undo-tree-enable-save-history ()

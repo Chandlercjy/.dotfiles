@@ -4,55 +4,56 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package highlight-defined
   :ensure t
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode))
-
-
+  :hook (emacs-lisp-mode . highlight-defined-mode)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                Python               ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 (use-package python
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
-  :config (setq python-indent-offset 4)
-  (add-hook 'python-mode-hook 'ycmd-mode)
-  (add-hook 'python-mode-hook 'company-mode)
+  :hook(
+        (python-mode . ycmd-mode)
+        (python-mode . company-mode)
+        )
+  :config
+  (setq python-indent-offset 4)
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "--simple-prompt -i --pylab")
+
+  ;; 使在ipython中能上下选择命令
+  (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+  (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
   )
 
 (use-package flycheck-pycheckers
   :ensure t
-  :after flycheck
+  :commands flycheck-mode
+  :hook (flycheck-mode . flycheck-pycheckers-setup)
   :config
-  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)
   (setq flycheck-pycheckers-checkers (quote (pylint pep8)))
   )
 
 (use-package py-isort
   :ensure t
-  :config
+  :defer 5
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;           Python Notebook           ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Python Notebook
 (use-package ein
   :ensure t
+  :defer 5
+  :after company
   :config
   (setq ein:completion-backend 'ein:use-company-backend)
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;            IPython Shell            ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package fill-column-indicator
   :ensure t
   :after company
-  :config
+  :init
   (defvar-local company-fci-mode-on-p nil)
-
   ;; 修复导致company显示错误的问题
   (defun company-turn-off-fci (&rest ignore)
     (when (boundp 'fci-mode)
@@ -62,15 +63,12 @@
   (defun company-maybe-turn-on-fci (&rest ignore)
     (when company-fci-mode-on-p (fci-mode 1)))
 
-  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
+  :hook ((company-completion-started . company-turn-off-fci)
+         (company-completion-finished . company-maybe-turn-on-fci)
+         (company-completion-cancelled . company-maybe-turn-on-fci)
+         (prog-mode . fci-mode))
   )
 
-(setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "--simple-prompt -i --pylab")
-(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
-(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                 C++                 ;
@@ -82,6 +80,7 @@
 
 (use-package cpputils-cmake
   :ensure t
+  :defer 5
   :config
   (add-hook 'c-mode-common-hook
             (lambda ()
@@ -102,6 +101,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package cmake-mode
   :ensure t
+  :defer 5
   :config
   (add-to-list 'auto-mode-alist '("\\CMakeLists.txt\\'" . cmake-mode))
   )
@@ -113,32 +113,34 @@
 
 (use-package go-mode
   :ensure t
+  :commands go-mode
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                TypeScript           ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  (company-mode +1))
-
 (use-package tide
   :ensure t
   :after company
+  :init
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1)
+    (company-mode +1))
+  :hook (  
+         ;; formats the buffer before saving
+         (before-save . tide-format-before-save)
+         (typescript-mode . setup-tide-mode)
+         )
   :config
   ;; aligns annotation to the right hand side
   (setq company-tooltip-align-annotations t)
-  ;; formats the buffer before saving
-  (add-hook 'before-save-hook 'tide-format-before-save)
-  (add-hook 'typescript-mode-hook #'setup-tide-mode)
   )
 
-(provide 'init-languages)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;               JavaScript            ;
@@ -210,3 +212,5 @@
         web-mode-enable-auto-pairing t
         web-mode-enable-current-element-highlight t)
   ) ; this fixes the quote problem I mentioned
+
+(provide 'init-languages)

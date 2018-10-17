@@ -2,57 +2,135 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;            Packages 相关            ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package ivy
+(use-package evil
   :ensure t
+  :defer 1
+  :bind (
+         :map evil-normal-state-map
+         ("C-u" . evil-scroll-up)
+         ("<SPC> e" . open-my-emacs-init-file)
+         ("<SPC> v" . open-my-vim-init-file)
+         ("<SPC> r" . reload_init_config_file)
+         ("<SPC> u" . undo-tree-visualize)
+         ("<SPC> o" . counsel-fzf)
+         (",cd" . back_to_current_dir)
+         (",g" . ycmd-goto)
+         (",d" . dumb-jump-go)
+         (",b" . dumb-jump-back)
+         ("<SPC> yf" . ycmd-fixit)
+         (",f" . format-all-buffer)
+         ("C-c i" . package-install)
+         ("<SPC> a" . counsel-ag)
+         ("<SPC> b" . counsel-ibuffer)
+         ("<SPC> f" . counsel-fzf)
+         ("<SPC> ]" . flycheck-next-error)
+         ("<SPC> [" . flycheck-previous-error)
+         (",l" . flycheck-list-errors)
+         ("<f7>" . flycheck-mode)
+         (",y" . chandler/toggle-copy-to-osx)
+
+         (",cc" . evilnc-comment-or-uncomment-lines)
+
+         ("<SPC> h" . evil-search-highlight-persist-remove-all)
+
+         ;; 添加括号
+         ("t" . embrace-commander)
+
+         ;; workgroups
+         ( "<SPC> 0" . wg-switch-to-workgroup-at-index-0)
+         ( "<SPC> 1" . wg-switch-to-workgroup-at-index-1)
+         ( "<SPC> 2" . wg-switch-to-workgroup-at-index-2)
+         ( "<SPC> 3" . wg-switch-to-workgroup-at-index-3)
+         ( "<SPC> 4" . wg-switch-to-workgroup-at-index-4)
+         ( "<SPC> 5" . wg-switch-to-workgroup-at-index-5)
+         ( "<SPC> 6" . wg-switch-to-workgroup-at-index-6)
+         ( "<SPC> 7" . wg-switch-to-workgroup-at-index-7)
+         ( "<SPC> 8" . wg-switch-to-workgroup-at-index-8)
+         ( "<SPC> 9" . wg-switch-to-workgroup-at-index-9)
+         ( "<SPC> `" . wg-switch-to-workgroup)
+         ( "<SPC> -" . wg-kill-workgroup)
+         ( "<SPC> +" . wg-create-workgroup)
+
+         ;; 跳转
+         ("f" . ace-jump-char-mode)
+         ("C-w e" . ace-swap-window)
+         ("C-w w" . ace-select-window)
+
+         :map evil-insert-state-map
+         ("\C-a" . company-yasnippet)
+
+         :map evil-visual-state-map
+         (",cc" . evilnc-comment-or-uncomment-lines)
+         (",cp" . evilnc-comment-or-uncomment-paragraphs)
+
+         ;; 同时都有的
+         :map evil-normal-state-map
+         ("RET" . er/expand-region)
+         :map evil-visual-state-map
+         ("RET" . er/expand-region)
+         )
+  :hook (prog-mode . evil-mode)
   :config
-  (ivy-mode 1)
+  (evil-add-hjkl-bindings recentf-dialog-mode-map 'emacs)
+  (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
+
+  (setq-default evil-insert-state-cursor 'bar)
   (evil-set-initial-state 'ivy-occur-grep-mode 'normal)
-  (autoload 'cmake-project-mode "cmake-project" nil t)
-  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (evil-set-initial-state 'ag-mode 'normal)
   )
 
+(use-package ivy
+  :ensure t
+  :defer 1
+  :bind (("C-c C-r" . ivy-resume))
+  :config
+  (ivy-mode 1)
+  (autoload 'cmake-project-mode "cmake-project" nil t)
+  )
 
 (use-package counsel
   :ensure t
-  :bind
-  (
-   ("C-x C-r" . counsel-recentf)
-   ("M-x" . counsel-M-x)
-   ("M-y" . counsel-yank-pop)
-   ("C-c G" . counsel-git-grep)
-   ("C-c m" . counsel-imenu)
-   :map ivy-minibuffer-map
-   ("<tab>" . ivy-alt-done)
-   ("<escape>" . minibuffer-keyboard-quit)
-   ("C-r" . counsel-minibuffer-history)))
+  :defer 1
+  :bind (
+         ("C-x C-r" . counsel-recentf)
+         ("M-x" . counsel-M-x)
+         ("M-y" . counsel-yank-pop)
+         ("C-c G" . counsel-git-grep)
+         ("C-c m" . counsel-imenu)
+         :map ivy-minibuffer-map
+         ("<tab>" . ivy-alt-done)
+         ("<escape>" . minibuffer-keyboard-quit)
+         ("C-r" . counsel-minibuffer-history)))
 
 (use-package swiper
   :ensure t
-  :config
-  (global-set-key (kbd "C-s") 'swiper)
+  :defer 3
+  :bind(
+        ("C-s" . swiper))
   )
 
 (use-package counsel-gtags
   :ensure t
-  :after counsel gtags
+  :defer 1
   )
 
 (use-package counsel-projectile
   :ensure t
-  :after counsel projectile
-  :config
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (add-hook 'after-init-hook #'counsel-projectile-mode)
+  :defer 3
+  :after projectile
+  :hook (prog-mode . counsel-projectile-mode)
   )
 
 (use-package ranger
   :ensure t
+  :defer 2
   :config
   (global-set-key (kbd "C-c r") 'ranger)
   )
 
 (use-package dumb-jump
   :ensure t
+  :defer 1
   :bind (
          ("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
@@ -65,89 +143,39 @@
   )
 
 
-(use-package evil
-  :ensure t
-  :config (evil-mode 1)
-  (evil-add-hjkl-bindings recentf-dialog-mode-map 'emacs)
-  (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  (define-key evil-normal-state-map (kbd "<SPC> e") 'open-my-emacs-init-file)
-  (define-key evil-normal-state-map (kbd "<SPC> v") 'open-my-vim-init-file)
-
-  (define-key evil-normal-state-map (kbd "<SPC> r") 'reload_init_config_file)
-  (define-key evil-normal-state-map (kbd "<SPC> u") 'undo-tree-visualize)
-  (define-key evil-normal-state-map (kbd "<SPC> o") 'counsel-fzf)
-  (define-key evil-normal-state-map ",cd" 'back_to_current_dir)
-
-  ;; (define-key evil-normal-state-map (kbd "<SPC> gd") 'counsel-gtags-find-definition)
-  ;; (define-key evil-normal-state-map (kbd "<SPC> gr") 'counsel-gtags-find-reference)
-  (define-key evil-normal-state-map (kbd ",g") 'ycmd-goto)
-
-  (define-key evil-normal-state-map ",d" 'dumb-jump-go)
-  (define-key evil-normal-state-map ",b" 'dumb-jump-back)
-  (define-key evil-normal-state-map (kbd "<SPC> yf") 'ycmd-fixit)
-  (define-key evil-normal-state-map ",f" 'format-all-buffer)
-
-  (define-key evil-normal-state-map (kbd "C-c i") 'package-install)
-
-
-  (define-key evil-normal-state-map (kbd "<SPC> a") 'counsel-ag)
-  (define-key evil-normal-state-map (kbd "<SPC> b") 'counsel-ibuffer)
-  (define-key evil-normal-state-map (kbd "<SPC> f") 'counsel-fzf)
-
-  (define-key evil-normal-state-map (kbd "<SPC> ]") 'flycheck-next-error)
-  (define-key evil-normal-state-map (kbd "<SPC> [") 'flycheck-previous-error)
-  (define-key evil-normal-state-map (kbd ",l") 'flycheck-list-errors)
-  (define-key evil-normal-state-map (kbd "<f7>") 'flycheck-mode)
-
-
-  (define-key evil-normal-state-map ",y" 'chandler/toggle-copy-to-osx)
-
-  (define-key evil-insert-state-map "\C-a" 'company-yasnippet)
-  )
-
 (use-package evil-nerd-commenter
   :ensure t
-  :after evil
-  :config
-  (define-key evil-visual-state-map ",cc" 'evilnc-comment-or-uncomment-lines)
-  (define-key evil-normal-state-map ",cc" 'evilnc-comment-or-uncomment-lines)
-  (define-key evil-normal-state-map ",cp" 'evilnc-comment-or-uncomment-paragraphs)
+  :defer 1
   )
 
 ;; 高亮搜索
 (use-package evil-search-highlight-persist
   :ensure t
-  :after evil
+  :defer 5
   :config
   (global-evil-search-highlight-persist t)
-  (define-key evil-normal-state-map (kbd "<SPC> h") 'evil-search-highlight-persist-remove-all)
   )
 
 (use-package ace-window
   :ensure t
-  :config
-  ;; (define-key evil-normal-state-map "t" 'ace-jump-char-mode)
-  (define-key evil-normal-state-map (kbd "C-w e") 'ace-swap-window)
-  (define-key evil-normal-state-map (kbd "C-w w") 'ace-select-window)
+  :defer 3
   )
 
 
 (use-package ace-jump-mode
   :ensure t
-  :after evil
-  :config
-  ;; (define-key evil-normal-state-map "t" 'ace-jump-char-mode)
-  (define-key evil-normal-state-map "f" 'ace-jump-char-mode)
+  :commands ace-jump-mode
   )
 
 
 (use-package workgroups2
   :ensure t
-  :config
+  :defer 0.01
+  :bind (("<f8>" . wg-save-session)
+         ("<f9>" . wg-reload-session))
+  :init
   (setq wg-prefix-key (kbd "C-c w"))
   (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
-  (add-hook 'after-init-hook #'workgroups-mode)
   (setq wg-mode-line-display-on t)          ; Default: (not (featurep 'powerline))
   (setq wg-flag-modified t)                 ; Display modified flags as well
   (setq wg-mode-line-decor-left-brace "<<<<<<<<<<<<<<<"
@@ -156,51 +184,35 @@
   ;; What to do on Emacs exit / workgroups-mode exit?
   ;; (setq wg-emacs-exit-save-behavior           'save)      ; Options: 'save 'ask nil
   ;; (setq wg-workgroups-mode-exit-save-behavior 'save)      ; Options: 'save 'ask nil
-  (define-key evil-normal-state-map (kbd "<SPC> 0") 'wg-switch-to-workgroup-at-index-0)
-  (define-key evil-normal-state-map (kbd "<SPC> 1") 'wg-switch-to-workgroup-at-index-1)
-  (define-key evil-normal-state-map (kbd "<SPC> 2") 'wg-switch-to-workgroup-at-index-2)
-  (define-key evil-normal-state-map (kbd "<SPC> 3") 'wg-switch-to-workgroup-at-index-3)
-  (define-key evil-normal-state-map (kbd "<SPC> 4") 'wg-switch-to-workgroup-at-index-4)
-  (define-key evil-normal-state-map (kbd "<SPC> 5") 'wg-switch-to-workgroup-at-index-5)
-  (define-key evil-normal-state-map (kbd "<SPC> 6") 'wg-switch-to-workgroup-at-index-6)
-  (define-key evil-normal-state-map (kbd "<SPC> 7") 'wg-switch-to-workgroup-at-index-7)
-  (define-key evil-normal-state-map (kbd "<SPC> 8") 'wg-switch-to-workgroup-at-index-8)
-  (define-key evil-normal-state-map (kbd "<SPC> 9") 'wg-switch-to-workgroup-at-index-9)
-  (define-key evil-normal-state-map (kbd "<SPC> `") 'wg-switch-to-workgroup)
-  (define-key evil-normal-state-map (kbd "<SPC> -") 'wg-kill-workgroup)
-  (define-key evil-normal-state-map (kbd "<SPC> +") 'wg-create-workgroup)
-
-  (global-set-key  (kbd "\C-c ws") 'wg-save-session)
-  (global-set-key  (kbd "\C-c wl") 'wg-reload-session)
-  (global-set-key  (kbd "<f8>") 'wg-save-session)
-  (global-set-key  (kbd "<f9>") 'wg-reload-session)
-
+  ;; (wg-reload-session)
+  :config
+  (workgroups-mode)
   )
 
 (use-package embrace
   :ensure t
-  :after evil
-  :config
-  (define-key evil-normal-state-map (kbd "t") 'embrace-commander)
+  :defer 3
   )
 
 
 (use-package  expand-region
   :ensure t
-  :after evil
+  :defer 3
   :config
   (setq expand-region-fast-keys-enabled nil)
-  (define-key evil-normal-state-map (kbd "RET") 'er/expand-region)
-  (define-key evil-visual-state-map (kbd "RET") 'er/expand-region)
   )
+
+
 (use-package evil-vimish-fold
   :ensure t
+  :defer 5
   :config
   (evil-vimish-fold-mode 1))
 
 
-
 (global-set-key (kbd "C-x g") 'magit)
+;; (global-set-key (kbd "<f1>") 'which-key-show-keymap)
+(global-set-key (kbd "<f1>") 'benchmark-init/show-durations-tree)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;               系统相关             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -222,4 +234,5 @@
 
 
 ;; (global-set-key (kbd "\C-c t") 'toggle-truncate-lines)
+
 (provide 'init-keybindings)

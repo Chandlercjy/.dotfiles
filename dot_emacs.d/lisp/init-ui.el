@@ -7,8 +7,9 @@
   :config
   (load-theme 'atom-one-dark t)
   ;; 修复终端下显示颜色过深问题
-  (add-to-list 'default-frame-alist '(background-color . "#282d3d")))
-(set-background-color "#282d3d")
+  (add-to-list 'default-frame-alist '(background-color . "#282d3d"))
+  ;; (set-background-color "#282d3d")
+  )
 
 
 ;; (use-package doom-themes
@@ -36,9 +37,10 @@
 
 (use-package linum-relative
   :ensure t
+  :defer 5
+  :hook (prog-mode . linum-relative-mode)
   :config
-  (global-linum-mode 1)
-  (linum-relative-global-mode 1)
+  ;; (global-linum-mode 1)
   )
 
 (scroll-bar-mode -1)
@@ -60,8 +62,10 @@
 
 (use-package spaceline
   :ensure t
+  :defer 1
+  :hook (prog-mode . spaceline-spacemacs-theme)
   :config
-  (spaceline-spacemacs-theme)
+  ;; (spaceline-spacemacs-theme)
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
   (set-face-attribute 'spaceline-evil-normal nil :background "SkyBlue2")
   (set-face-attribute 'spaceline-evil-emacs nil :background "DarkGoldenrod2")
@@ -69,12 +73,26 @@
   (set-face-attribute 'spaceline-evil-replace nil :background "#ec7870")
   (set-face-attribute 'spaceline-evil-motion nil :background "#plum3")
   (set-face-attribute 'spaceline-evil-visual nil :background "#f7c58f")
+
+  (setq evil-normal-state-tag   (propertize " <NORMAL> " 'face '((:background "SkyBlue2" :foreground "#282d3d")))
+        evil-emacs-state-tag    (propertize " <EMACS> " 'face '((:background "Darkgoldenrod2"  :foreground "black")))
+        evil-insert-state-tag   (propertize " <INSERT> " 'face '((:background "#8de461"    :foreground "#282d3d")))
+        evil-replace-state-tag  (propertize " <REPLACE> " 'face '((:background "#ec7870"      :foreground "#282d3d")))
+        evil-motion-state-tag   (propertize " <MOTION> " 'face '((:background "orange"          :foreground "#282d3d")))
+        evil-visual-state-tag   (propertize " <VISUAL> " 'face '((:background "#f7c58f"           :foreground "#282d3d")))
+        evil-operator-state-tag (propertize " <OPERATOR> " 'face '((:background "SkyBlue2"    :foreground "#282d3d")))
+        )
+
+  (set-face-foreground 'mode-line "#afabab")
+  (set-face-background 'mode-line "black")
+  (set-face-background 'mode-line-inactive "#2b323d")
   )
 
 
 ;;;; Rich Minority
 (use-package rich-minority
   :ensure t
+  :defer 5
   :config
   (progn
     (setq rm-blacklist
@@ -130,39 +148,25 @@
           (add-to-list 'rm-text-properties '("\\` ARev\\'" 'display "​aR."))
           (add-to-list 'rm-text-properties '("\\` Fill\\'" 'display "​aF.")))))))
 
-(setq evil-normal-state-tag   (propertize " <NORMAL> " 'face '((:background "SkyBlue2" :foreground "#282d3d")))
-      evil-emacs-state-tag    (propertize " <EMACS> " 'face '((:background "Darkgoldenrod2"  :foreground "black")))
-      evil-insert-state-tag   (propertize " <INSERT> " 'face '((:background "#8de461"    :foreground "#282d3d")))
-      evil-replace-state-tag  (propertize " <REPLACE> " 'face '((:background "#ec7870"      :foreground "#282d3d")))
-      evil-motion-state-tag   (propertize " <MOTION> " 'face '((:background "orange"          :foreground "#282d3d")))
-      evil-visual-state-tag   (propertize " <VISUAL> " 'face '((:background "#f7c58f"           :foreground "#282d3d")))
-      evil-operator-state-tag (propertize " <OPERATOR> " 'face '((:background "SkyBlue2"    :foreground "#282d3d")))
-      )
-
-(set-face-foreground 'mode-line "#afabab")
-(set-face-background 'mode-line "black")
-(set-face-background 'mode-line-inactive "#2b323d")
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;               开始界面             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package dashboard
-  :ensure t
-  :config (setq dashboard-banners-directory "~/.emacs.d/banner/")
-  (setq dashboard-startup-banner 666)
-  (dashboard-setup-startup-hook)
-  (setq dashboard-items '((recents  . 5)
-                          (bookmarks . 5)
-                          (agenda . 5)
-                          (registers . 5)
-                          (projects . 5)))
-  (setq dashboard-banner-logo-title ""))
+;; (use-package dashboard
+;;   :ensure t
+;;   :config
+;;   (dashboard-setup-startup-hook)
+;;   (setq dashboard-banners-directory "~/.emacs.d/banner/")
+;;   (setq dashboard-startup-banner 666)
+;;   (setq dashboard-items '((recents  . 5)
+;;                           (bookmarks . 5)
+;;                           (agenda . 5)
+;;                           (registers . 5)
+;;                           (projects . 5)))
+;;   (setq dashboard-banner-logo-title "")
+;;   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+;;   )
 
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-
-
-
+(setq inhibit-splash-screen t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                文件树               ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -170,10 +174,7 @@
 
 (use-package treemacs
   :ensure t
-  :defer t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :defer 5
   :config
   (progn
     (setq treemacs-collapse-dirs              (if (executable-find "python") 3 0)
@@ -224,11 +225,11 @@
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag))
-
   )
 
 (use-package treemacs-evil
   :ensure t
+  :defer 5
   :after treemacs evil
   :config
   (evil-define-key 'treemacs treemacs-mode-map (kbd "TAB") #'treemacs-TAB-action)
@@ -239,7 +240,7 @@
 
 (use-package treemacs-projectile
   :ensure t
-  :after treemacs projectile)
-
+  :defer 5
+  )
 
 (provide 'init-ui)

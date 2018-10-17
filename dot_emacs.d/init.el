@@ -1,18 +1,13 @@
-
-(require 'package )
+(require 'package)
 (setq gc-cons-threshold 100000000)
 (setq package-enable-at-startup nil)
 
-(add-to-list 'load-path "~/.emacs.d/lisp")
-
 ;; (add-to-list 'package-archives '("MELPA-tuna" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
-(add-to-list 'package-archives '("Marmalad" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/marmalade/")
-             t)
+(add-to-list 'package-archives '("Marmalad" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/marmalade/") t)
 (add-to-list 'package-archives '("Org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/marmalade/") t)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
 (package-initialize)
 ;; (package-refresh-contents)
 
@@ -22,6 +17,7 @@
   (package-install 'use-package)
   )
 
+;; 用来调试启动时间
 (use-package benchmark-init
   :ensure t
   :init
@@ -29,28 +25,26 @@
   :hook
   (after-init . benchmark-init/deactivate))
 
+
+;; Chandler 传说中炫酷的配置
+(add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'init-packages)
+(require 'init-keybindings)
 (require 'init-ui)
 (require 'init-func)
 (require 'init-programming)
 (require 'init-languages)
-(require 'init-keybindings)
 (require 'init-org)
 (require 'init-better-default)
 (require 'init-personal)
+(require 'init-custom)
 
-
-(setq custom-file (expand-file-name "lisp/init-custom.el" user-emacs-directory))
-(load-file custom-file)
-
-(setq-default evil-insert-state-cursor 'bar)
 (setq-default cursor-type '(hbar . 1))
-
-
 
 
 (use-package dired-hide-dotfiles
   :ensure t
+  :defer 3
   :after dired
   :config
   (dired-hide-dotfiles-mode)
@@ -62,25 +56,29 @@
 
 (use-package erefactor
   :ensure t
-  :config
-  (global-set-key (kbd "<f6>") 'erefactor-rename-symbol-in-buffer)
+  :defer 3
+  :bind ("<f6>" . erefactor-rename-symbol-in-buffer)
   )
 
 (use-package ag
   :ensure t
-  :after evil evil-mc
-  :config
-  (evil-set-initial-state 'ag-mode 'normal)
-  (define-key ag-mode-map "h" 'evil-backward-char)
-  (define-key ag-mode-map "k" 'evil-previous-line)
-  (define-key ag-mode-map "n" 'evil-search-next)
+  :defer 3
+  :after evil
+  :bind(:map ag-mode-map
+             ("h" . evil-backward-char)
+             ("k" . evil-previous-line)
+             ("n" . evil-search-next)
+             )
   )
 
 (use-package wgrep
-  :ensure t)
+  :ensure t
+  :defer 3
+  )
 
 (use-package wgrep-ag
   :ensure t
+  :defer 3
   :after wgrep ag
   )
 
@@ -103,6 +101,7 @@
 
 (use-package docker
   :ensure t
+  :defer 5
   :bind ("C-c d" . docker)
   :config
   (evil-set-initial-state 'docker-container-mode 'emacs)
@@ -111,6 +110,7 @@
 
 (use-package dockerfile-mode
   :ensure t
+  :defer 5
   :mode ("\Dockerfile.*\\'" . dockerfile-mode)
   )
 
@@ -118,5 +118,3 @@
 (put 'dired-find-alternate-file 'disabled nil )
 
 (setq initial-scratch-message ";; Hi Chandler! Today's is also a beautiful day~")
-
-
