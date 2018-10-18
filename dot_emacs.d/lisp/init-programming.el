@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package magit
   :ensure t
-  :defer 5
+  :defer 3
   :config
   (add-to-list 'display-buffer-alist
                `(,(rx bos "*magit:")
@@ -17,7 +17,7 @@
 
 (use-package evil-magit
   :ensure t
-  :defer 5
+  :defer 3
   :after magit
   )
 
@@ -130,7 +130,7 @@
 (use-package yasnippet
   :ensure t
   :after company
-  :defer 5
+  :defer 3
   :config
   (yas-global-mode 1)
   (setq yas-snippet-dirs

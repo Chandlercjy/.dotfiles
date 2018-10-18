@@ -93,7 +93,7 @@
 ;;;; Rich Minority
 (use-package rich-minority
   :ensure t
-  :defer 5
+  :defer 2
   :config
   (progn
     (setq rm-blacklist
@@ -175,7 +175,7 @@
 
 (use-package treemacs
   :ensure t
-  :defer 5
+  :defer 1
   :config
   (progn
     (setq treemacs-collapse-dirs              (if (executable-find "python") 3 0)
@@ -230,7 +230,7 @@
 
 (use-package treemacs-evil
   :ensure t
-  :defer 5
+  :defer 1
   :after treemacs evil
   :config
   (evil-define-key 'treemacs treemacs-mode-map (kbd "TAB") #'treemacs-TAB-action)
@@ -241,7 +241,7 @@
 
 (use-package treemacs-projectile
   :ensure t
-  :defer 5
+  :defer 2
   )
 
 (provide 'init-ui)

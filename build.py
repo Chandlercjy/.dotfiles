@@ -21,6 +21,7 @@ def move_to_backup(path):
     return not os.system(f"mv {path} {path}.bak")
 
 
+
 def main():
     # Link neovim
 
