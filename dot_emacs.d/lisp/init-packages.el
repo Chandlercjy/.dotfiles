@@ -35,7 +35,7 @@
 (use-package diminish
   :ensure t
   :defer 5
-  :init
+  :config
   (diminish 'highlight-parentheses-mode)
   (diminish 'highlight-symbol-mode)
   (diminish 'paredit-mode)
@@ -60,7 +60,7 @@
 
 (use-package fzf
   :ensure t
-  :defer 1
+  :defer 5
   )
 
 
@@ -82,7 +82,6 @@
   (which-key-setup-minibuffer)
   (which-key-mode)
   )
-
 
 
 (provide 'init-packages)

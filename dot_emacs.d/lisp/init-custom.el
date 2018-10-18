@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(max-specpdl-size 2000)
  '(package-selected-packages
    (quote
     (benchmark-init nodejs-repl company-web zenburn-theme doom-themes web-mode go-mode py-isort isortify smart-tabs-mode company-childframe company-posframe pyim linear-undo goto-last-change devdocs-search devdocs fill-column-indicator dockerfile-mode docker better-shell wgrep-ag wgrep ag erefactor dired-hide-dotfiles evil-magit evil-vimish-fold embrace workgroups2 ace-jump-mode evil-search-highlight-persist evil-nerd-commenter dumb-jump ranger counsel-projectile counsel-gtags tide cmake-mode cpputils-cmake ein flycheck-pycheckers highlight-defined aggressive-indent yasnippet-snippets format-all gtags flycheck-ycmd company-ycmd evil-smartparens treemacs-projectile treemacs-evil dashboard rich-minority spaceline linum-relative color-theme-approximate atom-one-dark-theme which-key vimrc-mode fzf evil-matchit diminish popwin hungry-delete evil-mc use-package)))

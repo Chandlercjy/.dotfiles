@@ -4,6 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package highlight-defined
   :ensure t
+  :defer 1
   :hook (emacs-lisp-mode . highlight-defined-mode)
   )
 

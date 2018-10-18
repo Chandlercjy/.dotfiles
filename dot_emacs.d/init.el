@@ -1,6 +1,6 @@
 (require 'package)
 (setq gc-cons-threshold 100000000)
-(setq package-enable-at-startup nil)
+;; (setq package-enable-at-startup nil)
 
 ;; (add-to-list 'package-archives '("MELPA-tuna" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
 (add-to-list 'package-archives '("Marmalad" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/marmalade/") t)

@@ -73,7 +73,6 @@
   :config
   (evil-add-hjkl-bindings recentf-dialog-mode-map 'emacs)
   (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
-
   (setq-default evil-insert-state-cursor 'bar)
   (evil-set-initial-state 'ivy-occur-grep-mode 'normal)
   (evil-set-initial-state 'ag-mode 'normal)
@@ -209,10 +208,10 @@
   (evil-vimish-fold-mode 1))
 
 
-(global-set-key (kbd "C-x g") 'magit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;               系统相关             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "C-x g") 'magit)
 0 ;;移动窗口快捷键 仿vim
 (global-set-key (kbd "<C-w> k") 'windmove-up)
 (global-set-key (kbd "<C-w> j") 'windmove-down)

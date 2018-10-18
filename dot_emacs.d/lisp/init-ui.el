@@ -8,7 +8,7 @@
   (load-theme 'atom-one-dark t)
   ;; 修复终端下显示颜色过深问题
   (add-to-list 'default-frame-alist '(background-color . "#282d3d"))
-  ;; (set-background-color "#282d3d")
+  (set-background-color "#282d3d")
   )
 
 
@@ -37,28 +37,25 @@
 
 (use-package linum-relative
   :ensure t
-  :defer 5
-  :hook (prog-mode . linum-relative-mode)
+  :defer 2
   :config
-  ;; (global-linum-mode 1)
+  (linum-relative-mode 1)
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode 0)
   )
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(menu-bar-mode 0)
 
 ;;去掉边框
-(set-face-attribute 'fringe nil
-                    :foreground nil
-                    :background nil)
-(set-frame-parameter nil 'internal-border-width 0)
-(set-window-buffer nil (current-buffer))
+;; (set-face-attribute 'fringe nil
+;;                     :foreground nil
+;;                     :background nil)
+;; (set-frame-parameter nil 'internal-border-width 0)
+;; (set-window-buffer nil (current-buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                状态栏              ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(display-time-mode 1) ;; 常显
-(setq display-time-24hr-format t) ;;格式
 
 (use-package spaceline
   :ensure t
@@ -86,6 +83,10 @@
   (set-face-foreground 'mode-line "#afabab")
   (set-face-background 'mode-line "black")
   (set-face-background 'mode-line-inactive "#2b323d")
+
+  ;; 显示时间
+  (display-time-mode 1) ;; 常显
+  (setq display-time-24hr-format t) ;;格式
   )
 
 
@@ -166,7 +167,7 @@
 ;;   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 ;;   )
 
-(setq inhibit-splash-screen t)
+;; (setq inhibit-splash-screen t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                文件树               ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

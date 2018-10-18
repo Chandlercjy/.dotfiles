@@ -1,30 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;               系统相关             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 允许在minibuffer中使用指令
-(setq enable-recursive-minibuffers t)
-
-;; 更新文件
-(add-hook 'prog-mode-hook #'auto-revert-mode)
-
-;; 取消备份文件
-(setq auto-save-default nil)
-(setq make-backup-files nil)
-
-(use-package recentf
-  ;; :hook(prog-mode . recentf-mode)
-  :defer 3
-  :config
-  (setq recentf-max-menu-items 25)
-  )
-
-;; 关闭报警音
-(setq ring-bell-function 'ignore)
-
-;;设置鼠标滚动
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
-      mouse-wheel-progressive-speed nil
-      mouse-wheel-follow-mouse 't)
 
 (use-package dired
   :defer 1
@@ -39,6 +15,30 @@
         dired-recursive-copies 'always)
 
   ;; 其他
+  ;; 允许在minibuffer中使用指令
+  (setq enable-recursive-minibuffers t)
+
+  ;; 更新文件
+  (add-hook 'prog-mode-hook #'auto-revert-mode)
+
+  ;; 取消备份文件
+  (setq auto-save-default nil)
+  (setq make-backup-files nil)
+
+  (use-package recentf
+    ;; :hook(prog-mode . recentf-mode)
+    :defer 3
+    :config
+    (setq recentf-max-menu-items 25)
+    )
+
+  ;; 关闭报警音
+  (setq ring-bell-function 'ignore)
+
+  ;;设置鼠标滚动
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
+        mouse-wheel-progressive-speed nil
+        mouse-wheel-follow-mouse 't)
   )
 
 
@@ -48,17 +48,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                  UI相关            ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-linum-mode 1)                   ; always show line numbers
-;;高亮当前行
-(global-hl-line-mode 1)
-;;状态栏
-(setq ns-use-srgb-colorspace nil)
-
-;;设置行高
-(setq line-spacing 3)
-
-;;替换yes/no为y/n
-(fset 'yes-or-no-p 'y-or-n-p)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -66,15 +55,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 关闭缩进
 ;; (electric-indent-mode 1)
-
-;;设置各种文件编码
-(prefer-coding-system 'utf-8)
-(setq buffer-file-coding-system 'utf-8-unix
-      default-file-name-coding-system 'utf-8-unix
-      default-keyboard-coding-system 'utf-8-unix
-      default-process-coding-system '(utf-8-unix . utf-8-unix)
-      default-sendmail-coding-system 'utf-8-unix
-      default-terminal-coding-system 'utf-8-unix)
 
 (use-package smart-tabs-mode
   :ensure t
@@ -84,6 +64,27 @@
   (setq-default tab-width 4)
   (setq-default indent-tabs-mode nil)
   (set-default 'truncate-lines t)
+
+  ;;设置各种文件编码
+  (prefer-coding-system 'utf-8)
+  (setq buffer-file-coding-system 'utf-8-unix
+        default-file-name-coding-system 'utf-8-unix
+        default-keyboard-coding-system 'utf-8-unix
+        default-process-coding-system '(utf-8-unix . utf-8-unix)
+        default-sendmail-coding-system 'utf-8-unix
+        default-terminal-coding-system 'utf-8-unix)
+
+  (global-linum-mode 1)                   ; always show line numbers
+  ;;高亮当前行
+  (global-hl-line-mode 1)
+  ;;状态栏
+  (setq ns-use-srgb-colorspace nil)
+
+  ;;设置行高
+  (setq line-spacing 3)
+
+  ;;替换yes/no为y/n
+  (fset 'yes-or-no-p 'y-or-n-p)
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

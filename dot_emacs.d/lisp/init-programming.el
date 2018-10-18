@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package magit
   :ensure t
-  :defer 1
+  :defer 5
   :config
   (add-to-list 'display-buffer-alist
                `(,(rx bos "*magit:")
@@ -14,14 +14,16 @@
                  (window-height   . 0.4)))
   )
 
+
 (use-package evil-magit
   :ensure t
-  :defer 1
+  :defer 5
   :after magit
   )
 
 (use-package projectile
   :ensure t
+  :defer 1
   :bind(
         :map projectile-mode-map
         ( "C-c p" . projectile-command-map)
@@ -37,7 +39,7 @@
                                         ;               代码补全             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package company
-  :defer 3
+  :defer 1
   :bind (("M-/" . company-complete)
          :map company-active-map
          ("<backtab>" . company-select-previous-or-abort)
