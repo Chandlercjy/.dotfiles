@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: org-ipython-block
+# key: py
+# --
+
+#+BEGIN_SRC ipython :session :results raw drawer :async t exports: both
+  $0
+#+END_SRC

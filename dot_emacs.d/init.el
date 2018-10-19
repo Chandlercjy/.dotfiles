@@ -17,6 +17,11 @@
   (package-install 'use-package)
   )
 
+(use-package bug-hunter
+  :ensure t
+  :defer 1
+  :commands (bug-hunter-file bug-hunter-init-file))
+
 ;; 用来调试启动时间
 (use-package benchmark-init
   :ensure t
@@ -38,9 +43,6 @@
 (require 'init-org)
 (require 'init-better-default)
 (require 'init-personal)
-(require 'init-custom)
-
-(setq-default cursor-type '(hbar . 1))
 
 
 (use-package dired-hide-dotfiles
@@ -48,7 +50,6 @@
   :defer 3
   :after dired
   :config
-  (dired-hide-dotfiles-mode)
   (define-key dired-mode-map "." #'dired-hide-dotfiles-mode)
   (add-hook 'dired-mode-hook #'dired-hide-dotfiles-mode)
   )
@@ -77,25 +78,18 @@
 
 (use-package wgrep-ag
   :ensure t
-  :defer 3
-  :after wgrep ag
+  :defer 5
   )
 
 
 ;; 方便登录远程SSH
 (use-package better-shell
   :ensure t
+  :defer 5
   :bind (("C-'" . better-shell-shell)
          ("C-;" . better-shell-remote-open)))
 
 ;; (spaceline-define-segment spaceline-workgroups2-segment 'wg-mode-line-string)
-
-;; (spaceline-define-segment my-segment-left-1 "My first left segment." "Hello, World (LEFT 1)!")
-;; (spaceline-define-segment my-segment-left-2 "My second left segment." "Hello, World (LEFT 2)!")
-;; (spaceline-define-segment my-segment-right-1 "My first right segment." "Hello, World (RIGHT 1)!")
-;; (spaceline-define-segment my-segment-right-2 "My second right segment." "Hello, World (RIGHT 2)!")
-;; (spaceline-compile "my-modeline" '(spaceline-wokgroup2-segment my-segment-left-2) '(my-segment-right-1 my-segment-right-2))
-;; (setq mode-line-format '("%e" (:eval (spaceline-ml-my-modeline))))
 
 
 (use-package docker
@@ -114,6 +108,39 @@
   )
 
 
-(put 'dired-find-alternate-file 'disabled nil )
+;; (put 'dired-find-alternate-file 'disabled nil )
 
 (setq initial-scratch-message ";; Hi Chandler! Today's is also a beautiful day~")
+
+(setq python-indent-guess-indent-offset t)  
+(setq python-indent-guess-indent-offset-verbose nil)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (org-make-toc org-html-preview ox-html5slide org-ehtml org-preview-html ox-latex ob-ipython esup bug-hunter htmlize org-bullets org-evil wakatime-mode benchmark-init nodejs-repl company-web zenburn-theme doom-themes web-mode go-mode py-isort isortify smart-tabs-mode company-childframe company-posframe pyim linear-undo goto-last-change devdocs-search devdocs fill-column-indicator dockerfile-mode docker better-shell wgrep-ag wgrep ag erefactor dired-hide-dotfiles evil-magit evil-vimish-fold embrace workgroups2 ace-jump-mode evil-search-highlight-persist evil-nerd-commenter dumb-jump ranger counsel-projectile counsel-gtags tide cmake-mode cpputils-cmake ein flycheck-pycheckers highlight-defined aggressive-indent yasnippet-snippets format-all gtags flycheck-ycmd company-ycmd evil-smartparens treemacs-projectile treemacs-evil dashboard rich-minority spaceline linum-relative color-theme-approximate atom-one-dark-theme which-key vimrc-mode fzf evil-matchit diminish popwin hungry-delete evil-mc use-package)))
+ '(shell-pop-full-span t)
+ '(shell-pop-shell-type
+   (quote
+    ("ansi-term" "*ansi-term*"
+     (lambda nil
+       (ansi-term shell-pop-term-shell))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-preview ((t (:background "gold3" :foreground "black"))))
+ '(company-preview-common ((t (:background "gold3" :foreground "grey20"))))
+ '(company-preview-search ((t (:background "green4" :foreground "green"))))
+ '(company-scrollbar-bg ((t (:background "#303030"))))
+ '(company-scrollbar-fg ((t (:background "#404040"))))
+ '(company-tooltip-annotation ((t (:foreground "gold"))))
+ '(company-tooltip-annotation-selection ((t (:foreground "white"))))
+ '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
+ '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))

@@ -64,6 +64,15 @@
   (defun company-maybe-turn-on-fci (&rest ignore)
     (when company-fci-mode-on-p (fci-mode 1)))
 
+  ;; 解决org-mode导出代码尾部有乱码
+  (defun fci-mode-override-advice (&rest args))
+  (advice-add 'org-html-fontify-code :around
+              (lambda (fun &rest args)
+                (advice-add 'fci-mode :override #'fci-mode-override-advice)
+                (let ((result  (apply fun args)))
+                  (advice-remove 'fci-mode #'fci-mode-override-advice)
+                  result)))
+
   :hook ((company-completion-started . company-turn-off-fci)
          (company-completion-finished . company-maybe-turn-on-fci)
          (company-completion-cancelled . company-maybe-turn-on-fci)

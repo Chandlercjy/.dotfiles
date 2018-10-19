@@ -7,6 +7,7 @@
   :defer 1
   :bind (
          :map evil-normal-state-map
+         ("C-c b" . delete-blank-lines)
          ("C-u" . evil-scroll-up)
          ("<SPC> e" . open-my-emacs-init-file)
          ("<SPC> v" . open-my-vim-init-file)
@@ -68,6 +69,7 @@
          ("RET" . er/expand-region)
          :map evil-visual-state-map
          ("RET" . er/expand-region)
+
          )
   :hook (prog-mode . evil-mode)
   :config
@@ -167,26 +169,6 @@
   )
 
 
-(use-package workgroups2
-  :ensure t
-  :defer 0.01
-  :bind (("<f8>" . wg-save-session)
-         ("<f9>" . wg-reload-session))
-  :init
-  (setq wg-prefix-key (kbd "C-c w"))
-  (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
-  (setq wg-mode-line-display-on t)          ; Default: (not (featurep 'powerline))
-  (setq wg-flag-modified t)                 ; Display modified flags as well
-  (setq wg-mode-line-decor-left-brace "<<<<<<<<<<<<<<<"
-        wg-mode-line-decor-right-brace "]"  ; how to surround it
-        wg-mode-line-decor-divider ":")
-  ;; What to do on Emacs exit / workgroups-mode exit?
-  ;; (setq wg-emacs-exit-save-behavior           'save)      ; Options: 'save 'ask nil
-  ;; (setq wg-workgroups-mode-exit-save-behavior 'save)      ; Options: 'save 'ask nil
-  ;; (wg-reload-session)
-  :config
-  (workgroups-mode)
-  )
 
 (use-package embrace
   :ensure t

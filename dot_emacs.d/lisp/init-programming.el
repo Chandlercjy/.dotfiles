@@ -40,6 +40,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package company
   :defer 1
+  :hook (prog-mode . company-mode)
   :bind (("M-/" . company-complete)
          :map company-active-map
          ("<backtab>" . company-select-previous-or-abort)
@@ -211,21 +212,21 @@
   :defer 5
   )
 
-;; 自动换行
-(add-hook 'text-mode-hook (lambda ()
-                            (turn-on-auto-fill)
-                            (fci-mode)
-                            (set-fill-column 82)))
-(add-hook 'markdown-mode-hook (lambda ()
-                                (turn-on-auto-fill)
-                                (fci-mode)
-                                (set-fill-column 82)))
-(add-hook 'python-mode-hook (lambda ()
-                              (fci-mode)
-                              (set-fill-column 94)))
-(add-hook 'c-mode-hook (lambda ()
-                         (fci-mode)
-                         (set-fill-column 94)))
+;; ;; 自动换行
+;; (add-hook 'text-mode-hook (lambda ()
+;;                             (turn-on-auto-fill)
+;;                             (fci-mode)
+;;                             (set-fill-column 82)))
+;; (add-hook 'markdown-mode-hook (lambda ()
+;;                                 (turn-on-auto-fill)
+;;                                 (fci-mode)
+;;                                 (set-fill-column 82)))
+;; (add-hook 'python-mode-hook (lambda ()
+;;                               (fci-mode)
+;;                               (set-fill-column 94)))
+;; (add-hook 'c-mode-hook (lambda ()
+;;                          (fci-mode)
+;;                          (set-fill-column 94)))
 
 
 (use-package smartparens

@@ -1,4 +1,3 @@
-
 (with-eval-after-load 'evil
   ;; 个性化配置快捷键:
   (define-key evil-normal-state-map (kbd "<SPC> p") 'search-Document)
@@ -51,6 +50,7 @@
       (chandler/run-command "~/Documents/CLionProjects/OnePyPlus/bin/test_OnePy")))
 
   )
+
 
 
 (provide 'init-personal)
