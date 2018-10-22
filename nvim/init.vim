@@ -63,7 +63,6 @@ Plug 'iamcco/markdown-preview.vim',{'for':'markdown'}
 Plug 'mzlogin/vim-markdown-toc',{'for':'markdown'}
 
 
-
 " 试用
 Plug 'xolox/vim-misc'
 Plug 'sillybun/vim-autodoc'
