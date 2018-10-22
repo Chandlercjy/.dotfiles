@@ -44,7 +44,6 @@
 (require 'init-better-default)
 (require 'init-personal)
 
-
 (use-package dired-hide-dotfiles
   :ensure t
   :defer 3
@@ -89,8 +88,6 @@
   :bind (("C-'" . better-shell-shell)
          ("C-;" . better-shell-remote-open)))
 
-;; (spaceline-define-segment spaceline-workgroups2-segment 'wg-mode-line-string)
-
 
 (use-package docker
   :ensure t
@@ -112,8 +109,27 @@
 
 (setq initial-scratch-message ";; Hi Chandler! Today's is also a beautiful day~")
 
-(setq python-indent-guess-indent-offset t)  
-(setq python-indent-guess-indent-offset-verbose nil)
+(use-package workgroups2
+  :ensure t
+  :bind (("<f8>" . wg-save-session)
+         ("<f9>" . wg-reload-session))
+  :init
+  (setq wg-prefix-key (kbd "C-c w"))
+  (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+  (setq wg-mode-line-display-on t)          ; Default: (not (featurep 'powerline))
+  (setq wg-flag-modified t)                 ; Display modified flags as well
+  (setq wg-mode-line-decor-left-brace "["
+        wg-mode-line-decor-right-brace "]"  ; how to surround it
+        wg-mode-line-decor-divider ":")
+
+  ;; What to do on Emacs exit / workgroups-mode exit?
+  (setq wg-emacs-exit-save-behavior           'nil)      ; Options: 'save 'ask nil
+  (setq wg-workgroups-mode-exit-save-behavior 'nil)      ; Options: 'save 'ask nil
+  (setq wg-session-load-on-start t)    ; default: (not (daemonp))
+
+  ;; :config
+  ;; (workgroups-mode 1)
+  )
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -144,3 +160,5 @@
  '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
  '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
  '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
+
+

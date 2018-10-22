@@ -28,7 +28,6 @@
          ("<SPC> [" . flycheck-previous-error)
          (",l" . flycheck-list-errors)
          ("<f7>" . flycheck-mode)
-         (",y" . chandler/toggle-copy-to-osx)
 
          (",cc" . evilnc-comment-or-uncomment-lines)
 
@@ -67,8 +66,10 @@
          ;; 同时都有的
          :map evil-normal-state-map
          ("RET" . er/expand-region)
+         (",y" . chandler/toggle-copy-to-osx)
          :map evil-visual-state-map
          ("RET" . er/expand-region)
+         (",y" . chandler/toggle-copy-to-osx)
 
          )
   :hook (prog-mode . evil-mode)
