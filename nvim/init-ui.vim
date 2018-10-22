@@ -50,8 +50,13 @@ let g:startify_custom_header = [
 "             \ }
 "
 " 设置主题
-" colorscheme onedark
-" colorscheme gruvbox
+"
+" call plug#load('gruvbox')
+" colorscheme gruvbox"
+" set bg = dark
+
+
+call plug#load('palenight.vim')
 colorscheme palenight
 let g:palenight_terminal_italics=1
 

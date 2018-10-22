@@ -9,7 +9,7 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_javascript_prettier_options = '--config ~/.prettierrc'
 let g:ale_fixers = {
             \   'vim': ['remove_trailing_lines','trim_whitespace'],
-            \   'python': ['add_blank_lines_for_python_control_statements','autopep8','isort','remove_trailing_lines','trim_whitespace'],
+            \   'python': ['add_blank_lines_for_python_control_statements','black','isort','remove_trailing_lines','trim_whitespace'],
             \   'markdown': ['prettier','remove_trailing_lines','trim_whitespace'],
             \   'cpp': ['clang-format','remove_trailing_lines','trim_whitespace'],
             \   'c': ['clang-format','remove_trailing_lines','trim_whitespace'],
@@ -48,7 +48,7 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 let g:ale_python_pylint_options = '--disable=missing-docstring,too-many-arguments,too-many-ancestors,arguments-differ'
-let g:ale_c_clangformat_options = '-style="{BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Attach, AllowShortIfStatementsOnASingleLine: true, IndentCaseLabels: true, ObjCBlockIndentWidth: 4, ObjCSpaceAfterProperty: true, ColumnLimit: 0, AlignTrailingComments: true, SpaceAfterCStyleCast: true, SpacesInParentheses: false, SpacesInSquareBrackets: false}"'
+let g:ale_c_clangformat_options = '-style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Attach, AllowShortIfStatementsOnASingleLine: true, IndentCaseLabels: true, ObjCBlockIndentWidth: 4, ObjCSpaceAfterProperty: true, ColumnLimit: 0, AlignTrailingComments: true, SpaceAfterCStyleCast: true, SpacesInParentheses: false, SpacesInSquareBrackets: false}'
 "let g:ale_cpp_gcc_options = '-Wall -std=c++17 -I ~/Documents/CLionProjects/OnePyPlus/include/'
 "let g:ale_cpp_clang_options = '-Wall -std=c++17'
 "let g:ale_javascript_prettier_options = '--tab-width 4 --prose-wrap always'

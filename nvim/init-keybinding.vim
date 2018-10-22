@@ -1,17 +1,17 @@
 
-" ===================== vim-which-key ====================== 
+" ===================== vim-which-key ======================
 set timeoutlen=500
 let g:mapleader = ","
 
-nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
-nnoremap <silent> <SPACE> :<c-u>WhichKey  '<SPACE>'<CR>
-nnoremap <silent> [ :<c-u>WhichKey  '['<CR>
-nnoremap <silent> ] :<c-u>WhichKey  ']'<CR>
+nnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
+nnoremap <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
+nnoremap <silent> [ :<c-u>WhichKey '['<CR>
+nnoremap <silent> ] :<c-u>WhichKey ']'<CR>
 
-vnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
-vnoremap <silent> <SPACE> :<c-u>WhichKey  '<SPACE>'<CR>
-vnoremap <silent> [ :<c-u>WhichKey  '['<CR>
-vnoremap <silent> ] :<c-u>WhichKey  ']'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
+vnoremap <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
+vnoremap <silent> [ :<c-u>WhichKey '['<CR>
+vnoremap <silent> ] :<c-u>WhichKey ']'<CR>
 
 let g:comma_prefix_dict =  {}
 let g:space_prefix_dict =  {}
@@ -27,9 +27,9 @@ vmap <Leader>cc <Plug>NERDCommenterToggle
 
 let g:comma_prefix_dict['c'] = {
             \ 'name': '+nerd-comenter && cd',
-            \ 'd' : [':cd %:p:h'                 , 'Back to current directory'] ,
-            \ 'A' : ['<Plug>NERDCommenterAppend' , 'NERDComment Append']        ,
-            \ 'c' : ['<Plug>NERDCommenterToggle' , 'NERDComment Toggle']        ,
+            \ 'A' : ['<Plug>NERDCommenterAppend', 'NERDComment Append'],
+            \ 'c' : ['<Plug>NERDCommenterToggle', 'NERDComment Toggle'],
+            \ 'd' : [':cd %:p:h | echo "Change Dir successfully!"', 'Back to current directory'] ,
             \}
 
 " 复制达到剪贴板
@@ -44,16 +44,20 @@ let g:comma_prefix_dict.g = [':YcmCompleter GoTo' , 'YCM-GoTo']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
                                         "             Space-prefix            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:space_prefix_dict['o'] = {
-            \ 'name' : '+open',
-            \ 'q': [ ':copen' , 'open-quickfix']     ,
-            \ 'l': [ ':lopen' , 'open-locationlist'] ,
-            \ }
+
+let g:space_prefix_dict['v'] = {
+            \ 'name' : '+Neovim_Config',
+            \ 's': [':FZF ~/.config/nvim' , 'Search config'] ,
+            \ 'k': [':e ~/.config/nvim/init-keybinding.vim' , 'init-keybinding'] ,
+            \ 'i': [':e ~/.config/nvim/init.vim' , 'init'] ,
+            \ 'r': [':source $MYVIMRC'    , 'Source vimrc']  ,
+            \}
+
 
 let g:space_prefix_dict['f'] = {
             \ 'name' : '+files' ,
-            \ 'f': ['FZF'   , 'FZF']              ,
-            \ 's': [':wa'   , 'save all buffers'] ,
+            \ 'f': [':FZF'   , 'FZF']              ,
+            \ 's': [':wa|echo "Buffers saved!"'   , 'save all buffers'] ,
             \ 'r': [':Ranger'   , 'Ranger'] ,
             \ }
 
@@ -64,8 +68,9 @@ let g:space_prefix_dict['t'] = {
             \ 'g': [':GitGutterToggle'          , 'GitGutterToggle']        ,
             \ 'u': [':MundoToggle'              , 'MundoToggle']            ,
             \ 'U': [':UndotreeToggle'           , 'UndotreeToggle']         ,
+            \ 'm': [':SignatureToggleSigns'     , 'Marks Toggle']           ,
+            \ 'a': [':ALEToggle'     , 'ALEToggle']           ,
             \ }
-
 
 let g:space_prefix_dict['g'] = {
       \ 'name' : '+git/version-control' ,
@@ -87,6 +92,7 @@ let g:space_prefix_dict['s'] = {
       \ 'b' : [':call SwoopMulti()'          , 'swoop-multi-buffer']    ,
       \ }
 
+let g:space_prefix_dict.a = [':Ag' , 'Ag-search']
 let g:space_prefix_dict[':'] = [':OverCommandLine', 'Over-CommandLine']
 let g:space_prefix_dict.u = [':MundoToggle' , 'MundoToggle']
 let g:space_prefix_dict.b = [':Buffers'     , 'Buffer-list']
@@ -163,14 +169,6 @@ let NERDTreeWinPos="left"
 let NERDTreeIgnore=['\.pyc','\~$','\.swp'] " 忽略一下文件的显示
 
 
-
-
-
-
-
-
-
-
 " Markdown 设置预览,显示隐藏快捷键和加粗快捷键
 autocmd FileType markdown nmap <silent> <Space>m <Plug>MarkdownPreview
 nmap <Space>c :set conceallevel=0<CR>
@@ -181,8 +179,10 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
 " Quickfix & Location list
 nnoremap <leader>q :call QuickfixToggle()<cr>
+nnoremap <leader>l :call LocalfixToggle()<cr>
 
 let g:quickfix_is_open = 0
+let g:locallist_is_open = 0
 
 function! QuickfixToggle()
     if g:quickfix_is_open
@@ -194,8 +194,16 @@ function! QuickfixToggle()
     endif
 endfunction
 
-" vim-signature 设置mark标记提示
-nmap <silent> <F4> :SignatureToggleSigns<CR>
+function! LocalfixToggle()
+    if g:locallist_is_open
+        lclose
+        let g:locallist_is_open = 0
+    else
+        lopen
+        let g:locallist_is_open = 1
+    endif
+endfunction
+
 
 
 " AsyncRun
@@ -255,15 +263,11 @@ ino <silent> <c-x><c-a> <c-r>=<sid>utils#ulti_complete()<cr>
 " 通用快捷键
 " ==============================
 " 打开配置文件
-nmap <Space>v :FZF ~/.config/nvim<CR>
 nmap <Space>e :FZF ~/.emacs.d<CR>
-nmap <Space>a :Ag<CR>
 
 " FZF搜索文件
 nmap <C-p> :FZF ~/Documents/<CR>
 
-" 重置配置文件
-nmap <Space>r :source $MYVIMRC<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -292,7 +296,19 @@ nmap <F9> :SLoad default<CR>
 "map <F8> :setlocal spell! spelllang=en_us<CR>
 "
 
-
 " ======================== Vim-move ========================
 nmap <A-j> <Plug>MoveLineDown
 nmap <A-k> <Plug>MoveLineUp
+
+" ======================== YankRing ========================
+nmap <A-y> :YRShow<CR>
+
+
+" ======================== Neo-term ========================
+nmap <A-f> :TREPLSendFile<CR>
+nmap <A-r> <Plug>(neoterm-repl-send)
+nmap <A-l> <Plug>(neoterm-repl-send-line)
+
+vmap <A-f> :TREPLSendFile<CR>
+vmap <A-r> <Plug>(neoterm-repl-send)
+vmap <A-l> <Plug>(neoterm-repl-send-line)

@@ -1,12 +1,16 @@
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
                                         "               Vim-Plug              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
+
+Plug 'Chandlercjy/neoterm'
+Plug 'ConradIrwin/vim-bracketed-paste'
+
 " 动态替换
 Plug 'osyo-manga/vim-over'
-
 
 "UI
 Plug 'majutsushi/tagbar'
@@ -16,7 +20,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree',{ 'on':  'NERDTreeToggle' }
 Plug 'junegunn/goyo.vim'
 " 主题美化类
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'drewtempelmeyer/palenight.vim',{'on':[]}
+Plug 'morhetz/gruvbox',{'on':[]}
 Plug 'yggdroot/indentline'
 
 
@@ -56,7 +61,7 @@ Plug 'tpope/vim-surround',              { 'on': []}
 
 " 代码插件
 Plug 'skywind3000/asyncrun.vim',        { 'on': 'AsyncRun'}
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', {'on':['ALEToggle','ALEFix']}
 Plug 'Valloric/YouCompleteMe',          { 'do': './install.py --clang-completer' }
 Plug 'dyng/ctrlsf.vim',                 { 'on':'CtrlSF'}
 Plug 'vim-python/python-syntax',        { 'for' : 'python'}
@@ -64,7 +69,7 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'leafgarland/typescript-vim'
 
 " 强大的各种语言支持
-Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot',{'on':[]}
 
 
 "补全
@@ -95,6 +100,8 @@ Plug 'rbgrouleff/bclose.vim',           { 'on':'Ranger'}
 Plug 'easymotion/vim-easymotion', {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
 
 Plug 'tpope/vim-repeat'
+
+" 快速选择
 Plug 'gcmt/wildfire.vim'
 
 " 记录编程时间
@@ -119,6 +126,11 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'pseewald/vim-anyfold'
 
+" 复制粘贴记录
+Plug 'vim-scripts/YankRing.vim', {'on':['YRShow']}
+
+" Plug 'sillybun/vim-repl', {'do': './install.sh'}
+
 "Plug 'dhruvasagar/vim-table-mode'
 "Plug 'terryma/vim-expand-region'
 "Plug 'roxma/vim-tmux-clipboard'
@@ -127,13 +139,16 @@ Plug 'pseewald/vim-anyfold'
 "Plug 'Shougo/vimproc.vim'
 
 call plug#end()
-"
+
+
+
 augroup lazy_load
     autocmd!
     autocmd InsertEnter * call plug#load('vim-wakatime') | autocmd! lazy_load
     autocmd InsertEnter * call plug#load('vim-surround') | autocmd! lazy_load
     autocmd InsertEnter * call plug#load('vim-signature') | autocmd! lazy_load
     autocmd InsertEnter * call plug#load('vim-gitgutter') | autocmd! lazy_load
+    autocmd InsertEnter * call plug#load('vim-polyglot') | autocmd! lazy_load
 augroup END
 
 " ========================= 读取配置文件 =========================
@@ -213,4 +228,12 @@ hi Folded term=NONE cterm=NONE
 
 
 let g:swoopUseDefaultKeyMap = 0
+
+" ======================== neo-term ========================
+let g:neoterm_open_in_all_tabs = 0
+let g:neoterm_position = 'vertical'
+let g:neoterm_autoscroll = 1
+let g:neoterm_fixedsize = 1
+let g:neoterm_size = '80'
+" let g:neoterm_default_mod = 'rightbelow'
 
