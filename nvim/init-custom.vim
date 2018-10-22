@@ -12,10 +12,10 @@ let g:startify_bookmarks = [
 " ==============================
 " 临时测试中的设定
 " ==============================
-nmap <Space>o :FZF ~/Documents/PycharmProjects/OnePy/<CR>
+"nmap <Space>o :FZF ~/Documents/PycharmProjects/OnePy/<CR>
 "nmap <Space>o :FZF ~/Downloads/OnePy-master/<CR>
-nmap <Space>p :FZF ~/Documents/CLionProjects/OnePyPlus<CR>
-nmap <Space>k :FZF ~/Documents/CLionProjects/test_python_boost<CR>
+"nmap <Space>p :FZF ~/Documents/CLionProjects/OnePyPlus<CR>
+"nmap <Space>k :FZF ~/Documents/CLionProjects/test_python_boost<CR>
 
 
 " 快速编译
@@ -29,7 +29,6 @@ nmap <leader>5 :wa<CR>:AsyncRun -raw cd ~/Documents/CLionProjects/boost-python-e
 nmap <leader>6 :wa<CR>:AsyncRun -raw cd ~/Documents/CLionProjects/test_python_boost/build && cmake .. && make && python ../lib/main.py<CR>
 nmap <leader>7 :wa<CR>:AsyncRun -raw cd ~/CLionProjects/untitled/build && cmake .. && make && ../bin/main<CR>
 
-
 set makeprg=gcc\ -std=c++17\ -Wall\ -omain\ main.cpp
 
 "let g:asyncrun_rootmarks = ['.git', '.root']
@@ -37,8 +36,6 @@ set makeprg=gcc\ -std=c++17\ -Wall\ -omain\ main.cpp
 "let g:gen_tags#gtags_default_map = 0
 
 
-nmap <F8> :SSave! default<CR>
-nmap <F9> :SLoad default<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
