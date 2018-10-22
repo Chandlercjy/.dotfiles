@@ -1,8 +1,12 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
                                         "               Vim-Plug              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
+
+" 动态替换
+Plug 'osyo-manga/vim-over'
+
 
 "UI
 Plug 'majutsushi/tagbar'
@@ -10,47 +14,58 @@ Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree',{ 'on':  'NERDTreeToggle' }
+Plug 'junegunn/goyo.vim'
 " 主题美化类
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'yggdroot/indentline'
 
 
+
+
 " 左边栏显示mark
-Plug 'kshenoy/vim-signature', {'on': []}
+Plug 'kshenoy/vim-signature',           { 'on': []}
 
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter', {'on': []}
+Plug 'airblade/vim-gitgutter',          { 'on': []}
 
 
 
 " 搜索
-Plug 'junegunn/fzf', {'on': 'FZF', 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim', {'on': 'FZF'}
+Plug 'junegunn/fzf',                    { 'on': ['FZF','Buffers'], 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim',                { 'on': ['FZF','Buffers']}
+Plug 'pelodelfuego/vim-swoop'
 
 
 "通用插件
 "Plug 'ludovicchabant/vim-gutentags'
-Plug 'mbbill/undotree',{ 'on':  'UndotreeToggle' }
+Plug 'mbbill/undotree',                 { 'on':  'UndotreeToggle' }
+Plug 'simnalamburt/vim-mundo'
+
 
 
 
 " 通用编辑类
-Plug 'scrooloose/nerdcommenter', {'on': []}
+Plug 'scrooloose/nerdcommenter',         { 'on': '<Plug>NERDCommenterToggle' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-surround', {'on': []}
+Plug 'tpope/vim-surround',              { 'on': []}
+
 
 
 " 代码插件
-Plug 'skywind3000/asyncrun.vim', {'on': 'AsyncRun'}
-Plug 'w0rp/ale', {'on': []}
-Plug 'Valloric/YouCompleteMe',{'do': './install.py --clang-completer' }
-Plug 'dyng/ctrlsf.vim',{'on':'CtrlSF'}
-Plug 'vim-python/python-syntax', {'for' : 'python'}
+Plug 'skywind3000/asyncrun.vim',        { 'on': 'AsyncRun'}
+Plug 'w0rp/ale'
+Plug 'Valloric/YouCompleteMe',          { 'do': './install.py --clang-completer' }
+Plug 'dyng/ctrlsf.vim',                 { 'on':'CtrlSF'}
+Plug 'vim-python/python-syntax',        { 'for' : 'python'}
 Plug 'bfrg/vim-cpp-modern'
 Plug 'leafgarland/typescript-vim'
+
+" 强大的各种语言支持
+Plug 'sheerun/vim-polyglot'
+
 
 "补全
 Plug 'SirVer/ultisnips'
@@ -58,9 +73,10 @@ Plug 'honza/vim-snippets'
 
 
 " Markdown插件
-Plug 'iamcco/mathjax-support-for-mkdp',{'for':'markdown'}
-Plug 'iamcco/markdown-preview.vim',{'for':'markdown'}
-Plug 'mzlogin/vim-markdown-toc',{'for':'markdown'}
+Plug 'iamcco/mathjax-support-for-mkdp', { 'for':'markdown'}
+Plug 'iamcco/markdown-preview.vim',     { 'for':'markdown'}
+Plug 'mzlogin/vim-markdown-toc',        { 'for':'markdown'}
+" Plug 'kannokanno/previm',        { 'for':'markdown'}
 
 
 " 试用
@@ -69,14 +85,15 @@ Plug 'sillybun/vim-autodoc'
 
 
 " 文件管理
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim',       { 'on':'Ranger'}
+Plug 'rbgrouleff/bclose.vim',           { 'on':'Ranger'}
 
 
 
 " ========================== 实用类 ===========================
 " 快速跳转
-Plug 'easymotion/vim-easymotion', {'on': []}
+Plug 'easymotion/vim-easymotion', {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
+
 Plug 'tpope/vim-repeat'
 Plug 'gcmt/wildfire.vim'
 
@@ -92,13 +109,15 @@ Plug 'tweekmonster/startuptime.vim'
 Plug 'pbrisbin/vim-mkdir'
 "舒服的滚动
 Plug 'yuttie/comfortable-motion.vim'
+" 移动行
+Plug 'matze/vim-move', { 'on': [ '<Plug>MoveLineDown', '<Plug>MoveLineUp' ]}
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-"Plug 'Shougo/denite.nvim'
 
+Plug 'pseewald/vim-anyfold'
 
 "Plug 'dhruvasagar/vim-table-mode'
 "Plug 'terryma/vim-expand-region'
@@ -107,19 +126,12 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 "Plug 'idanarye/vim-vebugger'
 "Plug 'Shougo/vimproc.vim'
 
-
-
-
-
 call plug#end()
 "
 augroup lazy_load
     autocmd!
     autocmd InsertEnter * call plug#load('vim-wakatime') | autocmd! lazy_load
-    autocmd InsertEnter * call plug#load('nerdcommenter') | autocmd! lazy_load
     autocmd InsertEnter * call plug#load('vim-surround') | autocmd! lazy_load
-    autocmd InsertEnter * call plug#load('vim-easymotion') | autocmd! lazy_load
-    autocmd InsertEnter * call plug#load('ale') | autocmd! lazy_load
     autocmd InsertEnter * call plug#load('vim-signature') | autocmd! lazy_load
     autocmd InsertEnter * call plug#load('vim-gitgutter') | autocmd! lazy_load
 augroup END
@@ -132,7 +144,7 @@ source ~/.config/nvim/init-keybinding.vim
 source ~/.config/nvim/init-ui.vim
 
 "在当前目录下新建一个custom.vim的文件加载自己的自定义配置, 文件不存在时不报错
-"ru init-custom.vim
+ru init-custom.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -146,7 +158,7 @@ if has('nvim')
     let g:python_host_skip_check=1
     let g:python3_host_skip_check=1
     let g:python3_host_prog='python'
-    let g:python_host_prog='python2'
+    let g:python_host_prog='python'
 
 
      "Neovim Terminal变换
@@ -175,21 +187,30 @@ let g:fzf_layout = { 'down': '~20%' }
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
+
+" ====================== vim-anyfold =======================
+let g:anyfold_activate=1
+let g:anyfold_fold_comments=1
+set foldlevel=0
+hi Folded term=NONE cterm=NONE
+
+
+let g:swoopUseDefaultKeyMap = 0
 

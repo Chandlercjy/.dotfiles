@@ -50,10 +50,8 @@ let g:startify_custom_header = [
 "             \ }
 "
 " 设置主题
-"colorscheme onedark
-"colorscheme neodark
-"colorscheme gruvbox
-"colorscheme OceanicNext
+" colorscheme onedark
+" colorscheme gruvbox
 colorscheme palenight
 let g:palenight_terminal_italics=1
 
@@ -71,4 +69,14 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 let g:airline_theme='bubblegum'
 
+let g:airline#extensions#ale#enabled = 1
+
+
+
+" ====================== Which-key 高亮 ====================
+
+autocmd! FileType which_key
+autocmd FileType which_key highlight WhichKeyGroup guifg=PaleGoldenrod
+autocmd  FileType which_key set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 

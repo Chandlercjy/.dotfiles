@@ -1,62 +1,96 @@
 
-" ===================== vim-which-key ======================
+" ===================== vim-which-key ====================== 
 set timeoutlen=500
 let g:mapleader = ","
-let g:maplocalleader = "\<SPACE>"
 
 nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+nnoremap <silent> <SPACE> :<c-u>WhichKey  '<SPACE>'<CR>
+nnoremap <silent> [ :<c-u>WhichKey  '['<CR>
+nnoremap <silent> ] :<c-u>WhichKey  ']'<CR>
+
 vnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+vnoremap <silent> <SPACE> :<c-u>WhichKey  '<SPACE>'<CR>
+vnoremap <silent> [ :<c-u>WhichKey  '['<CR>
+vnoremap <silent> ] :<c-u>WhichKey  ']'<CR>
 
-nnoremap <silent> <localleader> :<c-u>WhichKey  '<SPACE>'<CR>
-vnoremap <silent> <localleader> :<c-u>WhichKey  '<SPACE>'<CR>
-
+let g:comma_prefix_dict =  {}
+let g:space_prefix_dict =  {}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
                                         "             Comma-prefix            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:comma_prefix_dict =  {}
+
+" 修复无法多行comment
+nmap <Leader>cc <Plug>NERDCommenterToggle
+omap <Leader>cc <Plug>NERDCommenterToggle
+vmap <Leader>cc <Plug>NERDCommenterToggle
+
 let g:comma_prefix_dict['c'] = {
             \ 'name': '+nerd-comenter && cd',
-            \ 'd'       : [':cd %:p:h'                 , 'Back to current directory'] ,
-            \ 'A'       : ['<Plug>NERDCommenterAppend' , 'NERDComment Append']        ,
-            \ '<SPACE>' : ['<Plug>NERDCommenterToggle' , 'NERDComment Toggle']        ,
+            \ 'd' : [':cd %:p:h'                 , 'Back to current directory'] ,
+            \ 'A' : ['<Plug>NERDCommenterAppend' , 'NERDComment Append']        ,
+            \ 'c' : ['<Plug>NERDCommenterToggle' , 'NERDComment Toggle']        ,
             \}
 
 " 复制达到剪贴板
 nmap <leader>y "+y
 vmap <leader>y "+y
 let g:comma_prefix_dict.y = "yank to clipboard"
-call which_key#register(',', 'g:comma_prefix_dict')
 
+
+let g:comma_prefix_dict.f = [':ALEFix | wa' , 'ALEFix and save']
+let g:comma_prefix_dict.g = [':YcmCompleter GoTo' , 'YCM-GoTo']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
                                         "             Space-prefix            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:space_prefix_dict =  {}
 let g:space_prefix_dict['o'] = {
             \ 'name' : '+open',
-            \ 'q'    : [ ':copen' , 'open-quickfix']     ,
-            \ 'l'    : [ ':lopen' , 'open-locationlist'] ,
+            \ 'q': [ ':copen' , 'open-quickfix']     ,
+            \ 'l': [ ':lopen' , 'open-locationlist'] ,
             \ }
 
 let g:space_prefix_dict['f'] = {
             \ 'name' : '+files' ,
-            \ 'f'    : ['FZF'   , 'FZF']              ,
-            \ 's'    : [':wa'   , 'save all buffers'] ,
-            \ 'r'    : [':Ranger'   , 'Ranger'] ,
+            \ 'f': ['FZF'   , 'FZF']              ,
+            \ 's': [':wa'   , 'save all buffers'] ,
+            \ 'r': [':Ranger'   , 'Ranger'] ,
             \ }
 
 let g:space_prefix_dict['t'] = {
-            \ 'name' : '+Tabs' ,
-            \ 'n'    : [':tabnew'   , 'Tab New'] ,
-            \ 't'    : [':tabnew % | normal gTZZgt'   , 'Drag buffer to New Tab'] ,
+            \ 'name' : '+Tabs_Toggle' ,
+            \ 'n': [':tabnew'                   , 'Tab New']                ,
+            \ 't': [':tabnew % | normal gTZZgt' , 'Drag buffer to New Tab'] ,
+            \ 'g': [':GitGutterToggle'          , 'GitGutterToggle']        ,
+            \ 'u': [':MundoToggle'              , 'MundoToggle']            ,
+            \ 'U': [':UndotreeToggle'           , 'UndotreeToggle']         ,
             \ }
 
-"let g:space_prefix_dict['b'] = {
-"            \ 'name' : '+buffers' ,
-"            \ 'n'    : [':tabnew'   , 'Tab New'] ,
-"            \ 't'    : [':tabnew %<CR>gTZZgt'   , 'Tab New'] ,
-"            \ }
+
+let g:space_prefix_dict['g'] = {
+      \ 'name' : '+git/version-control' ,
+      \ 'b' : ['Gblame'                 , 'fugitive-blame']             ,
+      \ 'c' : ['BCommits'               , 'commits-for-current-buffer'] ,
+      \ 'C' : ['Gcommit'                , 'fugitive-commit']            ,
+      \ 'd' : ['Gdiff'                  , 'fugitive-diff']              ,
+      \ 'e' : ['Gedit'                  , 'fugitive-edit']              ,
+      \ 'l' : ['Glog'                   , 'fugitive-log']               ,
+      \ 'r' : ['Gread'                  , 'fugitive-read']              ,
+      \ 's' : ['Gstatus'                , 'fugitive-status']            ,
+      \ 'w' : ['Gwrite'                 , 'fugitive-write']             ,
+      \ 'p' : ['Git push'               , 'fugitive-push']              ,
+      \ }
+
+let g:space_prefix_dict['s'] = {
+      \ 'name' : '+swoop-search' ,
+      \ 's' : [':call SwoopMultiSelection()' , 'swoop-multi-selection'] ,
+      \ 'b' : [':call SwoopMulti()'          , 'swoop-multi-buffer']    ,
+      \ }
+
+let g:space_prefix_dict[':'] = [':OverCommandLine', 'Over-CommandLine']
+let g:space_prefix_dict.u = [':MundoToggle' , 'MundoToggle']
+let g:space_prefix_dict.b = [':Buffers'     , 'Buffer-list']
+let g:space_prefix_dict.h = [':set nohls'   , "clear-search-highlight"] " 去除搜索高亮
 
 let g:space_prefix_dict.1 = [':normal 1gt' , 'Tab 1']
 let g:space_prefix_dict.2 = [':normal 2gt' , 'Tab 2']
@@ -67,32 +101,41 @@ let g:space_prefix_dict.6 = [':normal 6gt' , 'Tab 6']
 let g:space_prefix_dict.7 = [':normal 7gt' , 'Tab 7']
 let g:space_prefix_dict.8 = [':normal 8gt' , 'Tab 8']
 let g:space_prefix_dict.9 = [':normal 9gt' , 'Tab 9']
-let g:space_prefix_dict.0 = [':tablast' , 'Tab Last']
+let g:space_prefix_dict.0 = [':tablast'    , 'Tab Last']
 
 
+let g:space_prefix_dict['y'] = {
+      \ 'name' : '+YouCompleteMe' ,
+      \ 'f' : [':YcmCompleter FixIt'   , 'YCM-FixIt']   ,
+      \ 'd' : [':YcmCompleter GetDoc'  , 'YCM-GetDoc']  ,
+      \ 't' : [':YcmCompleter GetType' , 'YCM-GetType'] ,
+      \ }
 
+let g:space_prefix_dict['p'] = {'name' : '+projects'}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                                        "          Parentheses-prefex         "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:left_parentheses_prefix_dict = {}
+let g:right_parentheses_prefix_dict = {}
+
+let g:left_parentheses_prefix_dict.g  = ['<Plug>GitGutterNextHunk', "GitGutterNextHunk"]
+let g:right_parentheses_prefix_dict.g = ['<Plug>GitGutterPrevHunk', "GitGutterPrevHunk"]
+
+" ALE 设置快捷键
+let g:left_parentheses_prefix_dict.a  = ['<Plug>(ale_previous)' , "ALE_previous"]
+let g:right_parentheses_prefix_dict.a = ['<Plug>(ale_next)'     , "ALE_NEXT"]
+
+
+" ======================= Which-END ========================
+call which_key#register(',', 'g:comma_prefix_dict')
 call which_key#register('<SPACE>', 'g:space_prefix_dict')
-
-
-
-
-"去除搜索高亮
-nnoremap <silent> <Space>h :nohls<CR>
-let g:space_prefix_dict.h = "No highlight"
-
-
-
-
-"===================================================
+call which_key#register('[', 'g:left_parentheses_prefix_dict')
+call which_key#register(']', 'g:right_parentheses_prefix_dict')
 
 
 "重命名指令
 :command! -nargs=1 Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
-
-
-" 行号控制,便于复制
-nnoremap <silent> <Space>n :NumbersToggle<CR>:IndentLinesToggle<CR>
-let g:enable_numbers = 0
 
 
 " 修改全角符号为半角符号
@@ -120,19 +163,11 @@ let NERDTreeWinPos="left"
 let NERDTreeIgnore=['\.pyc','\~$','\.swp'] " 忽略一下文件的显示
 
 
-" 设置YouCompleteMe
-" Go to definition else declaration
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>f :YcmCompleter FixIt<CR>
-nnoremap <S-Tab> :YcmCompleter GetDoc<CR>
-nnoremap <leader>t :YcmCompleter GetType<CR>
 
 
 
 
 
-" 调用 gundo 树
-nnoremap <Space>u :UndotreeToggle<CR>
 
 
 
@@ -176,9 +211,8 @@ map <F5> :w<CR>:!python %<CR>
 
 " Guitter
 let g:gitgutter_map_keys = 0
-nmap <Space>g :GitGutterToggle<CR>
-nmap ]g <Plug>GitGutterNextHunk
-nmap [g <Plug>GitGutterPrevHunk<Paste>
+
+
 
 
 " ======================= UltiSnips ========================
@@ -257,3 +291,8 @@ nmap <F9> :SLoad default<CR>
 " 英文检查
 "map <F8> :setlocal spell! spelllang=en_us<CR>
 "
+
+
+" ======================== Vim-move ========================
+nmap <A-j> <Plug>MoveLineDown
+nmap <A-k> <Plug>MoveLineUp

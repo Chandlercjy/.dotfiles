@@ -62,11 +62,6 @@ let g:ale_c_clangformat_options = '-style="{BasedOnStyle: LLVM, IndentWidth: 4, 
 "let g:ale_linters_explicit = 1
 
 "
-" ALE 设置快捷键
-nmap <Space>] <Plug>(ale_next)
-nmap <Space>[ <Plug>(ale_previous)
-nmap <F7> :ALEToggle<CR>
-nmap <leader>f  :ALEFix<CR>:wa<CR>
 
 
 
@@ -86,13 +81,12 @@ let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
 "set completeopt=longest,menu "关闭弹出原型窗口的功能
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_show_diagnostics_ui = 0 "关闭静态检查
-let g:ycm_min_num_of_chars_for_completion=1 " 从第2个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion=1 " 从第1个键入字符就开始罗列匹配项
 let g:ycm_cache_omnifunc=0 " 禁止缓存匹配项,每次都重新生成匹配项
 let g:ycm_seed_identifiers_with_syntax=1 " 语法关键字补全
 let g:ycm_complete_in_comments = 1 " 在注
 let g:ycm_global_ycm_extra_conf='~/.config/nvim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
-"let g:ycm_key_invoke_completion = '<C-a>' " 主动调用补全
 "
 "Vim补全
 "autocmd FileType vim let b:vcm_tab_complete = 'vim'
@@ -128,9 +122,14 @@ let g:table_mode_corner='|'
 
 " ===================== Nerd Commenter =====================
 let g:NERDSpaceDelims = 1
-let g:NERDDefaultNesting = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDCommentEmptyLines = 1
-let g:NERDTrimTrailingWhitespace = 1
-let g:NERDToggleCheckAllLines = 1
-let g:NERDCreateDefaultMappings = 1
+let g:NERDCreateDefaultMappings = 0
+
+
+
+" ========================= Ranger =========================
+let g:NERDTreeHijackNetrw = 0
+" open ranger when vim open a directory
+let g:ranger_replace_netrw = 1
+let g:ranger_map_keys = 0
+let g:bclose_no_plugin_maps = 0 " Bclose为在Neovim下Ranger的依赖
+

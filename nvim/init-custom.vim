@@ -12,11 +12,10 @@ let g:startify_bookmarks = [
 " ==============================
 " 临时测试中的设定
 " ==============================
-"nmap <Space>o :FZF ~/Documents/PycharmProjects/OnePy/<CR>
-"nmap <Space>o :FZF ~/Downloads/OnePy-master/<CR>
-"nmap <Space>p :FZF ~/Documents/CLionProjects/OnePyPlus<CR>
-"nmap <Space>k :FZF ~/Documents/CLionProjects/test_python_boost<CR>
-
+nmap <Space>po :FZF ~/Documents/PycharmProjects/OnePy/<CR>
+nmap <Space>pp :FZF ~/Documents/CLionProjects/OnePyPlus<CR>
+nmap <Space>pk :FZF ~/Documents/CLionProjects/test_python_boost<CR>
+nmap <Space>pd :FZF ~/Documents/demo_files<CR>
 
 " 快速编译
 "nmap <leader>1 :wa<CR>:AsyncRun -raw cd ~/Documents/CLionProjects/OnePyPlus/src/ && clang -std=c++17 -Wall  main.cpp -o ./main && ./main<CR>
@@ -42,4 +41,8 @@ xmap ga <Plug>(EasyAlign)
 
 " unmap from easymotion
 "unmap <C-i>
-"
+
+
+call which_key#register(',', 'g:comma_prefix_dict')
+call which_key#register('<SPACE>', 'g:space_prefix_dict')
+
