@@ -495,20 +495,17 @@
 " ================== Initialize Which-key ==================
     set timeoutlen=500
     let g:mapleader = ","
+
+    " 高亮prefix
     autocmd! FileType which_key
     autocmd FileType which_key highlight WhichKeyGroup guifg=PaleGoldenrod
     autocmd  FileType which_key set laststatus=0 noshowmode noruler
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-    nnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
-    nnoremap <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
-    nnoremap <silent> [ :<c-u>WhichKey '['<CR>
-    nnoremap <silent> ] :<c-u>WhichKey ']'<CR>
-
-    vnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
-    vnoremap <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
-    vnoremap <silent> [ :<c-u>WhichKey '['<CR>
-    vnoremap <silent> ] :<c-u>WhichKey ']'<CR>
+    map <silent> <leader> :<c-u>WhichKey ','<CR>
+    map <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
+    map <silent> [ :<c-u>WhichKey '['<CR>
+    map <silent> ] :<c-u>WhichKey ']'<CR>
 
     let g:comma_prefix_dict =  {}
     let g:space_prefix_dict =  {}
