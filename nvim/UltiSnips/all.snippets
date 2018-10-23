@@ -15,9 +15,9 @@ com_str = get_comment_str(snip)
 com_len = 79
 snip.rv = com_str*com_len`
 `!p 
-space_left_len = int((39 - len(t[1]))/2)
-snip.rv =' '*40 + com_str + space_left_len*' '`${1:Text}`!p 
-snip.rv =(37 - space_left_len - len(t[1]))*' '+com_str`
+space_left_len = int((com_len - 2 - len(t[1]))/2)
+snip.rv =com_str + space_left_len*' '`${1:Text}`!p 
+snip.rv =(com_len - 2 - space_left_len - len(t[1]))*' '+com_str`
 `!p snip.rv = com_str*com_len`
 endsnippet
 

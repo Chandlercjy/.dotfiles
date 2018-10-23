@@ -28,20 +28,16 @@ nmap <leader>5 :wa<CR>:AsyncRun -raw cd ~/Documents/CLionProjects/boost-python-e
 nmap <leader>6 :wa<CR>:AsyncRun -raw cd ~/Documents/CLionProjects/test_python_boost/build && cmake .. && make && python ../lib/main.py<CR>
 nmap <leader>7 :wa<CR>:AsyncRun -raw cd ~/CLionProjects/untitled/build && cmake .. && make && ../bin/main<CR>
 
-set makeprg=gcc\ -std=c++17\ -Wall\ -omain\ main.cpp
-
-"let g:asyncrun_rootmarks = ['.git', '.root']
-"set tags=./tags;,tags
-"let g:gen_tags#gtags_default_map = 0
+" set makeprg=gcc\ -std=c++17\ -Wall\ -omain\ main.cpp
 
 
+" 通用快捷键
+" ==============================
+" 打开emacs配置文件
+nmap <Space>e :FZF ~/.emacs.d<CR>
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" unmap from easymotion
-"unmap <C-i>
-
+" FZF搜索文件
+nmap <C-p> :FZF ~/Documents/<CR>
 
 call which_key#register(',', 'g:comma_prefix_dict')
 call which_key#register('<SPACE>', 'g:space_prefix_dict')

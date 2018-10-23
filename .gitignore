@@ -30,3 +30,4 @@ dot_emacs.d/.emacs.d
 nvim/nvim
 dot_emacs.d/undo-tree-history/
 dot_emacs.d/dot_emacs.d
+nvim/swoopBuf

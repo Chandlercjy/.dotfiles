@@ -1,5 +1,8 @@
 
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               Useful Functions                              "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 借鉴自SpaceVim，绑定quit到q按键
 fu! utils#SmartClose() abort
   "let ignorewin = get(g:,'spacevim_smartcloseignorewin',[])
   "let ignoreft = get(g:, 'spacevim_smartcloseignoreft',[])
@@ -19,7 +22,7 @@ fu! utils#SmartClose() abort
   endif
 endf
 
-
+" 专门显示snip的补全
 fu! utils#ulti_complete() abort
     if empty(UltiSnips#SnippetsInCurrentScope(1))
         return ''
@@ -38,6 +41,27 @@ fu! utils#ulti_complete() abort
     endif
     return ''
 endfu
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              Toggle Functions                               "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! ComfortableMotionToggle()
+    if g:comfortable_motion_is_enabled
+        unmap <C-d>
+        unmap <C-u>
+        unmap <C-f>
+        unmap <C-b>
+        let g:comfortable_motion_is_enabled = 0
+    else
+        nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+        nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+        nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
+        nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
+        let g:comfortable_motion_is_enabled = 1
+    endif
+endfunction
 
 func! CompileRunGcc()
     exec "w"
@@ -66,3 +90,24 @@ func! CompileRunGcc()
 endfunc
 
 
+let g:quickfix_is_open = 0
+let g:locallist_is_open = 0
+function! QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+    else
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+
+function! LocalListToggle()
+    if g:locallist_is_open
+        lclose
+        let g:locallist_is_open = 0
+    else
+        lopen
+        let g:locallist_is_open = 1
+    endif
+endfunction
