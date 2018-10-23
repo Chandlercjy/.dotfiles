@@ -1,7 +1,6 @@
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            System Better Default                            "
+" 1. System Better Default                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " 系统类
     set nocompatible                         " 去掉讨厌的有关vi一致性模式,避免以前版本的一些bug和局限
@@ -68,7 +67,7 @@
     set cursorline
     set cursorcolumn
 
-                                             " 不知道啥的
+    " 不知道啥的
     set magic                                " 设置魔术
     set nowb
     set bufhidden=hide
@@ -80,7 +79,6 @@
                                              " 折叠
     set foldmethod=indent                    " 基于语法进行代码折叠
     set nofoldenable                         " 启动 vim 时不折叠代码
-    hi Folded term=NONE cterm=NONE
     " set foldenable
     " set foldlevel=3
     " set foldcolumn=0
@@ -95,7 +93,7 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               Awesome CMD                                   "
+" 2. Awesome CMD                                                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ============ Remember the last edit position =============
     autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -108,7 +106,7 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Vim-Plug                                   "
+" 3. Vim-Plug                                                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     call plug#begin('~/.vim/plugged')
 
@@ -116,38 +114,42 @@
     Plug 'mhinz/vim-startify'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'drewtempelmeyer/palenight.vim' , {'on':[]}
-    Plug 'morhetz/gruvbox'               , {'on':[]}
+    Plug 'drewtempelmeyer/palenight.vim'    , {'on':[]}
+    Plug 'morhetz/gruvbox'                  , {'on':[]}
 
 " ========================== 代码类 ===========================
     " 强大的各种语言支持
-    Plug 'sheerun/vim-polyglot'
+    Plug 'sheerun/vim-polyglot'             , {'on':[]}
 
     " 代码检查和补全
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'w0rp/ale'
-    Plug 'Valloric/YouCompleteMe'       , { 'do': './install.py --clang-completer' }
+    Plug 'SirVer/ultisnips'                 , {'on':[]}
+    Plug 'honza/vim-snippets'               , {'on':[]}
+    Plug 'w0rp/ale'                         , {'on':['ALEToggle']}
+    Plug 'Valloric/YouCompleteMe'           , { 'do': './install.py --clang-completer' }
+    Plug 'rdnetto/YCM-Generator'            , {'on':'YcmGenerateConfig', 'branch': 'stable'}
 
     " 异步运行
-    Plug 'skywind3000/asyncrun.vim'     , { 'on': 'AsyncRun'}
+    Plug 'skywind3000/asyncrun.vim'         , { 'on': ['AsyncRun','AsyncStop']}
 
     " REPL
     Plug 'ConradIrwin/vim-bracketed-paste'
-    Plug 'Chandlercjy/neoterm'          , {'on':[ 'TREPLSendFile', '<Plug>(neoterm-repl-send)', '<Plug>(neoterm-repl-send-line)' ]}
+    Plug 'Chandlercjy/neoterm'              , {'on':[ 'TREPLSendFile', '<Plug>(neoterm-repl-send)', '<Plug>(neoterm-repl-send-line)' ]}
 
     " Git
-    Plug 'tpope/vim-fugitive'           , {'on': ['Gblame', 'BCommits', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
-    Plug 'airblade/vim-gitgutter'       , { 'on': []}
+    Plug 'tpope/vim-fugitive'               , {'on': ['GV', 'Gblame', 'BCommits', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
+    Plug 'junegunn/gv.vim'                  , { 'on': ['GV']}
+    Plug 'airblade/vim-gitgutter'           , { 'on': ['GitGutterToggle']}
+    Plug 'Chandlercjy/git-blame.vim'        , { 'on': ['GitBlame']}
 
     " 自动生成ctags和查看
-    Plug 'ludovicchabant/vim-gutentags' , { 'on': []}
-    Plug 'majutsushi/tagbar'            , {'on':['TagbarToggle']}
+    Plug 'ludovicchabant/vim-gutentags'     , { 'on': []}
+    Plug 'majutsushi/tagbar'                , {'on':['TagbarToggle']}
 
     " 语言相关
-    Plug 'vim-python/python-syntax'     , { 'for' : 'python'}
-    Plug 'bfrg/vim-cpp-modern'          , { 'for' : ['c','cpp','hpp','h']}
-    Plug 'leafgarland/typescript-vim'   , { 'for' : ['typescript']}
+    Plug 'vhdirk/vim-cmake'                 , { 'for' : ['c','cpp','hpp','h']}
+    Plug 'vim-python/python-syntax'         , { 'for' : 'python'}
+    Plug 'octol/vim-cpp-enhanced-highlight' , { 'for' : ['c','cpp','hpp','h']}
+    Plug 'leafgarland/typescript-vim'       , { 'for' : ['typescript']}
 
 " ========================== 实用类 ===========================
     " 快捷键帮助视图
@@ -162,47 +164,52 @@
     " 通用编辑
     Plug 'terryma/vim-multiple-cursors'
     Plug 'jiangmiao/auto-pairs'
-    Plug 'scrooloose/nerdcommenter'   , { 'on': '<Plug>NERDCommenterToggle' }
-    Plug 'tpope/vim-surround'         , { 'on': []}
-    Plug 'mbbill/undotree'            , { 'on':  'UndotreeToggle' }
-    Plug 'simnalamburt/vim-mundo'     , { 'on':  'MundoToggle' }
+    Plug 'scrooloose/nerdcommenter'         , { 'on': ['<Plug>NERDCommenterToggle', '<Plug>NERDCommenterAppend'] }
+    Plug 'tpope/vim-surround'               , { 'on': []}
+    Plug 'mbbill/undotree'                  , { 'on':  'UndotreeToggle' }
+    Plug 'simnalamburt/vim-mundo'           , { 'on':  'MundoToggle' }
 
     " 左边栏显示mark
-    Plug 'kshenoy/vim-signature'      , { 'on': []}
+    Plug 'kshenoy/vim-signature'
 
     " Docker管理
-    Plug 'kevinhui/vim-docker-tools'  , { 'on':  'DockerToolsToggle' }
+    Plug 'kevinhui/vim-docker-tools'        , { 'on':  'DockerToolsToggle' }
 
     " 文件管理
-    Plug 'scrooloose/nerdtree'        , { 'on':  'NERDTreeToggle' }
-    Plug 'francoiscabrol/ranger.vim'  , { 'on':'Ranger'}
-    Plug 'rbgrouleff/bclose.vim'      , { 'on':'Ranger'}
+    Plug 'scrooloose/nerdtree'              , { 'on':  'NERDTreeToggle' }
+    Plug 'francoiscabrol/ranger.vim'        , { 'on':'Ranger'}
+    Plug 'rbgrouleff/bclose.vim'            , { 'on':'Ranger'}
 
     " 搜索
-    Plug 'junegunn/fzf'               , { 'on': ['FZF','Buffers','Ag'], 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'           , { 'on': ['FZF','Buffers','Ag']}
+    Plug 'junegunn/fzf'                     , {  'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
     Plug 'pelodelfuego/vim-swoop'
-    Plug 'dyng/ctrlsf.vim'            , { 'on':'CtrlSF'}
-
-    " 实时显示正则替换
-    Plug 'osyo-manga/vim-over'        , { 'on':'OverCommandLine'}
-
-
-    " 快速跳转
-    Plug 'easymotion/vim-easymotion'  , {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
-
-
-    " 对齐格式
-    Plug 'junegunn/vim-easy-align'    , { 'on': ['<Plug>(EasyAlign)']}
-
-    " 方便地移动上下行
-    Plug 'matze/vim-move'             , { 'on': [ '<Plug>MoveLineDown', '<Plug>MoveLineUp' ]}
+    Plug 'dyng/ctrlsf.vim'                  , { 'on':'CtrlSF'}
 
     " 复制粘贴记录
-    Plug 'vim-scripts/YankRing.vim'   , {'on':['YRShow']}
+    Plug 'Shougo/neoyank.vim'               , {'on': 'FZFNeoyank'}
+    Plug 'justinhoward/fzf-neoyank'         , {'on': 'FZFNeoyank'}
+
+    " 实时显示正则替换
+    Plug 'osyo-manga/vim-over'              , { 'on':'OverCommandLine'}
+
+    " 给同样的单词加下划线
+    Plug 'itchyny/vim-cursorword'
+
+    " 高亮html/xml tags
+    Plug 'Valloric/MatchTagAlways'          , { 'on':[]}
+
+    " 快速跳转
+    Plug 'easymotion/vim-easymotion'        , {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
+
+    " 对齐格式
+    Plug 'junegunn/vim-easy-align'          , { 'on': ['<Plug>(EasyAlign)']}
+
+    " 方便地移动上下行
+    Plug 'matze/vim-move'                   , { 'on': [ '<Plug>MoveLineDown', '<Plug>MoveLineUp' ]}
 
     " 强大的表格模式
-    Plug 'dhruvasagar/vim-table-mode' , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
+    Plug 'dhruvasagar/vim-table-mode'       , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
 
 " ======================== 系统增强类 =========================
     Plug 'pseewald/vim-anyfold'           " 加强缩进折叠
@@ -216,18 +223,18 @@
     Plug 'yuttie/comfortable-motion.vim'                             " 舒服的滚动
     Plug 'tweekmonster/startuptime.vim'    , {'on': ['StartupTime']} " 检查启动时间
     Plug 'wakatime/vim-wakatime'           , {'on': []}              " 记录编程时间
-   Plug 'junegunn/goyo.vim'               , {'on':'Goyo'}           " 无打扰模式
+    Plug 'junegunn/goyo.vim'               , {'on':'Goyo'}           " 无打扰模式
     Plug 'iamcco/mathjax-support-for-mkdp' , { 'for':'markdown'}     " Markdown插件
     Plug 'iamcco/markdown-preview.vim'     , { 'for':'markdown'}
     Plug 'mzlogin/vim-markdown-toc'        , { 'for':'markdown'}
-
+    Plug 'pangloss/vim-javascript'         , { 'for' : ['javascript']} " 需要测试
 
     call plug#end()
 " ================================================================ Vim-Plug End
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                        Initialize Chandler's Config                         "
+" 4. Initialize Chandler's Config                                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     source ~/.config/nvim/utils.vim
 
@@ -239,16 +246,18 @@
         autocmd!
         autocmd InsertEnter * call plug#load('vim-wakatime') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-surround') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('vim-signature') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('vim-gitgutter') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-gutentags') | autocmd! lazy_load
+        autocmd InsertEnter * call plug#load('ultisnips') | autocmd! lazy_load
+        autocmd InsertEnter * call plug#load('vim-snippets') | autocmd! lazy_load
+        autocmd InsertEnter * call plug#load('MatchTagAlways') | autocmd! lazy_load
+        autocmd InsertEnter * call plug#load('vim-polyglot') | autocmd! lazy_load
 
     augroup END
 " ============================================================== Initialize End
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              Initialize Neovim                              "
+" 5. Initialize Neovim                                                        "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     if has('nvim')
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -272,9 +281,10 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                     UI                                      "
+" 6. UI                                                                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ========================= Theme ==========================
+
     call plug#load('palenight.vim')
     colorscheme palenight
     let g:palenight_terminal_italics=1
@@ -283,6 +293,11 @@
     " let g:gruvbox_italic=1
     " colorscheme gruvbox"
     " set background=dark
+
+" ====================== Custom Theme ======================
+    autocmd InsertLeave * highlight CursorLine guibg=#2f3843
+    autocmd InsertEnter * highlight CursorLine guibg=#2b323b
+    hi Folded guifg=lightblue
 
 " ======================== Startify ========================
     let g:startify_enable_special = 0 " don't show empty buffer
@@ -328,7 +343,7 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                Plugin Config                                "
+" 7. Plugin Config                                                            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " =================== Comfortable-motion ===================
     let g:comfortable_motion_no_default_key_mappings = 1
@@ -371,7 +386,6 @@
     let g:neoterm_size = '80'
 
 " ========================== ALE ===========================
-    let g:ale_lint_on_enter = 0 "打开文件时不进行检查
     let g:ale_python_mypy_executable = 'mypy'
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
@@ -390,8 +404,10 @@
     " let g:ale_fix_on_save = 1
 
     " 控制刷新频率
+    let g:ale_lint_on_enter = 0 "打开文件时不进行检查
     let g:ale_lint_on_text_changed = 'normal'
     let g:ale_lint_on_insert_leave = 1
+
 
     " 始终开启标志列
     let g:ale_set_highlights = 1
@@ -412,6 +428,7 @@
     "let g:ale_cpp_gcc_options = '-Wall -std=c++17 -I ~/Documents/CLionProjects/OnePyPlus/include/'
     "let g:ale_cpp_clang_options = '-Wall -std=c++17'
     "let g:ale_javascript_prettier_options = '--tab-width 4 --prose-wrap always'
+    let g:ale_c_parse_compile_commands = 1 " 在CMAKE中添加 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON) 就可以找到头文件
 
 " ======================= UltiSnips ========================
     let g:UltiSnipsUsePythonVersion = 3
@@ -425,7 +442,7 @@
     let g:ycm_cache_omnifunc=0 " 禁止缓存匹配项,每次都重新生成匹配项
     let g:ycm_seed_identifiers_with_syntax=1 " 语法关键字补全
     let g:ycm_complete_in_comments = 1 " 在注
-    let g:ycm_global_ycm_extra_conf='~/.config/nvim/.ycm_extra_conf.py'
+    let g:ycm_global_ycm_extra_conf='~/.config/nvim/.ycm_extra_conf.py' " 如果找不到conf就用这个
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_filetype_blacklist = {
       \ 'tagbar': 1,
@@ -486,14 +503,25 @@
 " ======================= vim-swoop ========================
     let g:swoopUseDefaultKeyMap = 0
 
+" ===================== vim-javascript =====================
+    let g:javascript_plugin_jsdoc = 1
+    let g:javascript_plugin_ngdoc = 1
+    let g:javascript_plugin_flow = 1
+
+" =============== vim-cpp-enhanced-highlight ===============
+    let g:cpp_class_scope_highlight = 1
+    let g:cpp_member_variable_highlight = 1
+    let g:cpp_class_decl_highlight = 1
+    let g:cpp_experimental_simple_template_highlight = 1
+
 " ================================================================== Plugin End
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           Keybinding by Which-key                           "
+" 8. Keybinding by Which-key                                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ================== Initialize Which-key ==================
-    set timeoutlen=500
+    set timeoutlen=1000
     let g:mapleader = ","
 
     " 高亮prefix
@@ -506,6 +534,7 @@
     map <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
     map <silent> [ :<c-u>WhichKey '['<CR>
     map <silent> ] :<c-u>WhichKey ']'<CR>
+
 
     let g:comma_prefix_dict =  {}
     let g:space_prefix_dict =  {}
@@ -538,25 +567,26 @@
     let g:comma_prefix_dict.g = [':YcmCompleter GoTo'      , 'YCM-GoTo']
     let g:comma_prefix_dict.q = [':call QuickfixToggle()'  , 'QuickfixToggle']
     let g:comma_prefix_dict.l = [':call LocalListToggle()' , 'LocalListToggle']
-    let g:comma_prefix_dict.r = [':call CompileRunGcc()'   , 'AsyncRun Code!']
+    let g:comma_prefix_dict.r = [':call AsyncRun_Code()'   , 'AsyncRun Code!']
     let g:comma_prefix_dict.s = [':AsyncStop'              , 'AsyncStop']
 
 
 " ====================== Space-prefix ======================
     let g:space_prefix_dict.v = {
                 \ 'name' : '+Neovim_Config',
-                \ 's': [':FZF ~/.config/nvim'                   , 'Search config']       ,
-                \ 'u': [':e ~/.config/nvim/utils.vim'           , 'utils.vim']           ,
-                \ 'i': [':e ~/.config/nvim/init.vim'            , 'init.vim']            ,
-                \ 'c': [':e ~/.config/nvim/init-custom.vim'     , 'init-custom.vim']     ,
-                \ 'r': [':source $MYVIMRC'                      , 'Source vimrc']        ,
+                \ 's': [':FZF ~/.config/nvim'               , 'Search config']   ,
+                \ 'p': [':FZF ~/.vim/plugged'               , 'Search plugged']  ,
+                \ 'u': [':e ~/.config/nvim/utils.vim'       , 'utils.vim']       ,
+                \ 'i': [':e ~/.config/nvim/init.vim'        , 'init.vim']        ,
+                \ 'c': [':e ~/.config/nvim/init-custom.vim' , 'init-custom.vim'] ,
+                \ 'r': [':source $MYVIMRC'                  , 'Source vimrc']    ,
                 \}
 
     let g:space_prefix_dict.f = {
                 \ 'name' : '+files' ,
-                \ 'f': [':FZF'                      , 'FZF']              ,
-                \ 's': [':wa|echo "Buffers saved!"' , 'save all buffers'] ,
-                \ 'r': [':Ranger'                   , 'Ranger']           ,
+                \ 'f': [':FZF'                          , 'FZF']              ,
+                \ 's': [':wa|echo "All Buffers Saved!"' , 'save all buffers'] ,
+                \ 'r': [':Ranger'                       , 'Ranger']           ,
                 \ }
 
     let g:space_prefix_dict.t = {
@@ -576,16 +606,18 @@
 
     let g:space_prefix_dict.g = {
                 \ 'name' : '+git/version-control' ,
-                \ 'b' : ['Gblame'                 , 'fugitive-blame']             ,
-                \ 'c' : ['BCommits'               , 'commits-for-current-buffer'] ,
-                \ 'C' : ['Gcommit'                , 'fugitive-commit']            ,
-                \ 'd' : ['Gdiff'                  , 'fugitive-diff']              ,
-                \ 'e' : ['Gedit'                  , 'fugitive-edit']              ,
-                \ 'l' : ['Glog'                   , 'fugitive-log']               ,
-                \ 'r' : ['Gread'                  , 'fugitive-read']              ,
-                \ 's' : ['Gstatus'                , 'fugitive-status']            ,
-                \ 'w' : ['Gwrite'                 , 'fugitive-write']             ,
-                \ 'p' : ['Git push'               , 'fugitive-push']              ,
+                \ 'b' : ['GitBlame' , 'git-blame']                            ,
+                \ 'v' : ['GV'       , 'Visualize Commits']                    ,
+                \ 'vc' : ['GV!'     , 'Visualize Commits for current buffer'] ,
+                \ 'c' : ['BCommits' , 'commits-for-current-buffer']           ,
+                \ 'C' : ['Gcommit'  , 'fugitive-commit']                      ,
+                \ 'd' : ['Gdiff'    , 'fugitive-diff']                        ,
+                \ 'e' : ['Gedit'    , 'fugitive-edit']                        ,
+                \ 'l' : ['Glog'     , 'fugitive-log']                         ,
+                \ 'r' : ['Gread'    , 'fugitive-read']                        ,
+                \ 's' : ['Gstatus'  , 'fugitive-status']                      ,
+                \ 'w' : ['Gwrite'   , 'fugitive-write']                       ,
+                \ 'p' : ['Git push' , 'fugitive-push']                        ,
                 \ }
 
     let g:space_prefix_dict.s = {
@@ -596,9 +628,11 @@
 
     let g:space_prefix_dict.y = {
                 \ 'name' : '+YouCompleteMe' ,
-                \ 'f' : [':YcmCompleter FixIt'   , 'YCM-FixIt']   ,
-                \ 'd' : [':YcmCompleter GetDoc'  , 'YCM-GetDoc']  ,
-                \ 't' : [':YcmCompleter GetType' , 'YCM-GetType'] ,
+                \ 'f' : [':YcmCompleter FixIt'               , 'YCM-FixIt']                 ,
+                \ 'd' : [':YcmCompleter GetDoc'              , 'YCM-GetDoc']                ,
+                \ 't' : [':YcmCompleter GetType'             , 'YCM-GetType']               ,
+                \ 'gf' : [':cd %:p:h | YcmGenerateConfig -f' , 'YCM-Generate-Config-force'] ,
+                \ 'gg' : [':cd %:p:h | YcmGenerateConfig'    , 'YCM-Generate-Config']       ,
                 \ }
 
     let g:space_prefix_dict.p = {'name' : '+projects'}
@@ -619,6 +653,8 @@
     let g:space_prefix_dict.b = [':Buffers'     , 'Buffer-list']
     let g:space_prefix_dict.h = [':set nohls'   , "clear-search-highlight"] " 去除搜索高亮
     let g:space_prefix_dict[':'] = [':OverCommandLine', 'Over-CommandLine']
+    let g:space_prefix_dict['[']  = ['<Plug>(ale_previous)' , "ALE_previous"]
+    let g:space_prefix_dict[']'] = ['<Plug>(ale_next)'     , "ALE_NEXT"]
 
 
 " =================== Parentheses-prefex ===================
@@ -637,8 +673,11 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              Other KeyBindings                              "
+" 9. Other KeyBindings                                                        "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ====================== FZF-NEOYANK =======================
+  map <A-y> :FZFNeoyank<CR>
+
 " ======================= GitGutter ========================
     let g:gitgutter_map_keys = 0
 
@@ -696,8 +735,6 @@
     nmap <A-j> <Plug>MoveLineDown
     nmap <A-k> <Plug>MoveLineUp
 
-" ======================== YankRing ========================
-    nmap <A-y> :YRShow<CR>
 
 " ======================== Neo-term ========================
     nmap <A-f> :TREPLSendFile<CR>
@@ -722,7 +759,7 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               DIY KeyBindings                               "
+" 10. DIY KeyBindings                                                         "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==================== Smart close by q ====================
     nnoremap <F3> q
@@ -737,9 +774,6 @@
     " nmap <leader>f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
-
-
-
 
 
 
