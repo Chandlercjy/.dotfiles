@@ -1,48 +1,96 @@
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            System Better Default                            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " For System
-    set termguicolors
-    "set autochdir          " 自动切换路径到文件目录
-    set nocompatible        " 去掉讨厌的有关vi一致性模式,避免以前版本的一些bug和局限
-    filetype on             " 开启文件类型检测
-    filetype plugin on      " 根据检测到的不同类型加载对应的插件
-    syntax on               " 开启语法高亮功能
-    set mouse=a             " on OSX press ALT and click
-    set bs=2                " make backspace behave like normal again
+    " 系统类
+    set nocompatible                         " 去掉讨厌的有关vi一致性模式,避免以前版本的一些bug和局限
+    filetype on                              " 开启文件类型检测
+    filetype plugin on                       " 根据检测到的不同类型加载对应的插件
+    filetype plugin indent on                " 为特定文件类型载入相关缩进文件
+    syntax on                                " 开启语法高亮功能
+    set mouse=a                              " on OSX press ALT and click
+    set wildmenu                             " 增强模式中的命令行自动完成操作
+    set showcmd                              " 输入的命令显示出来，看的清楚些
+    set splitright                           " 每次分屏在右边
+    set noerrorbells                         " 不让vim发出的滴滴声
+    set report=0                             " 通过使用: commands命令，告诉我们文件的哪一行被改变过
+    set path+=**                             " 可以用:find命令递归打开文件
+    set autoread                             " 文件自动重载
+    set confirm                              " 在处理未保存或只读文件的时候，弹出确认
+    set nobackup                             " 不要备份文件
+    set noswapfile                           " 不产生临时备份文件
+    set undofile                             " tell it to use an undo file
+    set undodir=~/.vimundo/                  " set a directory to store the undo history
+    set undolevels=1000                      " max number of undos
+    set undoreload=10000                     " max lines to to save for undo
+    set hidden                               " vim切换buffer(文件/tab)后仍然保留undo
 
-    set rnu                 " show line numbers
-    set nu                  " show line numbers
-    set tw=79               " width of document (used by gd) 超过会自动换行
-    set nowrap              " 禁止折行
-    set fo-=t               " don't automatically wrap text when typing
-    set colorcolumn=80
-    set tabstop=4
-    set softtabstop=4
+    " 编辑类
+    set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
+    set fo-=t                                " don't automatically wrap text when typing
+    set iskeyword+=_,$,@,%,#,-               " 带有如下符号的单词不要被换行分割
+    set fo+=mB                               " 对亚洲语言断行支持
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip " 这些后缀的文件不做补全成员
+    set whichwrap=b,h,l,<,>,[,]              " 允许backspace和光标键跨越行边界
+    set tw=79                                " width of document (used by gd) 超过会自动换行
+    set nowrap                               " 禁止折行
+    set fenc=utf-8                           " 设定默认解码
+    set list listchars=trail:๏,              " 方便显示tab 和 空格
+    set smarttab                             " 在行和段开始处使用制表符
+    set expandtab                            " 用空格代替制表符
+    set showtabline=1                        " always show the tabline
+    set tabstop=4                            " 制表符为4
+    set softtabstop=4                        " 统一缩进为4
     set shiftwidth=4
     set shiftround
-    set expandtab
-    set incsearch           " 开启实时搜索功能
-    set ignorecase          " 搜索时大小写不敏感
+    set autoindent                           " 自动缩进, 继承前一行的缩进方式
+    set smartindent                          " 智能自动缩进
+    set cindent shiftwidth=4                 " 自动缩进2空格
+    set shiftwidth=4                         " 统一缩进为4
+    set backspace=2                          " 使回格键（backspace）正常处理indent, eol, start等
+    set incsearch                            " 开启实时搜索功能
+    set hlsearch                             " 搜索逐字符高亮
+    set ignorecase                           " 搜索时大小写不敏感
     set smartcase
-    set noswapfile          " 不产生临时备份文件
+
+    " UI
+    set termguicolors
+    set colorcolumn=80
+    set rnu                                  " show relative line numbers
+    set nu                                   " show line numbers
+    set cmdheight=1                          " 命令行（在状态行下）的高度，默认为1，这里是2
+    set laststatus=2                         " 总是显示状态行
+    set scrolloff=3                          " 光标移动到buffer的顶部和底部时保持3行距离
+    set novisualbell                         " 不要闪烁
+    set showmatch                            " 高亮显示匹配的括号
+    set matchtime=2                          " 匹配括号高亮的时间（单位是十分之一秒）
     set cursorline
-    set undofile            " tell it to use an undo file
-    set undodir=~/.vimundo/ " set a directory to store the undo history
-    set wildmenu            " 增强模式中的命令行自动完成操作
-    set foldmethod=indent   " 基于语法进行代码折叠
-    set nofoldenable        " 启动 vim 时关闭折叠代码
-    set splitright          " 每次分屏在右边
-    set smartindent
+    set cursorcolumn
 
+                                             " 不知道啥的
+    set magic                                " 设置魔术
+    set nowb
+    set bufhidden=hide
+    set linespace=0                          " 字符间插入的像素行数目
+    set viminfo+=!                           " 保存全局变量
+    set history=1000                         " history文件中需要记录的行数
+    set fillchars+=stl:\ ,stlnc:\
 
-    "解决文字编码问题
-    set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
-    set whichwrap=b,h,l,<,>,[,]  "list of menu_flags specifying which commands wrap to another line
-    set showtabline=1  "always show the tabline
-    " 使find指令可用
-    set path+=**
+                                             " 折叠
+    set foldmethod=indent                    " 基于语法进行代码折叠
+    set nofoldenable                         " 启动 vim 时不折叠代码
+    hi Folded term=NONE cterm=NONE
+    " set foldenable
+    " set foldlevel=3
+    " set foldcolumn=0
+
+    " 不需要的
+    " set autochdir                                         " 自动切换路径到文件目录
+    " set autowrite                                         " 文件自动保存
+    " set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline:h18 " 设置字体
+    " set clipboard=unnamed                                 " Mac 下共享剪切板
+
 " =================================================== System Better Default End
 
 
@@ -50,10 +98,9 @@
 "                               Awesome CMD                                   "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ============ Remember the last edit position =============
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal! g`\"" |
-                \ endif
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+                        \ exe "normal! g`\"" |
+                        \ endif
 
 " ======================= Rename CMD =======================
     :command! -nargs=1 Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
@@ -66,127 +113,113 @@
     call plug#begin('~/.vim/plugged')
 
 " ======================= 主题美化类 ========================
-    Plug 'majutsushi/tagbar'
     Plug 'mhinz/vim-startify'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'drewtempelmeyer/palenight.vim',{'on':[]}
-    Plug 'morhetz/gruvbox',{'on':[]}
+    Plug 'drewtempelmeyer/palenight.vim' , {'on':[]}
+    Plug 'morhetz/gruvbox'               , {'on':[]}
 
 " ========================== 代码类 ===========================
-    " 异步运行
-    Plug 'skywind3000/asyncrun.vim',        { 'on': 'AsyncRun'}
+    " 强大的各种语言支持
+    Plug 'sheerun/vim-polyglot'
 
     " 代码检查和补全
-    Plug 'w0rp/ale', {'on':['ALEToggle','ALEFix']}
-    Plug 'Valloric/YouCompleteMe',          { 'do': './install.py --clang-completer' }
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
+    Plug 'w0rp/ale'
+    Plug 'Valloric/YouCompleteMe'       , { 'do': './install.py --clang-completer' }
 
-    " 强大的各种语言支持
-    Plug 'sheerun/vim-polyglot',{'on':[]}
+    " 异步运行
+    Plug 'skywind3000/asyncrun.vim'     , { 'on': 'AsyncRun'}
 
     " REPL
-    Plug 'Chandlercjy/neoterm'
     Plug 'ConradIrwin/vim-bracketed-paste'
+    Plug 'Chandlercjy/neoterm'          , {'on':[ 'TREPLSendFile', '<Plug>(neoterm-repl-send)', '<Plug>(neoterm-repl-send-line)' ]}
 
     " Git
-    Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter',          { 'on': []}
+    Plug 'tpope/vim-fugitive'           , {'on': ['Gblame', 'BCommits', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
+    Plug 'airblade/vim-gitgutter'       , { 'on': []}
 
-    " 自动生成ctags
-    Plug 'ludovicchabant/vim-gutentags'
+    " 自动生成ctags和查看
+    Plug 'ludovicchabant/vim-gutentags' , { 'on': []}
+    Plug 'majutsushi/tagbar'            , {'on':['TagbarToggle']}
 
     " 语言相关
-    Plug 'vim-python/python-syntax',        { 'for' : 'python'}
-    Plug 'bfrg/vim-cpp-modern'
-    Plug 'leafgarland/typescript-vim'
+    Plug 'vim-python/python-syntax'     , { 'for' : 'python'}
+    Plug 'bfrg/vim-cpp-modern'          , { 'for' : ['c','cpp','hpp','h']}
+    Plug 'leafgarland/typescript-vim'   , { 'for' : ['typescript']}
 
 " ========================== 实用类 ===========================
-    " 通用编辑
-    Plug 'scrooloose/nerdcommenter',         { 'on': '<Plug>NERDCommenterToggle' }
-    Plug 'terryma/vim-multiple-cursors'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'tpope/vim-surround',              { 'on': []}
-    Plug 'mbbill/undotree',                 { 'on':  'UndotreeToggle' }
-    Plug 'simnalamburt/vim-mundo'
+    " 快捷键帮助视图
+    Plug 'liuchengxu/vim-which-key'
 
     " 缩进提示
     Plug 'yggdroot/indentline'
 
-    " 左边栏显示mark
-    Plug 'kshenoy/vim-signature',           { 'on': []}
-
-    " Docker管理
-    Plug 'kevinhui/vim-docker-tools'
-
-    " 快捷键帮助视图
-    Plug 'liuchengxu/vim-which-key'
-
-    " 文件管理
-    Plug 'scrooloose/nerdtree',{ 'on':  'NERDTreeToggle' }
-    Plug 'francoiscabrol/ranger.vim',       { 'on':'Ranger'}
-    Plug 'rbgrouleff/bclose.vim',           { 'on':'Ranger'}
-
-    " 搜索
-    Plug 'junegunn/fzf',                    { 'on': ['FZF','Buffers','Ag'], 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim',                { 'on': ['FZF','Buffers','Ag']}
-    Plug 'pelodelfuego/vim-swoop'
-    Plug 'dyng/ctrlsf.vim',                 { 'on':'CtrlSF'}
-
-    " 实时显示正则替换
-    Plug 'osyo-manga/vim-over'
-
-    " 快速跳转
-    Plug 'easymotion/vim-easymotion', {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
-
     " 快速选择
     Plug 'gcmt/wildfire.vim'
 
+    " 通用编辑
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'scrooloose/nerdcommenter'   , { 'on': '<Plug>NERDCommenterToggle' }
+    Plug 'tpope/vim-surround'         , { 'on': []}
+    Plug 'mbbill/undotree'            , { 'on':  'UndotreeToggle' }
+    Plug 'simnalamburt/vim-mundo'     , { 'on':  'MundoToggle' }
+
+    " 左边栏显示mark
+    Plug 'kshenoy/vim-signature'      , { 'on': []}
+
+    " Docker管理
+    Plug 'kevinhui/vim-docker-tools'  , { 'on':  'DockerToolsToggle' }
+
+    " 文件管理
+    Plug 'scrooloose/nerdtree'        , { 'on':  'NERDTreeToggle' }
+    Plug 'francoiscabrol/ranger.vim'  , { 'on':'Ranger'}
+    Plug 'rbgrouleff/bclose.vim'      , { 'on':'Ranger'}
+
+    " 搜索
+    Plug 'junegunn/fzf'               , { 'on': ['FZF','Buffers','Ag'], 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'           , { 'on': ['FZF','Buffers','Ag']}
+    Plug 'pelodelfuego/vim-swoop'
+    Plug 'dyng/ctrlsf.vim'            , { 'on':'CtrlSF'}
+
+    " 实时显示正则替换
+    Plug 'osyo-manga/vim-over'        , { 'on':'OverCommandLine'}
+
+
+    " 快速跳转
+    Plug 'easymotion/vim-easymotion'  , {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
+
+
     " 对齐格式
-    Plug 'junegunn/vim-easy-align'
+    Plug 'junegunn/vim-easy-align'    , { 'on': ['<Plug>(EasyAlign)']}
 
     " 方便地移动上下行
-    Plug 'matze/vim-move', { 'on': [ '<Plug>MoveLineDown', '<Plug>MoveLineUp' ]}
+    Plug 'matze/vim-move'             , { 'on': [ '<Plug>MoveLineDown', '<Plug>MoveLineUp' ]}
 
     " 复制粘贴记录
-    Plug 'vim-scripts/YankRing.vim', {'on':['YRShow']}
+    Plug 'vim-scripts/YankRing.vim'   , {'on':['YRShow']}
 
     " 强大的表格模式
-    Plug 'dhruvasagar/vim-table-mode'
+    Plug 'dhruvasagar/vim-table-mode' , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
 
 " ======================== 系统增强类 =========================
-    " 加强缩进折叠
-    Plug 'pseewald/vim-anyfold'
-
-    " 系统.命令的加强
-    Plug 'tpope/vim-repeat'
-
-    " 可以自动创建文件夹不报错
-    Plug 'pbrisbin/vim-mkdir'
-
-    " Tmux加强
-    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'pseewald/vim-anyfold'           " 加强缩进折叠
+    Plug 'tpope/vim-repeat'               " 系统.命令的加强
+    Plug 'pbrisbin/vim-mkdir'             " 可以自动创建文件夹不报错
+    Plug 'christoomey/vim-tmux-navigator' " Tmux加强
     Plug 'tmux-plugins/vim-tmux-focus-events'
 
 
 " ========================== 趣味类 ===========================
-    " 检查启动时间
-    Plug 'tweekmonster/startuptime.vim'
-
-    " 记录编程时间
-    Plug 'wakatime/vim-wakatime', {'on': []} 
-
-    " 无打扰模式
-    Plug 'junegunn/goyo.vim'
-
-    "舒服的滚动
-    Plug 'yuttie/comfortable-motion.vim'
-
-    " Markdown插件
-    Plug 'iamcco/mathjax-support-for-mkdp', { 'for':'markdown'}
-    Plug 'iamcco/markdown-preview.vim',     { 'for':'markdown'}
-    Plug 'mzlogin/vim-markdown-toc',        { 'for':'markdown'}
+    Plug 'yuttie/comfortable-motion.vim'                             " 舒服的滚动
+    Plug 'tweekmonster/startuptime.vim'    , {'on': ['StartupTime']} " 检查启动时间
+    Plug 'wakatime/vim-wakatime'           , {'on': []}              " 记录编程时间
+   Plug 'junegunn/goyo.vim'               , {'on':'Goyo'}           " 无打扰模式
+    Plug 'iamcco/mathjax-support-for-mkdp' , { 'for':'markdown'}     " Markdown插件
+    Plug 'iamcco/markdown-preview.vim'     , { 'for':'markdown'}
+    Plug 'mzlogin/vim-markdown-toc'        , { 'for':'markdown'}
 
 
     call plug#end()
@@ -208,7 +241,8 @@
         autocmd InsertEnter * call plug#load('vim-surround') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-signature') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-gitgutter') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('vim-polyglot') | autocmd! lazy_load
+        autocmd InsertEnter * call plug#load('vim-gutentags') | autocmd! lazy_load
+
     augroup END
 " ============================================================== Initialize End
 
@@ -328,8 +362,6 @@
 " ====================== vim-anyfold =======================
     let g:anyfold_activate=1
     let g:anyfold_fold_comments=1
-    set foldlevel=0
-    hi Folded term=NONE cterm=NONE
 
 " ======================== neoterm =========================
     let g:neoterm_open_in_all_tabs = 0
@@ -497,7 +529,7 @@
 
     let g:comma_prefix_dict.t = {
                 \ 'name' : '+table_mode',
-                \ 'm': [':call tablemode#Toggle()'    , 'table-mode-Toggle']   ,
+                \ 'm': [':TableModeToggle'    , 'table-mode-Toggle']   ,
                 \ 't': ['<Plug>(table-mode-tableize)' , 'table-mode-tableize'] ,
                 \}
 
@@ -708,3 +740,11 @@
     " nmap <leader>f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
+
+
+
+
+
+
+
+
