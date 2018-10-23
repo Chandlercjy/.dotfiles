@@ -39,6 +39,4 @@ nmap <Space>e :FZF ~/.emacs.d<CR>
 " FZF搜索文件
 nmap <C-p> :FZF ~/Documents/<CR>
 
-call which_key#register(',', 'g:comma_prefix_dict')
-call which_key#register('<SPACE>', 'g:space_prefix_dict')
 

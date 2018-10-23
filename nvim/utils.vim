@@ -63,8 +63,8 @@ function! ComfortableMotionToggle()
     endif
 endfunction
 
-func! CompileRunGcc()
-    exec "w"
+func! AsyncRun_Code()
+    silent exec "w"
     if &filetype == 'c'
         :AsyncRun -raw g++ -x c++ % -o %< && ./%<
     elseif &filetype == 'cpp'
@@ -73,19 +73,19 @@ func! CompileRunGcc()
         :AsyncRun -raw tsc %< && node %:r".js"
     elseif &filetype == 'javascript'
         :AsyncRun -raw node %<
-    elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!time java %<"
     elseif &filetype == 'sh'
-        :!time bash %
+        :AsyncRun -raw bash %
     elseif &filetype == 'python'
         :AsyncRun -raw time python %
     elseif &filetype == 'html'
         exec "!firefox % &"
     elseif &filetype == 'go'
-        "        exec "!go build %<"
         :AsyncRun time go run %
-        "exec "!time go run %"
+    " elseif &filetype == 'java'
+        " exec "!javac %"
+        " exec "!time java %<"
+    else
+        echo "No Command for AsyncRun!"
     endif
 endfunc
 
