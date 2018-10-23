@@ -9,7 +9,7 @@ def get_comment_str(snip):
 
 endglobal
 
-snippet cob "Comment Block" b
+snippet cobc "Comment Center Block" b
 `!p 
 com_str = get_comment_str(snip)
 com_len = 79
@@ -20,6 +20,21 @@ snip.rv =com_str + space_left_len*' '`${1:Text}`!p
 snip.rv =(com_len - 2 - space_left_len - len(t[1]))*' '+com_str`
 `!p snip.rv = com_str*com_len`
 endsnippet
+
+
+snippet cobl "Comment Left Block" b
+`!p 
+com_str = get_comment_str(snip)
+com_len = 79
+snip.rv = com_str*com_len`
+`!p 
+space_left_len = int((com_len - 2 - len(t[1]))/2)
+snip.rv =com_str + ' '`${1:Text}`!p 
+snip.rv =(com_len - 2 - 1 - len(t[1]))*' '+com_str`
+`!p snip.rv = com_str*com_len`
+endsnippet
+
+
 
 snippet co "Comment line" b
 `!p 
