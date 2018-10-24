@@ -3,12 +3,12 @@
 " 1. System Better Default                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " 系统类
+    " set mouse=a                              " on OSX press ALT and click
     set nocompatible                         " 去掉讨厌的有关vi一致性模式,避免以前版本的一些bug和局限
     filetype on                              " 开启文件类型检测
     filetype plugin on                       " 根据检测到的不同类型加载对应的插件
     filetype plugin indent on                " 为特定文件类型载入相关缩进文件
     syntax on                                " 开启语法高亮功能
-    set mouse=a                              " on OSX press ALT and click
     set wildmenu                             " 增强模式中的命令行自动完成操作
     set showcmd                              " 输入的命令显示出来，看的清楚些
     set splitright                           " 每次分屏在右边
@@ -116,6 +116,7 @@
     Plug 'vim-airline/vim-airline-themes'
     Plug 'drewtempelmeyer/palenight.vim'    , {'on':[]}
     Plug 'morhetz/gruvbox'                  , {'on':[]}
+    Plug 'ryanoasis/vim-devicons'           , {'on':['NERDTreeToggle']}
 
 " ========================== 代码类 ===========================
     " 强大的各种语言支持
@@ -142,8 +143,10 @@
     Plug 'Chandlercjy/git-blame.vim'        , { 'on': ['GitBlame']}
 
     " 自动生成ctags和查看
-    Plug 'ludovicchabant/vim-gutentags'     , { 'on': []}
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'skywind3000/gutentags_plus'
     Plug 'majutsushi/tagbar'                , {'on':['TagbarToggle']}
+
 
     " 语言相关
     Plug 'vhdirk/vim-cmake'                 , { 'for' : ['c','cpp','hpp','h']}
@@ -211,6 +214,9 @@
     " 强大的表格模式
     Plug 'dhruvasagar/vim-table-mode'       , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
 
+
+
+
 " ======================== 系统增强类 =========================
     Plug 'pseewald/vim-anyfold'           " 加强缩进折叠
     Plug 'tpope/vim-repeat'               " 系统.命令的加强
@@ -228,6 +234,11 @@
     Plug 'iamcco/markdown-preview.vim'     , { 'for':'markdown'}
     Plug 'mzlogin/vim-markdown-toc'        , { 'for':'markdown'}
     Plug 'pangloss/vim-javascript'         , { 'for' : ['javascript']} " 需要测试
+
+    " 方便地控制窗口
+    Plug 'romgrk/winteract.vim' , {'on': 'InteractiveWindow'}
+    Plug 't9md/vim-choosewin'  , {'on': ['<Plug>(choosewin)']}
+
 
     call plug#end()
 " ================================================================ Vim-Plug End
@@ -251,6 +262,7 @@
         autocmd InsertEnter * call plug#load('vim-snippets') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('MatchTagAlways') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-polyglot') | autocmd! lazy_load
+        autocmd InsertEnter * call plug#load('vim-devicons') | autocmd! lazy_load
 
     augroup END
 " ============================================================== Initialize End
@@ -456,6 +468,7 @@
       \ 'infolog': 1,
       \ 'mail': 1
       \}
+    let g:ycm_key_detailed_diagnostics = ''
 
 " ===================== python-syntex ======================
     let g:python_highlight_all = 1
@@ -514,14 +527,69 @@
     let g:cpp_class_decl_highlight = 1
     let g:cpp_experimental_simple_template_highlight = 1
 
-" ================================================================== Plugin End
+" ===================== vim-choosewin ======================
+	" use overlay feature
+	let g:choosewin_overlay_enable = 1
+
+	" workaround for the overlay font being broken on mutibyte buffer.
+	let g:choosewin_overlay_clear_multibyte = 1
+
+	" tmux-like overlay color
+	let g:choosewin_color_overlay = {
+	      \ 'gui': ['DodgerBlue3', 'DodgerBlue3'],
+	      \ 'cterm': [25, 25]
+	      \ }
+	let g:choosewin_color_overlay_current = {
+	      \ 'gui': ['firebrick1', 'firebrick1'],
+	      \ 'cterm': [124, 124]
+	      \ }
+
+	let g:choosewin_blink_on_land      = 0 " don't blink at land
+	let g:choosewin_statusline_replace = 0 " don't replace statusline
+	let g:choosewin_tabline_replace    = 0 " don't replace tabline
+
+
+
+" ===================== vim-gutentags ======================
+    " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+    let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+    " 所生成的数据文件的名称
+    let g:gutentags_ctags_tagfile = '.tags'
+    " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+    let s:vim_tags = expand('~/.cache/tags')
+    let g:gutentags_cache_dir = s:vim_tags
+    " 配置 ctags 的参数
+    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+    " 检测 ~/.cache/tags 不存在就新建
+    if !isdirectory(s:vim_tags)
+        silent! call mkdir(s:vim_tags, 'p')
+    endif
+
+" ==================== gententags_plus =====================
+    " enable gtags module
+    let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+    " config project root markers.
+    let g:gutentags_project_root = ['.root']
+
+    " generate datebases in my cache directory, prevent gtags files polluting my project
+    let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+    " forbid gutentags adding gtags databases
+    let g:gutentags_auto_add_gtags_cscope = 0
+    let g:gutentags_plus_nomap = 1
+
+
+" =========================================================== Plugin Config End
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 8. Keybinding by Which-key                                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ================== Initialize Which-key ==================
-    set timeoutlen=1000
+    set timeoutlen=500
     let g:mapleader = ","
 
     " 高亮prefix
@@ -546,7 +614,7 @@
     nmap <Leader>cc <Plug>NERDCommenterToggle
     omap <Leader>cc <Plug>NERDCommenterToggle
     vmap <Leader>cc <Plug>NERDCommenterToggle
-    let g:comma_prefix_dict['c'] = {
+    let g:comma_prefix_dict.c = {
                 \ 'name': '+nerd-comenter && cd',
                 \ 'A' : ['<Plug>NERDCommenterAppend'                   , 'NERDComment Append']        ,
                 \ 'c' : ['<Plug>NERDCommenterToggle'                   , 'NERDComment Toggle']        ,
@@ -555,8 +623,40 @@
 
     let g:comma_prefix_dict.t = {
                 \ 'name' : '+table_mode',
-                \ 'm': [':TableModeToggle'    , 'table-mode-Toggle']   ,
+                \ 'm': [':TableModeToggle'            , 'table-mode-Toggle']   ,
                 \ 't': ['<Plug>(table-mode-tableize)' , 'table-mode-tableize'] ,
+                \}
+
+    let g:comma_prefix_dict.p = {
+                \ 'name' : '+Plugin',
+                \ 'd': [':PlugDiff'    , 'PlugDiff']    ,
+                \ 'c': [':PlugClean'   , 'PlugClean']   ,
+                \ 's': [':PlugStatus'  , 'PlugStatus']  ,
+                \ 'u': [':PlugUpdate'  , 'PlugUpdate']  ,
+                \ 'i': [':PlugInstall' , 'PlugInstall'] ,
+                \ 'U': [':PlugUpgrade' , 'PlugUpgrade'] ,
+                \}
+
+    noremap <silent> <leader>ds :GscopeFind s <C-R><C-W><cr>
+    noremap <silent> <leader>dg :GscopeFind g <C-R><C-W><cr>
+    noremap <silent> <leader>dc :GscopeFind c <C-R><C-W><cr>
+    noremap <silent> <leader>dt :GscopeFind t <C-R><C-W><cr>
+    noremap <silent> <leader>de :GscopeFind e <C-R><C-W><cr>
+    noremap <silent> <leader>df :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+    noremap <silent> <leader>di :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+    noremap <silent> <leader>dd :GscopeFind d <C-R><C-W><cr>
+    noremap <silent> <leader>da :GscopeFind a <C-R><C-W><cr>
+    let g:comma_prefix_dict.d = {
+                \ 'name' : '+Gtags',
+                \   's':'Find symbol (reference) under cursor'             ,
+                \   'g':'Find symbol definition under cursor'              ,
+                \   'c':'Functions called by this function'                ,
+                \   't':'Functions calling this function'                  ,
+                \   'e':'Find text string under cursor'                    ,
+                \   'f':'Find egrep pattern under cursor'                  ,
+                \   'i':'Find file name under cursor'                      ,
+                \   'd':'Find files #including the file name under cursor' ,
+                \   'a':'Find places where current symbol is assigned'     ,
                 \}
 
     " 复制达到剪贴板
@@ -564,11 +664,13 @@
     vmap <leader>y "+y
     let g:comma_prefix_dict.y = "yank to clipboard"
     let g:comma_prefix_dict.f = [':ALEFix | wa'            , 'ALEFix and save']
-    let g:comma_prefix_dict.g = [':YcmCompleter GoTo'      , 'YCM-GoTo']
     let g:comma_prefix_dict.q = [':call QuickfixToggle()'  , 'QuickfixToggle']
     let g:comma_prefix_dict.l = [':call LocalListToggle()' , 'LocalListToggle']
     let g:comma_prefix_dict.r = [':call AsyncRun_Code()'   , 'AsyncRun Code!']
     let g:comma_prefix_dict.s = [':AsyncStop'              , 'AsyncStop']
+
+    let g:comma_prefix_dict.g = [':YcmCompleter GoTo'      , 'YCM-GoTo']
+
 
 
 " ====================== Space-prefix ======================
@@ -651,11 +753,12 @@
     let g:space_prefix_dict.a = [':Ag' , 'Ag-search']
     let g:space_prefix_dict.u = [':MundoToggle' , 'MundoToggle']
     let g:space_prefix_dict.b = [':Buffers'     , 'Buffer-list']
-    let g:space_prefix_dict.h = [':set nohls'   , "clear-search-highlight"] " 去除搜索高亮
     let g:space_prefix_dict[':'] = [':OverCommandLine', 'Over-CommandLine']
     let g:space_prefix_dict['[']  = ['<Plug>(ale_previous)' , "ALE_previous"]
     let g:space_prefix_dict[']'] = ['<Plug>(ale_next)'     , "ALE_NEXT"]
 
+    nnoremap <silent><expr> <SPACE>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
+    let g:space_prefix_dict.h = "Search-Highlight-Toggle"
 
 " =================== Parentheses-prefex ===================
     let g:left_parentheses_prefix_dict.g  = ['<Plug>GitGutterNextHunk', "GitGutterNextHunk"]
@@ -669,13 +772,13 @@
     call which_key#register('<SPACE>', 'g:space_prefix_dict')
     call which_key#register('[', 'g:left_parentheses_prefix_dict')
     call which_key#register(']', 'g:right_parentheses_prefix_dict')
-" =============================================================== Which-key End
+" ==================================================Keybinding by Which-key End
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 9. Other KeyBindings                                                        "
+" 9. Plugin KeyBindings                                                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ====================== FZF-NEOYANK =======================
+" ====================== FZF-Neoyank =======================
   map <A-y> :FZFNeoyank<CR>
 
 " ======================= GitGutter ========================
@@ -697,24 +800,6 @@
     let g:UltiSnipsExpandTrigger="<C-a>"
     let g:UltiSnipsJumpForwardTrigger = "<C-n>"
     let g:UltiSnipsJumpBackwardTrigger= "<C-p>"
-
-" ===================== vim-gutentags ======================
-    " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-    let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-    " 所生成的数据文件的名称
-    let g:gutentags_ctags_tagfile = '.tags'
-    " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-    let s:vim_tags = expand('~/.cache/tags')
-    let g:gutentags_cache_dir = s:vim_tags
-    " 配置 ctags 的参数
-    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-    " 检测 ~/.cache/tags 不存在就新建
-    if !isdirectory(s:vim_tags)
-        silent! call mkdir(s:vim_tags, 'p')
-    endif
-
 
 " ========================= Tagbar =========================
     nmap <silent> <F4> :TagbarToggle<CR>
@@ -755,7 +840,78 @@
 " ======================= UltiSnips ========================
     ino <silent> <c-x><c-a> <c-r>=<sid>utils#ulti_complete()<cr>
 
-" =========================================================== Plugin KeyMap End
+" ======================= choosewin ========================
+    nmap  -  <Plug>(choosewin)
+
+" ======================= winteract ========================
+    nmap + :InteractiveWindow<CR>
+
+
+" ====================================================== Plugin KeyBindings End
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 9. Plugin KeyBindings by default                                            "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ===================== vim-choosewin ======================
+    " +-----+-----------+----------------------------+
+    " | Key | Action    | Description                |
+    " +=====+===========+============================+
+    " | 0   | tab_first | Select FIRST  tab          |
+    " | [   | tab_prev  | Select PREVIOUS tab        |
+    " | ]   | tab_next  | Select NEXT tab            |
+    " | $   | tab_last  | Select LAST tab            |
+    " | x   | tab_close | Close current tab          |
+    " | ;   | win_land  | Navigate to current window |
+    " | -   | previous  | Naviage to previous window |
+    " | s   | swap      | Swap windows #1            |
+    " | S   | swap_stay | Swap windows but stay #1   |
+    " +-----+-----------+----------------------------+
+
+" ===================== vim-table-mode =====================
+    " +-------------+---------------------------------+
+    " | Key         | Action                          |
+    " +=============+=================================+
+    " | <leader>t   | Prefix for table mode commands. |
+    " | <leader>tt  | Tablelize                       |
+    " | <leader>tm  | Toggle table mode               |
+    " | <leader>ts  | Sort a column                   |
+    " | <leader>tr  | Realigns table columns          |
+    " | <leader>tdd | Delete the table row            |
+    " | <leader>tdc | Delete table column             |
+    " | <leader>tfa | Add a fomula for  table cell.   |
+    " | <leader>tfe | Evaluate the formula line       |
+    " | ||          | Expands to a header border.     |
+    " | [|          | Move to previous cell           |
+    " | ]|          | Move to next cell               |
+    " | {|          | Move to the cell above          |
+    " | }|          | Move to the cell below          |
+    " +-------------+---------------------------------+
+
+
+" ======================= winteract ========================
+    " +--------------------------+-----------------+
+    " | Key                      | Action          |
+    " +==========================+=================+
+    " | j/k/h/l                  | resize          |
+    " | F                        | fullwidth       |
+    " | f                        | fullheight      |
+    " | o (!closes all others)   | fullscreen      |
+    " | =                        | equalize        |
+    " | &                        | width=textwidth |
+    " | s/v                      | [v]split        |
+    " | x/c                      | close           |
+    " | Alt + [jkhl]             | focus           |
+    " | w/W                      | next/prev       |
+    " | H/J/K/L                  | move window     |
+    " | m{h/j/k/l} or g{h/j/k/l} |                 |
+    " | mx or gx                 | exchange        |
+    " | n/p, <S-TAB>/<TAB>       | change buffer   |
+    " | <ESC>, <CR>              | exit mode       |
+    " +--------------------------+-----------------+
+
+
+" =========================================== Plugin KeyBindings by default End
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -774,8 +930,6 @@
     " nmap <leader>f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
-
-
 
 
 

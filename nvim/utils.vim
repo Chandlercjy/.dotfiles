@@ -8,14 +8,14 @@ fu! utils#SmartClose() abort
   "let ignoreft = get(g:, 'spacevim_smartcloseignoreft',[])
   let win_count = winnr('$')
   let num = win_count
-  for i in range(1,win_count)
-    "if index(ignorewin , bufname(winbufnr(i))) != -1 || index(ignoreft, getbufvar(bufname(winbufnr(i)),'&filetype')) != -1
-      "let num = num - 1
-    "endif
-    if getbufvar(winbufnr(i),'&buftype') ==# 'quickfix'
-      let num = num - 1
-    endif
-  endfor
+  " for i in range(1,win_count)
+    " " if index(ignorewin , bufname(winbufnr(i))) != -1 || index(ignoreft, getbufvar(bufname(winbufnr(i)),'&filetype')) != -1
+      " " let num = num - 1
+    " " endif
+    " if getbufvar(winbufnr(i),'&buftype') ==# 'quickfix'
+      " let num = num - 1
+    " endif
+  " endfor
   if num == 1
   else
     quit
@@ -46,7 +46,6 @@ endfu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Toggle Functions                               "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 function! ComfortableMotionToggle()
     if g:comfortable_motion_is_enabled
         unmap <C-d>
@@ -90,24 +89,32 @@ func! AsyncRun_Code()
 endfunc
 
 
-let g:quickfix_is_open = 0
-let g:locallist_is_open = 0
-function! QuickfixToggle()
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-    else
-        copen
-        let g:quickfix_is_open = 1
-    endif
-endfunction
+function QuickfixToggle() 
+    let qfw = 0         " find qf window, if any
+    windo if &l:buftype == "quickfix" | let qfw = winnr() | endif 
+    if qfw 
+        cclose 
+    else 
+        bot copen 
+    endif 
+    " go back to where we started from 
+    if (winnr >= qfw) && (winnr > 1) 
+        let winnr = winnr - 1 
+    endif 
+    exe winnr "wincmd w" 
+endfunction 
 
-function! LocalListToggle()
-    if g:locallist_is_open
-        lclose
-        let g:locallist_is_open = 0
-    else
-        lopen
-        let g:locallist_is_open = 1
-    endif
-endfunction
+function LocationListToggle() 
+    let qfw = 0         " find qf window, if any
+    windo if &l:buftype == "location" | let qfw = winnr() | endif 
+    if qfw 
+        lclose 
+    else 
+        bot lopen 
+    endif 
+    " go back to where we started from 
+    if (winnr >= qfw) && (winnr > 1) 
+        let winnr = winnr - 1 
+    endif 
+    exe winnr "wincmd w" 
+endfunction 
