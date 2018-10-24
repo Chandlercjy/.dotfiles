@@ -138,7 +138,7 @@
 
     " Git
     Plug 'tpope/vim-fugitive'               , {'on': ['GV', 'Gblame', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
-    Plug 'junegunn/gv.vim'                  , { 'on': ['GV']}
+    Plug 'junegunn/gv.vim'                  , { 'on': 'GV'}
     Plug 'airblade/vim-gitgutter'           , { 'on': ['GitGutterToggle']}
     Plug 'Chandlercjy/git-blame.vim'        , { 'on': ['GitBlame']}
 
@@ -760,6 +760,10 @@
     nnoremap <silent><expr> <SPACE>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
     let g:space_prefix_dict.h = "Search-Highlight-Toggle"
 
+    let g:space_prefix_dict['-']  = [':SSave! default' , "Save-Session-default"]
+    let g:space_prefix_dict['=']  = [':SLoad default' , "Load-Session-default"]
+
+
 " =================== Parentheses-prefex ===================
     let g:left_parentheses_prefix_dict.g  = ['<Plug>GitGutterNextHunk', "GitGutterNextHunk"]
     let g:right_parentheses_prefix_dict.g = ['<Plug>GitGutterPrevHunk', "GitGutterPrevHunk"]
@@ -802,10 +806,6 @@
 " ======================== vimterm =========================
     nnoremap <F7> :call vimterm#toggle() <CR>
     tnoremap <F7> <C-\><C-n>:call vimterm#toggle() <CR>
-
-" =================== Startify sessions ====================
-    nmap <F8> :SSave! default<CR>
-    nmap <F9> :SLoad default<CR>
 
 " ======================= UltiSnips ========================
     let g:UltiSnipsExpandTrigger="<C-a>"
