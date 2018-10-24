@@ -214,6 +214,7 @@
     " 强大的表格模式
     Plug 'dhruvasagar/vim-table-mode'       , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
 
+    Plug 'wvffle/vimterm'
 
 
 
@@ -236,11 +237,9 @@
     Plug 'pangloss/vim-javascript'         , { 'for' : ['javascript']} " 需要测试
 
     " 方便地控制窗口
-    Plug 'romgrk/winteract.vim' , {'on': 'InteractiveWindow'}
-    Plug 't9md/vim-choosewin'  , {'on': ['<Plug>(choosewin)']}
-    Plug 'wellle/visual-split.vim'
-
-
+    Plug 'romgrk/winteract.vim'            , {'on': 'InteractiveWindow'}
+    Plug 't9md/vim-choosewin'              , {'on': ['<Plug>(choosewin)']}
+    Plug 'wellle/visual-split.vim'         , {'on':['<Plug>(Visual-Split-VSSplitAbove)', '<Plug>(Visual-Split-VSSplitBelow)']}
 
     call plug#end()
 " ================================================================ Vim-Plug End
@@ -797,13 +796,21 @@
     let NERDTreeWinPos="left"
     let NERDTreeIgnore=['\.pyc','\~$','\.swp'] " 忽略一下文件的显示
 
+" ========================= Tagbar =========================
+    nmap <silent> <F4> :TagbarToggle<CR>
+
+" ======================== vimterm =========================
+    nnoremap <F7> :call vimterm#toggle() <CR>
+    tnoremap <F7> <C-\><C-n>:call vimterm#toggle() <CR>
+
+" =================== Startify sessions ====================
+    nmap <F8> :SSave! default<CR>
+    nmap <F9> :SLoad default<CR>
+
 " ======================= UltiSnips ========================
     let g:UltiSnipsExpandTrigger="<C-a>"
     let g:UltiSnipsJumpForwardTrigger = "<C-n>"
     let g:UltiSnipsJumpBackwardTrigger= "<C-p>"
-
-" ========================= Tagbar =========================
-    nmap <silent> <F4> :TagbarToggle<CR>
 
 " ===================== vim-easymotion =====================
     nmap f <Plug>(easymotion-overwin-f)
@@ -813,14 +820,9 @@
     xmap ga <Plug>(EasyAlign)
     nmap ga <Plug>(EasyAlign)
 
-" =================== Startify sessions ====================
-    nmap <F8> :SSave! default<CR>
-    nmap <F9> :SLoad default<CR>
-
 " ======================== Vim-move ========================
     nmap <A-j> <Plug>MoveLineDown
     nmap <A-k> <Plug>MoveLineUp
-
 
 " ======================== Neo-term ========================
     nmap <A-f> :TREPLSendFile<CR>
@@ -910,7 +912,7 @@
 " 10. DIY KeyBindings                                                         "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==================== Smart close by q ====================
-    nnoremap <F3> q
+    " 原始q录制宏可以按 <A-q>
     nnoremap <silent> q :call utils#SmartClose()<cr>
 
 
