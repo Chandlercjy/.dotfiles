@@ -116,6 +116,10 @@
     Plug 'vim-airline/vim-airline-themes'
     Plug 'drewtempelmeyer/palenight.vim'    " Load by Default
     Plug 'morhetz/gruvbox'                  , {'on':['Colors']}
+    Plug 'ayu-theme/ayu-vim'                , {'on':['Colors']}
+    Plug 'arcticicestudio/nord-vim'         , {'on':['Colors']}
+    Plug 'rakr/vim-one'                     , {'on':['Colors']}
+    Plug 'mhartington/oceanic-next'         , {'on':['Colors']}
     Plug 'ryanoasis/vim-devicons'           , {'on':['NERDTreeToggle']}
 
 " ========================== 代码类 ===========================
@@ -151,7 +155,6 @@
 
     " 语言相关
     Plug 'vhdirk/vim-cmake'                 , { 'for' : ['c','cpp','hpp','h']}
-    Plug 'neomake/neomake'
     Plug 'vim-python/python-syntax'         , { 'for' : 'python'}
     Plug 'octol/vim-cpp-enhanced-highlight' , { 'for' : ['c','cpp','hpp','h']}
     Plug 'leafgarland/typescript-vim'       , { 'for' : ['typescript']}
@@ -230,18 +233,18 @@
 
 " ========================== 趣味类 ===========================
     Plug 'yuttie/comfortable-motion.vim'                             " 舒服的滚动
-    Plug 'tweekmonster/startuptime.vim'    , {'on': ['StartupTime']} " 检查启动时间
-    Plug 'wakatime/vim-wakatime'           , {'on': []}              " 记录编程时间
-    Plug 'junegunn/goyo.vim'               , {'on':'Goyo'}           " 无打扰模式
-    Plug 'iamcco/mathjax-support-for-mkdp' , { 'for':'markdown'}     " Markdown插件
-    Plug 'iamcco/markdown-preview.vim'     , { 'for':'markdown'}
-    Plug 'mzlogin/vim-markdown-toc'        , { 'for':'markdown'}
-    Plug 'pangloss/vim-javascript'         , { 'for' : ['javascript']} " 需要测试
+    Plug 'tweekmonster/startuptime.vim'     , {'on': ['StartupTime']} " 检查启动时间
+    Plug 'wakatime/vim-wakatime'            , {'on': []}              " 记录编程时间
+    Plug 'junegunn/goyo.vim'                , {'on':'Goyo'}           " 无打扰模式
+    Plug 'iamcco/mathjax-support-for-mkdp'  , { 'for':'markdown'}     " Markdown插件
+    Plug 'iamcco/markdown-preview.vim'      , { 'for':'markdown'}
+    Plug 'mzlogin/vim-markdown-toc'         , { 'for':'markdown'}
+    Plug 'pangloss/vim-javascript'          , { 'for' : ['javascript']} " 需要测试
 
     " 方便地控制窗口
-    Plug 'romgrk/winteract.vim'            , {'on': 'InteractiveWindow'}
-    Plug 't9md/vim-choosewin'              , {'on': ['<Plug>(choosewin)']}
-    Plug 'wellle/visual-split.vim'         , {'on':['<Plug>(Visual-Split-VSSplitAbove)', '<Plug>(Visual-Split-VSSplitBelow)']}
+    Plug 'romgrk/winteract.vim'             , {'on': 'InteractiveWindow'}
+    Plug 't9md/vim-choosewin'               , {'on': ['<Plug>(choosewin)']}
+    Plug 'wellle/visual-split.vim'          , {'on':['<Plug>(Visual-Split-VSSplitAbove)', '<Plug>(Visual-Split-VSSplitBelow)']}
 
     call plug#end()
 " ================================================================ Vim-Plug End
@@ -305,10 +308,31 @@
 
     let g:gruvbox_italic=1
 
+    let g:nord_italic = 1
+    let g:nord_underline = 1
+    let g:nord_italic_comments = 1
+    let g:nord_comment_brightness = 12
+
+    let g:one_allow_italics = 1 " I love italic for comments
+
+
 " ====================== Custom Theme ======================
-    autocmd InsertLeave * highlight CursorLine guibg=#2f3843
-    autocmd InsertEnter * highlight CursorLine guibg=#2b323b
-    autocmd InsertEnter * highlight Folded guifg=lightblue
+    function! Custom_Theme_Strengthen() " 加强cursorline对比度
+        if g:colors_name == 'palenight'
+            augroup Strengthen
+                autocmd InsertLeave * highlight CursorLine guibg=#2f3843
+                autocmd InsertEnter * highlight CursorLine guibg=#2b323b
+            augroup END
+        else
+            autocmd! Strengthen
+        endif
+
+        highlight Folded guifg=lightblue
+    endfunction
+
+    call Custom_Theme_Strengthen()
+
+    autocmd ColorScheme * call Custom_Theme_Strengthen()
 
 " ======================== Startify ========================
     let g:startify_enable_special = 0 " don't show empty buffer
@@ -732,6 +756,7 @@
                 \ 'w' : [':Windows'                    , 'Windows-search']        ,
                 \ 'hc' : [':History:'                  , 'History-Commands']      ,
                 \ 'hs' : [':History/'                  , 'History-Search']        ,
+                \ 'c' : [':Colors'                     , 'Colors-Search']         ,
                 \ }
 
     let g:space_prefix_dict.y = {
