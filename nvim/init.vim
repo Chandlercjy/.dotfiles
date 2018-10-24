@@ -128,7 +128,7 @@
 
     " 代码检查和补全
     Plug 'SirVer/ultisnips'                 , {'on':[]}
-    Plug 'honza/vim-snippets'               , {'on':[]}
+    Plug 'honza/vim-snippets'
     Plug 'w0rp/ale'
     Plug 'Valloric/YouCompleteMe'           , { 'do': './install.py --clang-completer' }
     Plug 'rdnetto/YCM-Generator'            , {'on':'YcmGenerateConfig', 'branch': 'stable'}
@@ -220,6 +220,7 @@
     Plug 'dhruvasagar/vim-table-mode'       , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
 
     Plug 'wvffle/vimterm'
+
 
 
 
@@ -992,4 +993,3 @@
     " nmap <leader>f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
-
