@@ -947,6 +947,9 @@
     " 原始q录制宏可以按 <A-q>
     nnoremap <silent> q :call utils#SmartClose()<cr>
 
+" ====================== Smart indent ======================
+    nnoremap <silent> < <<
+    nnoremap <silent> > >>
 
 " ==================== Testing .....??? ====================
     " nmap <leader>f: :%s/：/:/g<CR>
