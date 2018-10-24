@@ -151,6 +151,7 @@
 
     " 语言相关
     Plug 'vhdirk/vim-cmake'                 , { 'for' : ['c','cpp','hpp','h']}
+    Plug 'neomake/neomake'
     Plug 'vim-python/python-syntax'         , { 'for' : 'python'}
     Plug 'octol/vim-cpp-enhanced-highlight' , { 'for' : ['c','cpp','hpp','h']}
     Plug 'leafgarland/typescript-vim'       , { 'for' : ['typescript']}
@@ -667,7 +668,7 @@
     let g:comma_prefix_dict.y = "yank to clipboard"
     let g:comma_prefix_dict.f = [':ALEFix | wa'            , 'ALEFix and save']
     let g:comma_prefix_dict.q = [':call QuickfixToggle()'  , 'QuickfixToggle']
-    let g:comma_prefix_dict.l = [':call LocalListToggle()' , 'LocalListToggle']
+    let g:comma_prefix_dict.l = [':call LocationListToggle()' , 'LocationListToggle']
     let g:comma_prefix_dict.r = [':call AsyncRun_Code()'   , 'AsyncRun Code!']
     let g:comma_prefix_dict.s = [':AsyncStop'              , 'AsyncStop']
 
