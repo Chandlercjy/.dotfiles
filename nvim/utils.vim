@@ -114,3 +114,8 @@ function! LocationListToggle()
         let g:locallist_is_open = 1
     endif
 endfunction
+
+function! BackgroundColorToggle()
+    let &background = ( &background == "dark"? "light" : "dark" )
+endfunction
+

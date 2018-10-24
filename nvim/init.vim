@@ -114,8 +114,8 @@
     Plug 'mhinz/vim-startify'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'drewtempelmeyer/palenight.vim'    , {'on':[]}
-    Plug 'morhetz/gruvbox'                  , {'on':[]}
+    Plug 'drewtempelmeyer/palenight.vim'    " Load by Default
+    Plug 'morhetz/gruvbox'                  , {'on':['Colors']}
     Plug 'ryanoasis/vim-devicons'           , {'on':['NERDTreeToggle']}
 
 " ========================== 代码类 ===========================
@@ -300,19 +300,15 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ========================= Theme ==========================
 
-    call plug#load('palenight.vim')
     colorscheme palenight
     let g:palenight_terminal_italics=1
 
-    " call plug#load('gruvbox')
-    " let g:gruvbox_italic=1
-    " colorscheme gruvbox"
-    " set background=dark
+    let g:gruvbox_italic=1
 
 " ====================== Custom Theme ======================
     autocmd InsertLeave * highlight CursorLine guibg=#2f3843
     autocmd InsertEnter * highlight CursorLine guibg=#2b323b
-    hi Folded guifg=lightblue
+    autocmd InsertEnter * highlight Folded guifg=lightblue
 
 " ======================== Startify ========================
     let g:startify_enable_special = 0 " don't show empty buffer
@@ -690,9 +686,10 @@
 
     let g:space_prefix_dict.f = {
                 \ 'name' : '+files' ,
-                \ 'f': [':FZF'                          , 'FZF']              ,
-                \ 's': [':wa|echo "All Buffers Saved!"' , 'save all buffers'] ,
-                \ 'r': [':Ranger'                       , 'Ranger']           ,
+                \ 'f': [':FZF'                          , 'FZF-Search-File']     ,
+                \ 'h' : [':History'                     , 'History-File-Search'] ,
+                \ 's': [':wa|echo "All Buffers Saved!"' , 'save all buffers']    ,
+                \ 'r': [':Ranger'                       , 'Ranger']              ,
                 \ }
 
     let g:space_prefix_dict.t = {
@@ -708,6 +705,7 @@
                 \ 'm': [':SignatureToggleSigns'            , 'Marks-Toggle']              ,
                 \ 's': [':setlocal spell! spelllang=en_us' , 'Spell-Toggle']              ,
                 \ 'c': [':call ComfortableMotionToggle()'  , 'Comfortable-Motion-Toggle'] ,
+                \ 'b': [':call BackgroundColorToggle()'  , 'BackgroundColorToggle'] ,
                 \ }
 
     let g:space_prefix_dict.g = {
@@ -726,9 +724,14 @@
                 \ }
 
     let g:space_prefix_dict.s = {
-                \ 'name' : '+swoop-search' ,
+                \ 'name' : '+Swoop/Search' ,
                 \ 's' : [':call SwoopMultiSelection()' , 'swoop-multi-selection'] ,
                 \ 'b' : [':call SwoopMulti()'          , 'swoop-multi-buffer']    ,
+                \ 't' : [':Tags'                       , 'Tags-search']           ,
+                \ 'm' : [':Marks'                      , 'Marks-search']          ,
+                \ 'w' : [':Windows'                    , 'Windows-search']        ,
+                \ 'hc' : [':History:'                  , 'History-Commands']      ,
+                \ 'hs' : [':History/'                  , 'History-Search']        ,
                 \ }
 
     let g:space_prefix_dict.y = {
