@@ -104,18 +104,13 @@ function! QuickfixToggle()
     exe winnr "wincmd w" 
 endfunction 
 
-function! LocationListToggle() 
-    let qfw = 0         " find qf window, if any
-    windo if &l:buftype == "location" | let qfw = winnr() | endif 
-    if qfw 
-        lclose 
-    else 
-        bot lopen 
-    endif 
-    " go back to where we started from 
-    if (winnr >= qfw) && (winnr > 1) 
-        let winnr = winnr - 1 
-    endif 
-    exe winnr "wincmd w" 
-endfunction 
-
+let g:locallist_is_open = 0
+function! LocationListToggle()
+    if g:locallist_is_open
+        lclose
+        let g:locallist_is_open = 0
+    else
+        lopen
+        let g:locallist_is_open = 1
+    endif
+endfunction
