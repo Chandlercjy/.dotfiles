@@ -267,7 +267,6 @@
         autocmd InsertEnter * call plug#load('vim-surround') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-gutentags') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('ultisnips') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('vim-snippets') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('MatchTagAlways') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-polyglot') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-devicons') | autocmd! lazy_load
