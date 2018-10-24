@@ -137,7 +137,7 @@
     Plug 'Chandlercjy/neoterm'              , {'on':[ 'TREPLSendFile', '<Plug>(neoterm-repl-send)', '<Plug>(neoterm-repl-send-line)' ]}
 
     " Git
-    Plug 'tpope/vim-fugitive'               , {'on': ['GV', 'Gblame', 'BCommits', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
+    Plug 'tpope/vim-fugitive'               , {'on': ['GV', 'Gblame', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
     Plug 'junegunn/gv.vim'                  , { 'on': ['GV']}
     Plug 'airblade/vim-gitgutter'           , { 'on': ['GitGutterToggle']}
     Plug 'Chandlercjy/git-blame.vim'        , { 'on': ['GitBlame']}
@@ -238,6 +238,8 @@
     " 方便地控制窗口
     Plug 'romgrk/winteract.vim' , {'on': 'InteractiveWindow'}
     Plug 't9md/vim-choosewin'  , {'on': ['<Plug>(choosewin)']}
+    Plug 'wellle/visual-split.vim'
+
 
 
     call plug#end()
@@ -711,8 +713,7 @@
                 \ 'b' : ['GitBlame' , 'git-blame']                            ,
                 \ 'v' : ['GV'       , 'Visualize Commits']                    ,
                 \ 'vc' : ['GV!'     , 'Visualize Commits for current buffer'] ,
-                \ 'c' : ['BCommits' , 'commits-for-current-buffer']           ,
-                \ 'C' : ['Gcommit'  , 'fugitive-commit']                      ,
+                \ 'c' : ['Gcommit'  , 'fugitive-commit']                      ,
                 \ 'd' : ['Gdiff'    , 'fugitive-diff']                        ,
                 \ 'e' : ['Gedit'    , 'fugitive-edit']                        ,
                 \ 'l' : ['Glog'     , 'fugitive-log']                         ,
@@ -840,20 +841,12 @@
 " ======================= UltiSnips ========================
     ino <silent> <c-x><c-a> <c-r>=<sid>utils#ulti_complete()<cr>
 
+" ====================== visual-split ======================
+    vmap <C-w>k <Plug>(Visual-Split-VSSplitAbove)
+    vmap <C-w>j <Plug>(Visual-Split-VSSplitBelow)
+
 " ======================= choosewin ========================
     nmap  -  <Plug>(choosewin)
-
-" ======================= winteract ========================
-    nmap + :InteractiveWindow<CR>
-
-
-" ====================================================== Plugin KeyBindings End
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 9. Plugin KeyBindings by default                                            "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ===================== vim-choosewin ======================
     " +-----+-----------+----------------------------+
     " | Key | Action    | Description                |
     " +=====+===========+============================+
@@ -867,6 +860,28 @@
     " | s   | swap      | Swap windows #1            |
     " | S   | swap_stay | Swap windows but stay #1   |
     " +-----+-----------+----------------------------+
+
+" ======================= winteract ========================
+    nmap + :InteractiveWindow<CR>
+    " +--------------------------+-----------------+
+    " | Key                      | Action          |
+    " +==========================+=================+
+    " | j/k/h/l                  | resize          |
+    " | F                        | fullwidth       |
+    " | f                        | fullheight      |
+    " | o (!closes all others)   | fullscreen      |
+    " | =                        | equalize        |
+    " | &                        | width=textwidth |
+    " | s/v                      | [v]split        |
+    " | x/c                      | close           |
+    " | Alt + [jkhl]             | focus           |
+    " | w/W                      | next/prev       |
+    " | H/J/K/L                  | move window     |
+    " | m{h/j/k/l} or g{h/j/k/l} |                 |
+    " | mx or gx                 | exchange        |
+    " | n/p, <S-TAB>/<TAB>       | change buffer   |
+    " | <ESC>, <CR>              | exit mode       |
+    " +--------------------------+-----------------+
 
 " ===================== vim-table-mode =====================
     " +-------------+---------------------------------+
@@ -888,30 +903,7 @@
     " | }|          | Move to the cell below          |
     " +-------------+---------------------------------+
 
-
-" ======================= winteract ========================
-    " +--------------------------+-----------------+
-    " | Key                      | Action          |
-    " +==========================+=================+
-    " | j/k/h/l                  | resize          |
-    " | F                        | fullwidth       |
-    " | f                        | fullheight      |
-    " | o (!closes all others)   | fullscreen      |
-    " | =                        | equalize        |
-    " | &                        | width=textwidth |
-    " | s/v                      | [v]split        |
-    " | x/c                      | close           |
-    " | Alt + [jkhl]             | focus           |
-    " | w/W                      | next/prev       |
-    " | H/J/K/L                  | move window     |
-    " | m{h/j/k/l} or g{h/j/k/l} |                 |
-    " | mx or gx                 | exchange        |
-    " | n/p, <S-TAB>/<TAB>       | change buffer   |
-    " | <ESC>, <CR>              | exit mode       |
-    " +--------------------------+-----------------+
-
-
-" =========================================== Plugin KeyBindings by default End
+" ====================================================== Plugin KeyBindings End
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -930,6 +922,4 @@
     " nmap <leader>f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
-
-
 
