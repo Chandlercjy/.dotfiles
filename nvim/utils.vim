@@ -89,7 +89,7 @@ func! AsyncRun_Code()
 endfunc
 
 
-function QuickfixToggle() 
+function! QuickfixToggle() 
     let qfw = 0         " find qf window, if any
     windo if &l:buftype == "quickfix" | let qfw = winnr() | endif 
     if qfw 
@@ -104,7 +104,7 @@ function QuickfixToggle()
     exe winnr "wincmd w" 
 endfunction 
 
-function LocationListToggle() 
+function! LocationListToggle() 
     let qfw = 0         " find qf window, if any
     windo if &l:buftype == "location" | let qfw = winnr() | endif 
     if qfw 
@@ -118,3 +118,4 @@ function LocationListToggle()
     endif 
     exe winnr "wincmd w" 
 endfunction 
+

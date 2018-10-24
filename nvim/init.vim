@@ -125,7 +125,7 @@
     " 代码检查和补全
     Plug 'SirVer/ultisnips'                 , {'on':[]}
     Plug 'honza/vim-snippets'               , {'on':[]}
-    Plug 'w0rp/ale'                         , {'on':['ALEToggle']}
+    Plug 'w0rp/ale'
     Plug 'Valloric/YouCompleteMe'           , { 'do': './install.py --clang-completer' }
     Plug 'rdnetto/YCM-Generator'            , {'on':'YcmGenerateConfig', 'branch': 'stable'}
 
@@ -139,8 +139,9 @@
     " Git
     Plug 'tpope/vim-fugitive'               , {'on': ['GV', 'Gblame', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
     Plug 'junegunn/gv.vim'                  , { 'on': 'GV'}
-    Plug 'airblade/vim-gitgutter'           , { 'on': ['GitGutterToggle']}
+    Plug 'airblade/vim-gitgutter'
     Plug 'Chandlercjy/git-blame.vim'        , { 'on': ['GitBlame']}
+
 
     " 自动生成ctags和查看
     Plug 'ludovicchabant/vim-gutentags'
@@ -437,7 +438,7 @@
     " 对ALE的特别配置
     let g:ale_python_mypy_options = '--ignore-missing-imports'
     let g:ale_python_pylint_options = '--disable=missing-docstring,too-many-arguments,too-many-ancestors,arguments-differ'
-    let g:ale_c_clangformat_options = '-style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Attach, AllowShortIfStatementsOnASingleLine: true, IndentCaseLabels: true, ObjCBlockIndentWidth: 4, ObjCSpaceAfterProperty: true, ColumnLimit: 0, AlignTrailingComments: true, SpaceAfterCStyleCast: true, SpacesInParentheses: false, SpacesInSquareBrackets: false}'
+    let g:ale_c_clangformat_options = '-style="{BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Attach, AllowShortIfStatementsOnASingleLine: true, IndentCaseLabels: true, ObjCBlockIndentWidth: 4, ObjCSpaceAfterProperty: true, ColumnLimit: 0, AlignTrailingComments: true, SpaceAfterCStyleCast: true, SpacesInParentheses: false, SpacesInSquareBrackets: false}"'
     "let g:ale_cpp_gcc_options = '-Wall -std=c++17 -I ~/Documents/CLionProjects/OnePyPlus/include/'
     "let g:ale_cpp_clang_options = '-Wall -std=c++17'
     "let g:ale_javascript_prettier_options = '--tab-width 4 --prose-wrap always'
@@ -671,6 +672,7 @@
     let g:comma_prefix_dict.s = [':AsyncStop'              , 'AsyncStop']
 
     let g:comma_prefix_dict.g = [':YcmCompleter GoTo'      , 'YCM-GoTo']
+
 
 
 
