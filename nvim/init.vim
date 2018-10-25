@@ -238,6 +238,7 @@
     Plug 'wakatime/vim-wakatime'            , {'on': []}              " 记录编程时间
     Plug 'junegunn/goyo.vim'                , {'on':'Goyo'}           " 无打扰模式
 
+    Plug 'nelstrom/vim-markdown-folding'    , { 'for':'markdown'}     " Markdown插件
     Plug 'iamcco/mathjax-support-for-mkdp'  , { 'for':'markdown'}     " Markdown插件
     Plug 'tyru/open-browser.vim'            , { 'for':'markdown'}
     Plug 'kannokanno/previm'                , { 'for':'markdown'}
@@ -997,6 +998,3 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
-
-" let g:maplocalleader = '\'
-
