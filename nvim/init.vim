@@ -95,6 +95,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 2. Awesome CMD                                                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ========== Autoload when changed in other place ==========
+    autocmd WinEnter,BufWinEnter,FocusGained * checktime
+
 " ============ Remember the last edit position =============
     autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
                         \ exe "normal! g`\"" |
@@ -269,7 +272,6 @@
         autocmd InsertEnter * call plug#load('vim-gutentags') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('ultisnips') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('MatchTagAlways') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('vim-polyglot') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-devicons') | autocmd! lazy_load
 
     augroup END
@@ -752,10 +754,9 @@
                 \ }
 
     map <C-S> :call SwoopMulti()<CR>
-                \ 'name' : '+Swoop/Search' ,
+    let g:space_prefix_dict.s = {
                 \ 'name' : '+Swoop/Search' ,
                 \ 's' : [':call SwoopMultiSelection()' , 'swoop-multi-selection'] ,
-                \ 'b' : [':call SwoopMulti()'          , 'swoop-multi-buffer']    ,
                 \ 'w' : [':Windows'                    , 'Windows-search']        ,
                 \ 'hc' : [':History:'                  , 'History-Commands']      ,
                 \ 'hs' : [':History/'                  , 'History-Search']        ,
