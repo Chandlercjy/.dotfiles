@@ -119,3 +119,11 @@ function! BackgroundColorToggle()
     let &background = ( &background == "dark"? "light" : "dark" )
 endfunction
 
+function! ConcelLevelToggle()
+    let &conceallevel = ( &conceallevel == 3 ? 0 : 3 )
+endfunction
+
+function! HighlightSearchToggle()
+    let &hlsearch = (&hls && v:hlsearch ? 0 : 1)
+endfunction
+
