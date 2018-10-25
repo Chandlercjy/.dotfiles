@@ -4,7 +4,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package evil
   :ensure t
-  :defer 1
   :bind (
          :map evil-normal-state-map
          ("C-c b" . delete-blank-lines)
@@ -23,13 +22,12 @@
          ("C-c i" . package-install)
          ("<SPC> a" . counsel-ag)
          ("<SPC> b" . counsel-ibuffer)
-         ("<SPC> f" . counsel-fzf)
+         ;; ("<SPC> f" . counsel-fzf)
          ("<SPC> ]" . flycheck-next-error)
          ("<SPC> [" . flycheck-previous-error)
          (",l" . flycheck-list-errors)
          ("<f7>" . flycheck-mode)
 
-         (",cc" . evilnc-comment-or-uncomment-lines)
 
          ("<SPC> h" . evil-search-highlight-persist-remove-all)
 
@@ -56,12 +54,13 @@
          ("C-w e" . ace-swap-window)
          ("C-w w" . ace-select-window)
 
+         ;; (",cc" . evilnc-comment-or-uncomment-lines)
          :map evil-insert-state-map
          ("\C-a" . company-yasnippet)
 
-         :map evil-visual-state-map
-         (",cc" . evilnc-comment-or-uncomment-lines)
-         (",cp" . evilnc-comment-or-uncomment-paragraphs)
+         ;; :map evil-visual-state-map
+         ;; (",cc" . evilnc-comment-or-uncomment-lines)
+         ;; (",cp" . evilnc-comment-or-uncomment-paragraphs)
 
          ;; 同时都有的
          :map evil-normal-state-map
@@ -77,9 +76,57 @@
   (evil-add-hjkl-bindings recentf-dialog-mode-map 'emacs)
   (evil-add-hjkl-bindings package-menu-mode-map 'emacs)
   (setq-default evil-insert-state-cursor 'bar)
+  ;; (define-key evil-normal-state-map (kbd "<SPC-f>f") 'fzf)
   (evil-set-initial-state 'ivy-occur-grep-mode 'normal)
   (evil-set-initial-state 'ag-mode 'normal)
+  (evil-set-initial-state 'term-mode 'emacs)
   )
+
+(use-package general
+  :ensure t)
+
+;; (general-create-definer comma-def :prefix ",")
+;; (general-create-definer comma-c-def :prefix ",")
+;; (general-create-definer comma-t-def :prefix ",")
+;; (general-create-definer comma-p-def :prefix ",")
+;; (general-create-definer comma-d-def :prefix ",")
+
+(general-define-key
+ :prefix ","
+ :keymaps '(normal visual)
+ "c" '(:ignore t :which-key "comments")
+ )
+
+(general-define-key
+ :states '(normal visual)
+ :keymaps 'override
+ :prefix ",c"
+ "c" 'evilnc-comment-or-uncomment-lines
+ "p" 'evilnc-comment-or-uncomment-paragraphs
+ )
+
+
+
+
+(general-create-definer spc-f-def :prefix "SPC f")
+(general-create-definer spc-f-def :prefix "SPC f")
+(general-create-definer spc-f-def :prefix "SPC f")
+(general-create-definer spc-f-def :prefix "SPC f")
+(general-create-definer spc-f-def :prefix "SPC f")
+
+(general-define-key
+ :states 'normal
+  :keymaps 'override
+ "q" ":wq"
+ )
+
+;; (spc-files-def
+;;   :states 'normal
+;;   :keymaps 'override
+
+;;   "f" 'fzf
+;;   )
+
 
 (use-package ivy
   :ensure t
@@ -189,6 +236,22 @@
   :defer 5
   :config
   (evil-vimish-fold-mode 1))
+
+
+
+(use-package term
+  :defer t
+  :config
+  (defun term-send-esc ()
+    "Send ESC in term mode."
+    (interactive)
+    (term-send-raw-string "\e"))
+  ;; to quit fzf with ESC key
+  (define-key term-raw-map (kbd "<escape>") 'term-send-esc)
+
+  )
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

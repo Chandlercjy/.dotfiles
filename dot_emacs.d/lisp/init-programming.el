@@ -40,7 +40,6 @@
                                         ;               代码补全             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package company
-  :defer 1
   :hook (prog-mode . company-mode)
   :bind (("M-/" . company-complete)
          :map company-active-map
@@ -83,12 +82,18 @@
       (add-hook 'after-make-frame-functions
                 (lambda (x)
                   (global-company-mode)))
-    (global-company-mode)))
+    (global-company-mode))
+
+  (defun chandler/company-to-yasnippet ()
+    (interactive)
+    (company-abort)
+    (call-interactively 'company-yasnippet))
+  (bind-key "C-a" 'chandler/company-to-yasnippet company-active-map)
+  )
 
 ;; YouCompleteMe
 (use-package ycmd
   :ensure t
-  :defer 5
   :config
   (set-variable 'ycmd-startup-timeout 5)
   (setq ycmd-tag-files 'auto)
@@ -107,13 +112,12 @@
 
 (use-package company-ycmd
   :ensure t
-  :defer 5
   :hook(company-mode . company-ycmd-setup)
   )
 
 
 (use-package hippie-expand
-  :defer 5
+  :defer 1
   :config
   (setq hippie-expand-try-functions-list
         '(try-expand-dabbrev
@@ -129,10 +133,12 @@
 	      try-complete-lisp-symbol))
   )
 
+(use-package yasnippet-snippets
+  :ensure t
+  )
+
 (use-package yasnippet
   :ensure t
-  :after company
-  :defer 3
   :config
   (yas-global-mode 1)
   (setq yas-snippet-dirs
@@ -140,18 +146,8 @@
           ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
           ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
           ))
-  (defun chandler/company-to-yasnippet ()
-    (interactive)
-    (company-abort)
-    (call-interactively 'company-yasnippet))
-  (bind-key "C-a" 'chandler/company-to-yasnippet company-active-map)
   )
 
-
-(use-package yasnippet-snippets
-  :ensure t
-  :defer 5
-  )
 
 
 

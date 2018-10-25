@@ -138,7 +138,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org-make-toc org-html-preview ox-html5slide org-ehtml org-preview-html ox-latex ob-ipython esup bug-hunter htmlize org-bullets org-evil wakatime-mode benchmark-init nodejs-repl company-web zenburn-theme doom-themes web-mode go-mode py-isort isortify smart-tabs-mode company-childframe company-posframe pyim linear-undo goto-last-change devdocs-search devdocs fill-column-indicator dockerfile-mode docker better-shell wgrep-ag wgrep ag erefactor dired-hide-dotfiles evil-magit evil-vimish-fold embrace workgroups2 ace-jump-mode evil-search-highlight-persist evil-nerd-commenter dumb-jump ranger counsel-projectile counsel-gtags tide cmake-mode cpputils-cmake ein flycheck-pycheckers highlight-defined aggressive-indent yasnippet-snippets format-all gtags flycheck-ycmd company-ycmd evil-smartparens treemacs-projectile treemacs-evil dashboard rich-minority spaceline linum-relative color-theme-approximate atom-one-dark-theme which-key vimrc-mode fzf evil-matchit diminish popwin hungry-delete evil-mc use-package)))
+    (general elpy org-make-toc org-html-preview ox-html5slide org-ehtml org-preview-html ox-latex ob-ipython esup bug-hunter htmlize org-bullets org-evil wakatime-mode benchmark-init nodejs-repl company-web zenburn-theme doom-themes web-mode go-mode py-isort isortify smart-tabs-mode company-childframe company-posframe pyim linear-undo goto-last-change devdocs-search devdocs fill-column-indicator dockerfile-mode docker better-shell wgrep-ag wgrep ag erefactor dired-hide-dotfiles evil-magit evil-vimish-fold embrace workgroups2 ace-jump-mode evil-search-highlight-persist evil-nerd-commenter dumb-jump ranger counsel-projectile counsel-gtags tide cmake-mode cpputils-cmake ein flycheck-pycheckers highlight-defined aggressive-indent yasnippet-snippets format-all gtags flycheck-ycmd company-ycmd evil-smartparens treemacs-projectile treemacs-evil dashboard rich-minority spaceline linum-relative color-theme-approximate atom-one-dark-theme which-key vimrc-mode fzf evil-matchit diminish popwin hungry-delete evil-mc use-package)))
  '(shell-pop-full-span t)
  '(shell-pop-shell-type
    (quote
@@ -160,5 +160,3 @@
  '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
  '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
  '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
-
-

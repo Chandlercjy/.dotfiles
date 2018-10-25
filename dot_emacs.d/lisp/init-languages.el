@@ -28,6 +28,13 @@
   (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
   )
 
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
+  )
+
+
 (use-package flycheck-pycheckers
   :ensure t
   :commands flycheck-mode
