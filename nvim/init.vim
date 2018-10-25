@@ -237,8 +237,10 @@
     Plug 'tweekmonster/startuptime.vim'     , {'on': ['StartupTime']} " 检查启动时间
     Plug 'wakatime/vim-wakatime'            , {'on': []}              " 记录编程时间
     Plug 'junegunn/goyo.vim'                , {'on':'Goyo'}           " 无打扰模式
+
     Plug 'iamcco/mathjax-support-for-mkdp'  , { 'for':'markdown'}     " Markdown插件
-    Plug 'iamcco/markdown-preview.vim'      , { 'for':'markdown'}
+    Plug 'tyru/open-browser.vim'            , { 'for':'markdown'}
+    Plug 'kannokanno/previm'                , { 'for':'markdown'}
     Plug 'mzlogin/vim-markdown-toc'         , { 'for':'markdown'}
     Plug 'pangloss/vim-javascript'          , { 'for' : ['javascript']} " 需要测试
 
@@ -506,6 +508,10 @@
 
 
 " ================ vim-gfm-syntax markdown =================
+    augroup PrevimSettings
+        autocmd!
+        autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+    augroup END
     let g:markdown_fenced_languages = ['cpp', 'ruby', 'json','python', 'r']
 
 
@@ -614,7 +620,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ================== Initialize Which-key ==================
     set timeoutlen=500
-    let g:mapleader = ","
+    " let g:mapleader = ","
 
     " 高亮prefix
     autocmd! FileType which_key
@@ -622,7 +628,7 @@
     autocmd  FileType which_key set laststatus=0 noshowmode noruler
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-    map <silent> <leader> :<c-u>WhichKey ','<CR>
+    map <silent> , :<c-u>WhichKey ','<CR>
     map <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
     map <silent> [ :<c-u>WhichKey '['<CR>
     map <silent> ] :<c-u>WhichKey ']'<CR>
@@ -635,9 +641,9 @@
 
 
 " ====================== Comma-prefix ======================
-    nmap <Leader>cc <Plug>NERDCommenterToggle
-    omap <Leader>cc <Plug>NERDCommenterToggle
-    vmap <Leader>cc <Plug>NERDCommenterToggle
+    nmap ,cc <Plug>NERDCommenterToggle
+    omap ,cc <Plug>NERDCommenterToggle
+    vmap ,cc <Plug>NERDCommenterToggle
     let g:comma_prefix_dict.c = {
                 \ 'name': '+nerd-comenter && cd',
                 \ 'A' : ['<Plug>NERDCommenterAppend'                   , 'NERDComment Append']        ,
@@ -661,15 +667,15 @@
                 \ 'U': [':PlugUpgrade' , 'PlugUpgrade'] ,
                 \}
 
-    noremap <silent> <leader>ds :GscopeFind s <C-R><C-W><cr>
-    noremap <silent> <leader>dg :GscopeFind g <C-R><C-W><cr>
-    noremap <silent> <leader>dc :GscopeFind c <C-R><C-W><cr>
-    noremap <silent> <leader>dt :GscopeFind t <C-R><C-W><cr>
-    noremap <silent> <leader>de :GscopeFind e <C-R><C-W><cr>
-    noremap <silent> <leader>df :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-    noremap <silent> <leader>di :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-    noremap <silent> <leader>dd :GscopeFind d <C-R><C-W><cr>
-    noremap <silent> <leader>da :GscopeFind a <C-R><C-W><cr>
+    noremap <silent> ,ds :GscopeFind s <C-R><C-W><cr>
+    noremap <silent> ,dg :GscopeFind g <C-R><C-W><cr>
+    noremap <silent> ,dc :GscopeFind c <C-R><C-W><cr>
+    noremap <silent> ,dt :GscopeFind t <C-R><C-W><cr>
+    noremap <silent> ,de :GscopeFind e <C-R><C-W><cr>
+    noremap <silent> ,df :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+    noremap <silent> ,di :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+    noremap <silent> ,dd :GscopeFind d <C-R><C-W><cr>
+    noremap <silent> ,da :GscopeFind a <C-R><C-W><cr>
     let g:comma_prefix_dict.d = {
                 \ 'name' : '+Gtags',
                 \   's':'Find symbol (reference) under cursor'             ,
@@ -684,8 +690,8 @@
                 \}
 
     " 复制达到剪贴板
-    nmap <leader>y "+y
-    vmap <leader>y "+y
+    nmap ,y "+y
+    vmap ,y "+y
     let g:comma_prefix_dict.y = "yank to clipboard"
     let g:comma_prefix_dict.f = [':ALEFix | wa'            , 'ALEFix and save']
     let g:comma_prefix_dict.q = [':call QuickfixToggle()'  , 'QuickfixToggle']
@@ -782,15 +788,15 @@
     let g:space_prefix_dict.9 = [':normal 9gt' , 'Tab 9']
     let g:space_prefix_dict.0 = [':tablast'    , 'Tab Last']
 
-    let g:space_prefix_dict.a = [':Ag' , 'Ag-search']
-    let g:space_prefix_dict.u = [':MundoToggle' , 'MundoToggle']
-    let g:space_prefix_dict.b = [':Buffers'     , 'Buffer-list']
-    let g:space_prefix_dict[':'] = [':OverCommandLine', 'Over-CommandLine']
-    let g:space_prefix_dict['[']  = ['<Plug>(ale_previous)' , "ALE_previous"]
-    let g:space_prefix_dict[']'] = ['<Plug>(ale_next)'     , "ALE_NEXT"]
+    let g:space_prefix_dict.a = [':Ag'                           , 'Ag-search']
+    let g:space_prefix_dict.b = [':Buffers'                      , 'Buffer-list']
+    let g:space_prefix_dict.c = [':call ConcelLevelToggle()'     , 'ConcelLevelToggle']
+    let g:space_prefix_dict.h = [':call HighlightSearchToggle()' , 'HighlightSearchToggle']
+    let g:space_prefix_dict.u = [':MundoToggle'                  , 'MundoToggle']
+    let g:space_prefix_dict[':'] = [':OverCommandLine'           , 'Over-CommandLine']
+    let g:space_prefix_dict['[']  = ['<Plug>(ale_previous)'      , "ALE_previous"]
+    let g:space_prefix_dict[']'] = ['<Plug>(ale_next)'           , "ALE_NEXT"]
 
-    nnoremap <silent><expr> <SPACE>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
-    let g:space_prefix_dict.h = "Search-Highlight-Toggle"
 
     let g:space_prefix_dict['-']  = [':SSave! default' , "Save-Session-default"]
     let g:space_prefix_dict['=']  = [':SLoad default' , "Load-Session-default"]
@@ -901,8 +907,7 @@
 
 " ====================== For Markdown ======================
     " Markdown 设置预览,显示隐藏快捷键和加粗快捷键
-    autocmd FileType markdown nmap <silent> <Space>m <Plug>MarkdownPreview
-    nmap <Space>c :set conceallevel=0<CR>
+    autocmd FileType markdown nmap <silent> <Space>m <Plug>PrevimOpen
 
 
 " ======================= UltiSnips ========================
@@ -985,10 +990,13 @@
     nnoremap <silent> > >>
 
 " ==================== Testing .....??? ====================
-    " nmap <leader>f: :%s/：/:/g<CR>
-    " nmap <leader>f, :%s/，/, /g<CR>
-    " nmap <leader>f,, :%s/,/, /g<CR> :%s/,  /, /g<CR>
-    " nmap <leader>f( :%s/（/(/g<CR>
-    " nmap <leader>f) :%s/）/)/g<CR>
+    " nmap ,f: :%s/：/:/g<CR>
+    " nmap ,f, :%s/，/, /g<CR>
+    " nmap ,f,, :%s/,/, /g<CR> :%s/,  /, /g<CR>
+    " nmap ,f( :%s/（/(/g<CR>
+    " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
+
+" let g:maplocalleader = '\'
+
