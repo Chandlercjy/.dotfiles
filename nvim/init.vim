@@ -124,7 +124,7 @@
 
 " ========================== 代码类 ===========================
     " 强大的各种语言支持
-    Plug 'sheerun/vim-polyglot'             , {'on':[]}
+    Plug 'sheerun/vim-polyglot'
 
     " 代码检查和补全
     Plug 'SirVer/ultisnips'                 , {'on':[]}
@@ -155,8 +155,6 @@
 
     " 语言相关
     Plug 'vhdirk/vim-cmake'                 , { 'for' : ['c','cpp','hpp','h']}
-    Plug 'vim-python/python-syntax'         , { 'for' : 'python'}
-    Plug 'octol/vim-cpp-enhanced-highlight' , { 'for' : ['c','cpp','hpp','h']}
     Plug 'leafgarland/typescript-vim'       , { 'for' : ['typescript']}
 
 " ========================== 实用类 ===========================
@@ -497,10 +495,6 @@
       \}
     let g:ycm_key_detailed_diagnostics = ''
 
-" ===================== python-syntex ======================
-    let g:python_highlight_all = 1
-    set re=1 " python语法高亮后会延迟,换用旧款正则表达式引擎即可修复
-    " set lazyredraw
 
 " ===================== vim-easymotion =====================
     let g:EasyMotion_do_mapping = 0
@@ -548,7 +542,13 @@
     let g:javascript_plugin_ngdoc = 1
     let g:javascript_plugin_flow = 1
 
-" =============== vim-cpp-enhanced-highlight ===============
+" ====================== vim-polyglot ======================
+    " Python 
+    let g:python_highlight_all = 1
+    set re=1 " python语法高亮后会延迟,换用旧款正则表达式引擎即可修复
+    " set lazyredraw
+
+    " Cpp
     let g:cpp_class_scope_highlight = 1
     let g:cpp_member_variable_highlight = 1
     let g:cpp_class_decl_highlight = 1
@@ -751,12 +751,11 @@
                 \ 'p' : ['Git push' , 'fugitive-push']                        ,
                 \ }
 
-    let g:space_prefix_dict.s = {
+    map <C-S> :call SwoopMulti()<CR>
+                \ 'name' : '+Swoop/Search' ,
                 \ 'name' : '+Swoop/Search' ,
                 \ 's' : [':call SwoopMultiSelection()' , 'swoop-multi-selection'] ,
                 \ 'b' : [':call SwoopMulti()'          , 'swoop-multi-buffer']    ,
-                \ 't' : [':Tags'                       , 'Tags-search']           ,
-                \ 'm' : [':Marks'                      , 'Marks-search']          ,
                 \ 'w' : [':Windows'                    , 'Windows-search']        ,
                 \ 'hc' : [':History:'                  , 'History-Commands']      ,
                 \ 'hs' : [':History/'                  , 'History-Search']        ,
@@ -819,6 +818,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ===================== YouCompleteMe ======================
     nnoremap <S-Tab> :YcmCompleter GetDoc<CR>
+
+" ======================= vim-swoop ========================
+    map <C-S> :call SwoopMulti()<CR>
 
 " ========================== FZF ===========================
     " +----------------+-----------------------------------------------------+
