@@ -509,10 +509,6 @@
 
 
 " ================ vim-gfm-syntax markdown =================
-    augroup PrevimSettings
-        autocmd!
-        autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-    augroup END
     let g:markdown_fenced_languages = ['cpp', 'ruby', 'json','python', 'r']
 
 
@@ -906,11 +902,6 @@
 
 
 
-" ====================== For Markdown ======================
-    " Markdown 设置预览,显示隐藏快捷键和加粗快捷键
-    autocmd FileType markdown nmap <silent> <Space>m <Plug>PrevimOpen
-
-
 " ======================= UltiSnips ========================
     ino <silent> <c-x><c-a> <c-r>=<sid>utils#ulti_complete()<cr>
 
@@ -989,6 +980,15 @@
 " ====================== Smart indent ======================
     nnoremap <silent> < <<
     nnoremap <silent> > >>
+
+" ====================== For-Markdown ======================
+    augroup PrevimSettings
+        autocmd!
+        autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+    augroup END
+    autocmd FileType markdown nmap <silent> <leader>m :PrevimOpen<CR>
+    autocmd FileType markdown nmap <silent> <Tab> zr
+    autocmd FileType markdown nmap <silent> <S-Tab> zm
 
 " ==================== Testing .....??? ====================
     " nmap ,f: :%s/：/:/g<CR>
