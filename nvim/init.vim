@@ -41,13 +41,12 @@
     set showtabline=1                        " always show the tabline
     set tabstop=4                            " 制表符为4
     set softtabstop=4                        " 统一缩进为4
-    set shiftwidth=4
+    set cindent shiftwidth=4                 " 自动缩进4空格
+    set shiftwidth=4                         " 统一缩进为4
+    set backspace=2                          " 使回格键（backspace）正常处理indent, eol, start等
     set shiftround
     set autoindent                           " 自动缩进, 继承前一行的缩进方式
     set smartindent                          " 智能自动缩进
-    set cindent shiftwidth=4                 " 自动缩进2空格
-    set shiftwidth=4                         " 统一缩进为4
-    set backspace=2                          " 使回格键（backspace）正常处理indent, eol, start等
     set incsearch                            " 开启实时搜索功能
     set hlsearch                             " 搜索逐字符高亮
     set ignorecase                           " 搜索时大小写不敏感
@@ -159,6 +158,7 @@
     " 语言相关
     Plug 'vhdirk/vim-cmake'                 , { 'for' : ['c','cpp','hpp','h']}
     Plug 'leafgarland/typescript-vim'       , { 'for' : ['typescript']}
+
 
 " ========================== 实用类 ===========================
     " 快捷键帮助视图
@@ -545,7 +545,7 @@
     let g:javascript_plugin_flow = 1
 
 " ====================== vim-polyglot ======================
-    " Python 
+    " Python
     let g:python_highlight_all = 1
     set re=1 " python语法高亮后会延迟,换用旧款正则表达式引擎即可修复
     " set lazyredraw
@@ -650,11 +650,6 @@
                 \ 'd' : [':cd %:p:h | echo "Change Dir successfully!"' , 'Back to current directory'] ,
                 \}
 
-    let g:comma_prefix_dict.t = {
-                \ 'name' : '+table_mode',
-                \ 'm': [':TableModeToggle'            , 'table-mode-Toggle']   ,
-                \ 't': ['<Plug>(table-mode-tableize)' , 'table-mode-tableize'] ,
-                \}
 
     let g:comma_prefix_dict.p = {
                 \ 'name' : '+Plugin',
@@ -725,12 +720,13 @@
     let g:space_prefix_dict.t = {
                 \ 'name' : '+Tabs_Toggle' ,
                 \ 'n': [':tabnew'                          , 'Tab-New']                   ,
-                \ 't': [':tabnew % | normal gTZZgt'        , 'Drag-buffer-to-New-Tab']    ,
+                \ 't': [':TableModeToggle'            , 'table-mode-Toggle']   ,
+                \ 'd': [':tabnew % | normal gTZZgt'        , 'Drag-buffer-to-New-Tab']    ,
+                \ 'D': [':DockerToolsToggle'               , ':DockerTools-Toggle']       ,
                 \ 'g': [':GitGutterToggle'                 , 'GitGutter-Toggle']          ,
                 \ 'a': [':ALEToggle'                       , 'ALE-Toggle']                ,
                 \ 'u': [':MundoToggle'                     , 'Mundo-Toggle']              ,
                 \ 'f': [':Goyo'                            , 'Free-Distraction-Toggle']   ,
-                \ 'd': [':DockerToolsToggle'               , ':DockerTools-Toggle']       ,
                 \ 'U': [':UndotreeToggle'                  , 'UndotreeToggle']            ,
                 \ 'm': [':SignatureToggleSigns'            , 'Marks-Toggle']              ,
                 \ 's': [':setlocal spell! spelllang=en_us' , 'Spell-Toggle']              ,
@@ -898,10 +894,10 @@
 " ======================== Neo-term ========================
     nmap <A-f> :TREPLSendFile<CR>
     nmap <A-r> <Plug>(neoterm-repl-send)
-    nmap <A-l> <Plug>(neoterm-repl-send-line)
+    nmap <A-l> <Plug>(neoterm-repl-send-line)j
     vmap <A-f> :TREPLSendFile<CR>
     vmap <A-r> <Plug>(neoterm-repl-send)
-    vmap <A-l> <Plug>(neoterm-repl-send-line)
+    vmap <A-l> <Plug>(neoterm-repl-send-line)j
 
 
 
@@ -989,6 +985,8 @@
         autocmd!
         autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
     augroup END
+
+    autocmd FileType markdown set shiftwidth=2
     autocmd FileType markdown nmap <silent> <leader>m :PrevimOpen<CR>
     autocmd FileType markdown nmap <silent> <Tab> zr
     autocmd FileType markdown nmap <silent> <S-Tab> zm
