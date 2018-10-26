@@ -210,6 +210,7 @@
 
     " 快速跳转
     Plug 'easymotion/vim-easymotion'        , {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
+    Plug 'rhysd/clever-f.vim'
 
     " 对齐格式
     Plug 'junegunn/vim-easy-align'          , { 'on': ['<Plug>(EasyAlign)']}
@@ -880,7 +881,7 @@
     let g:UltiSnipsJumpBackwardTrigger= "<C-p>"
 
 " ===================== vim-easymotion =====================
-    nmap f <Plug>(easymotion-overwin-f)
+    nmap t <Plug>(easymotion-overwin-f)
     nmap ? <Plug>(easymotion-Fn)
 
 " ===================== vim-easy-align =====================
