@@ -889,8 +889,15 @@
     nmap ga <Plug>(EasyAlign)
 
 " ======================== Vim-move ========================
-    nmap <A-j> <Plug>MoveLineDown
-    nmap <A-k> <Plug>MoveLineUp
+    map <A-Down> <Plug>MoveLineDown
+    map <A-Up> <Plug>MoveLineUp
+    map <A-Left> <<
+    map <A-Right> >>
+
+    imap <A-Down> <ESC><Plug>MoveLineDownA
+    imap <A-Up> <ESC><Plug>MoveLineUpA
+    imap <A-Left> <ESC><<A
+    imap <A-Right> <ESC>>>A
 
 " ======================== Neo-term ========================
     nmap <A-f> :TREPLSendFile<CR>
@@ -977,9 +984,9 @@
     " 原始q录制宏可以按 <A-q>
     nnoremap <silent> q :call utils#SmartClose()<cr>
 
-" ====================== Smart indent ======================
-    nnoremap <silent> < <<
-    nnoremap <silent> > >>
+" ====================== Hungry delete ======================
+    nmap <BS> <Esc>vgelda
+
 
 " ====================== For-Markdown ======================
     augroup PrevimSettings
