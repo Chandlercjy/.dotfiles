@@ -921,7 +921,7 @@
 
 
 " ======================= UltiSnips ========================
-    ino <silent> <c-x><c-a> <c-r>=<sid>utils#ulti_complete()<cr>
+    ino <silent> <c-x><c-a> <c-r>=utils#ulti_complete()<cr>
 
 " ====================== visual-split ======================
     vmap <C-w>k <Plug>(Visual-Split-VSSplitAbove)
