@@ -69,8 +69,8 @@ func! AsyncRun_Code()
     elseif &filetype == 'cpp'
         :AsyncRun -raw g++ -std=c++17 -Wall % -o %< && ./%<
     elseif &filetype == 'typescript'
-        :AsyncRun -raw tsc %< && node %:r".js"
-    elseif &filetype == 'javascript'
+        :AsyncRun -raw node %
+    elseif &filetype == 'javascript.jsx'
         :AsyncRun -raw node %<
     elseif &filetype == 'sh'
         :AsyncRun -raw bash %

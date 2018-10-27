@@ -122,14 +122,14 @@
     Plug 'arcticicestudio/nord-vim'         , {'on':['Colors']}
     Plug 'rakr/vim-one'                     , {'on':['Colors']}
     Plug 'mhartington/oceanic-next'         , {'on':['Colors']}
-    Plug 'ryanoasis/vim-devicons'           , {'on':['NERDTreeToggle']}
+    Plug 'ryanoasis/vim-devicons'           , {'on':[]}
 
 " ========================== 代码类 ===========================
     " 强大的各种语言支持
     Plug 'sheerun/vim-polyglot'
 
     " 代码检查和补全
-    Plug 'SirVer/ultisnips'                 , {'on':[]}
+    Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'w0rp/ale'
     Plug 'Valloric/YouCompleteMe'           , { 'do': './install.py --clang-completer' }
@@ -187,7 +187,7 @@
     " 文件管理
     Plug 'scrooloose/nerdtree'              , { 'on':  'NERDTreeToggle' }
     Plug 'francoiscabrol/ranger.vim'        , { 'on':'Ranger'}
-    Plug 'rbgrouleff/bclose.vim'            , { 'on':'Ranger'}
+    Plug 'rbgrouleff/bclose.vim'
 
     " 搜索
     Plug 'junegunn/fzf'                     , {  'dir': '~/.fzf', 'do': './install --all' }
@@ -221,10 +221,8 @@
     " 强大的表格模式
     Plug 'dhruvasagar/vim-table-mode'       , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
 
+    " 方便的调用终端
     Plug 'wvffle/vimterm'
-
-
-
 
 " ======================== 系统增强类 =========================
     Plug 'pseewald/vim-anyfold'           " 加强缩进折叠
@@ -251,6 +249,11 @@
     Plug 'romgrk/winteract.vim'             , {'on': 'InteractiveWindow'}
     Plug 't9md/vim-choosewin'               , {'on': ['<Plug>(choosewin)']}
     Plug 'wellle/visual-split.vim'          , {'on':['<Plug>(Visual-Split-VSSplitAbove)', '<Plug>(Visual-Split-VSSplitBelow)']}
+
+    " PlantUML
+    Plug 'scrooloose/vim-slumlord'          , { 'for':'plantuml'}
+    Plug 'tyru/open-browser.vim'            , { 'for':'plantuml'}
+    Plug 'weirongxu/plantuml-previewer.vim' , { 'for':'plantuml'}
 
 
     call plug#end()
@@ -430,6 +433,7 @@
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
     let g:ale_javascript_prettier_options = '--config ~/.prettierrc'
+    let g:ale_javascript_prettier_options = '--config ~/.prettierrc'
     let g:ale_fixers = {
                 \   'vim': ['remove_trailing_lines','trim_whitespace'],
                 \   'python': ['add_blank_lines_for_python_control_statements','black','isort','remove_trailing_lines','trim_whitespace'],
@@ -437,8 +441,10 @@
                 \   'cpp': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'c': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'typescript': ['prettier','remove_trailing_lines','trim_whitespace'],
-                \   'javascript': ['prettier','remove_trailing_lines','trim_whitespace'],
+                \   'javascript': [ 'eslint', 'importjs', 'prettier', 'prettier_eslint', 'prettier_standard', 'standard', 'xo', 'remove_trailing_lines', 'trim_whitespace' ],
+                \   'html': ['tidy','remove_trailing_lines','trim_whitespace'],
                 \}
+
 
     " 保存时自动调整
     " let g:ale_fix_on_save = 1
@@ -611,7 +617,12 @@
     let g:gutentags_auto_add_gtags_cscope = 0
     let g:gutentags_plus_nomap = 1
 
-
+" ======================== clever-f ========================
+    let g:clever_f_smart_case = 1
+    let g:clever_f_chars_match_any_signs = ";"
+    let g:clever_f_not_overwrites_standard_mappings = 0
+    map f <Plug>(clever-f-f)
+    map F <Plug>(clever-f-F)
 " =========================================================== Plugin Config End
 
 
@@ -976,6 +987,15 @@
 
 " ====================================================== Plugin KeyBindings End
 
+" ================= plantuml-previewer.vim =================
+
+    autocmd FileType plantuml nmap <silent> <leader>m :PlantumlOpen<CR>
+    " +---------------------------+-------------+
+    " | Command                   | Action      |
+    " +===========================+=============+
+    " | :PlantumlSave diagram.png | save to png |
+    " | :PlantumlSave diagram.svg | save to svg |
+    " +---------------------------+-------------+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 10. DIY KeyBindings                                                         "
@@ -983,6 +1003,7 @@
 " ==================== Smart close by q ====================
     " 原始q录制宏可以按 <A-q>
     nnoremap <silent> q :call utils#SmartClose()<cr>
+    nnoremap <silent> Q :Bclose<CR>
 
 " ====================== Hungry delete ======================
     nmap <BS> <Esc>vgelda
