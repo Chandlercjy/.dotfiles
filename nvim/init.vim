@@ -224,6 +224,9 @@
     " 方便的调用终端
     Plug 'wvffle/vimterm'
 
+    " 自动保存
+    Plug '907th/vim-auto-save'
+
 " ======================== 系统增强类 =========================
     Plug 'pseewald/vim-anyfold'           " 加强缩进折叠
     Plug 'tpope/vim-repeat'               " 系统.命令的加强
@@ -254,6 +257,7 @@
     Plug 'scrooloose/vim-slumlord'          , { 'for':'plantuml'}
     Plug 'tyru/open-browser.vim'            , { 'for':'plantuml'}
     Plug 'weirongxu/plantuml-previewer.vim' , { 'for':'plantuml'}
+
 
 
     call plug#end()
@@ -441,7 +445,7 @@
                 \   'cpp': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'c': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'typescript': ['prettier','remove_trailing_lines','trim_whitespace'],
-                \   'javascript': [ 'eslint', 'importjs', 'prettier', 'prettier_eslint', 'prettier_standard', 'standard', 'xo', 'remove_trailing_lines', 'trim_whitespace' ],
+                \   'javascript': ['prettier', 'importjs', 'remove_trailing_lines', 'trim_whitespace' ],
                 \   'html': ['tidy','remove_trailing_lines','trim_whitespace'],
                 \}
 
@@ -532,6 +536,8 @@
     let g:bclose_no_plugin_maps = 0 " Bclose为在Neovim下Ranger的依赖
 
 " ======================== AsyncRun ========================
+    let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml'] 
+
     let g:asyncrun_open = 10
     let $PYTHONUNBUFFERED=1
     let g:asyncrun_save = 2 " non-zero to save current(1) or all(2) modified buffer(s) before executing
@@ -623,6 +629,12 @@
     let g:clever_f_not_overwrites_standard_mappings = 0
     map f <Plug>(clever-f-f)
     map F <Plug>(clever-f-F)
+
+" ===================== vim-auto-save ======================
+    let g:auto_save = 1  " enable AutoSave on Vim startup
+    " let g:auto_save_silent = 1  " do not display the auto-save notification
+    let g:auto_save_write_all_buffers = 1  " write all open buffers as if you would use :wa
+
 " =========================================================== Plugin Config End
 
 
@@ -730,9 +742,9 @@
                 \ }
 
     let g:space_prefix_dict.t = {
-                \ 'name' : '+Tabs_Toggle' ,
-                \ 'n': [':tabnew'                          , 'Tab-New']                   ,
-                \ 't': [':TableModeToggle'            , 'table-mode-Toggle']   ,
+                \ 'name' : '+Tabs_Toggle'                  ,
+                \ 'n': [':tabnew'                          , 'New-Tab']                   ,
+                \ 't': [':TableModeToggle'                 , 'table-mode-Toggle']         ,
                 \ 'd': [':tabnew % | normal gTZZgt'        , 'Drag-buffer-to-New-Tab']    ,
                 \ 'D': [':DockerToolsToggle'               , ':DockerTools-Toggle']       ,
                 \ 'g': [':GitGutterToggle'                 , 'GitGutter-Toggle']          ,
@@ -742,8 +754,9 @@
                 \ 'U': [':UndotreeToggle'                  , 'UndotreeToggle']            ,
                 \ 'm': [':SignatureToggleSigns'            , 'Marks-Toggle']              ,
                 \ 's': [':setlocal spell! spelllang=en_us' , 'Spell-Toggle']              ,
+                \ 'S': [':AutoSaveToggle'                  , 'AutoSaveToggle']            ,
                 \ 'c': [':call ComfortableMotionToggle()'  , 'Comfortable-Motion-Toggle'] ,
-                \ 'b': [':call BackgroundColorToggle()'  , 'BackgroundColorToggle'] ,
+                \ 'b': [':call BackgroundColorToggle()'    , 'BackgroundColorToggle']     ,
                 \ }
 
     let g:space_prefix_dict.g = {
@@ -798,7 +811,7 @@
     let g:space_prefix_dict.c = [':call ConcelLevelToggle()'     , 'ConcelLevelToggle']
     let g:space_prefix_dict.h = [':call HighlightSearchToggle()' , 'HighlightSearchToggle']
     let g:space_prefix_dict.u = [':MundoToggle'                  , 'MundoToggle']
-    let g:space_prefix_dict[':'] = [':OverCommandLine'           , 'Over-CommandLine']
+    let g:space_prefix_dict[':'] = [":OverCommandLine '<,'>s/"   , 'Over-CommandLine']
     let g:space_prefix_dict['[']  = ['<Plug>(ale_previous)'      , "ALE_previous"]
     let g:space_prefix_dict[']'] = ['<Plug>(ale_next)'           , "ALE_NEXT"]
 
@@ -1007,7 +1020,6 @@
 
 " ====================== Hungry delete ======================
     nmap <BS> <Esc>vgelda
-
 
 " ====================== For-Markdown ======================
     augroup PrevimSettings
