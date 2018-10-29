@@ -631,6 +631,20 @@
     map f <Plug>(clever-f-f)
     map F <Plug>(clever-f-F)
 
+" ====================== For-Markdown ======================
+    let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
+    let g:mkdp_refresh_slow = 0
+
+    augroup PrevimSettings
+        autocmd!
+        autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+    augroup END
+
+    autocmd FileType markdown set shiftwidth=2
+    autocmd FileType markdown nmap <silent> <leader>m : MarkdownPreview<CR>
+    autocmd FileType markdown nmap <silent> <leader>s : MarkdownPreviewStop<CR>
+    autocmd FileType markdown nmap <silent> <Tab> zr
+    autocmd FileType markdown nmap <silent> <S-Tab> zm
 
 " =========================================================== Plugin Config End
 
@@ -805,7 +819,7 @@
 
     let g:space_prefix_dict.a = [':Ag'                           , 'Ag-search']
     let g:space_prefix_dict.b = [':Buffers'                      , 'Buffer-list']
-    let g:space_prefix_dict.c = [':call ConcelLevelToggle()'     , 'ConcelLevelToggle']
+    let g:space_prefix_dict.c = [':call ConcealLevelToggle()'     , 'ConcealLevelToggle']
     let g:space_prefix_dict.h = [':call HighlightSearchToggle()' , 'HighlightSearchToggle']
     let g:space_prefix_dict.u = [':MundoToggle'                  , 'MundoToggle']
     let g:space_prefix_dict[':'] = [":OverCommandLine '<,'>s/"   , 'Over-CommandLine']
@@ -929,7 +943,6 @@
     vmap <A-l> <Plug>(neoterm-repl-send-line)j
 
 
-
 " ======================= UltiSnips ========================
     ino <silent> <c-x><c-a> <c-r>=Ulti_complete()<cr>
 
@@ -1014,22 +1027,10 @@
     " 原始q录制宏可以按 <A-q>
     nnoremap <silent> q :call SmartClose()<cr>
     nnoremap <silent> Q :Bclose<CR>
+    nnoremap <C-q> :wqa<CR>
 
 " ====================== Hungry delete ======================
     nmap <BS> <Esc>vgelda
-
-" ====================== For-Markdown ======================
-    let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
-    augroup PrevimSettings
-        autocmd!
-        autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-    augroup END
-
-    autocmd FileType markdown set shiftwidth=2
-    autocmd FileType markdown nmap <silent> <leader>m : MarkdownPreview<CR>
-    autocmd FileType markdown nmap <silent> <leader>s : MarkdownPreviewStop<CR>
-    autocmd FileType markdown nmap <silent> <Tab> zr
-    autocmd FileType markdown nmap <silent> <S-Tab> zm
 
 " ==================== Testing .....??? ====================
     " nmap ,f: :%s/：/:/g<CR>
@@ -1039,3 +1040,4 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
+""

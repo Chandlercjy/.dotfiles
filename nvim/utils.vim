@@ -118,7 +118,7 @@ function! BackgroundColorToggle()
     let &background = ( &background == "dark"? "light" : "dark" )
 endfunction
 
-function! ConcelLevelToggle()
+function! ConcealLevelToggle()
     let &conceallevel = ( &conceallevel == 3 ? 0 : 3 )
 endfunction
 
