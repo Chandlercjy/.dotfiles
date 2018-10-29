@@ -104,6 +104,10 @@
 
 " ======================= Rename CMD =======================
     :command! -nargs=1 Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
+" ======================= Auto-Save ========================
+    autocmd FocusLost * :wa|echo "Autosaved!"
+    set autowriteall
+
 " ============================================================= Awesome CMD End
 
 
@@ -224,9 +228,6 @@
     " 方便的调用终端
     Plug 'wvffle/vimterm'
 
-    " 自动保存
-    Plug '907th/vim-auto-save'
-
 " ======================== 系统增强类 =========================
     Plug 'pseewald/vim-anyfold'           " 加强缩进折叠
     Plug 'tpope/vim-repeat'               " 系统.命令的加强
@@ -242,9 +243,9 @@
     Plug 'junegunn/goyo.vim'                , {'on':'Goyo'}           " 无打扰模式
 
     Plug 'nelstrom/vim-markdown-folding'    , { 'for':'markdown'}     " Markdown插件
+    Plug 'iamcco/markdown-preview.vim'      , { 'for':'markdown'}     " Markdown插件
     Plug 'iamcco/mathjax-support-for-mkdp'  , { 'for':'markdown'}     " Markdown插件
-    Plug 'tyru/open-browser.vim'            , { 'for':'markdown'}
-    Plug 'kannokanno/previm'                , { 'for':'markdown'}
+    Plug 'tyru/open-browser.vim'
     Plug 'mzlogin/vim-markdown-toc'         , { 'for':'markdown'}
     Plug 'pangloss/vim-javascript'          , { 'for' : ['javascript']} " 需要测试
 
@@ -296,7 +297,7 @@
         let g:python_host_skip_check=1
         let g:python3_host_skip_check=1
         let g:python3_host_prog='python'
-        let g:python_host_prog='python'
+        " let g:python_host_prog='python'
 
         "Neovim Terminal变换
         tnoremap <C-h> <C-\><C-N><C-w>h
@@ -630,10 +631,6 @@
     map f <Plug>(clever-f-f)
     map F <Plug>(clever-f-F)
 
-" ===================== vim-auto-save ======================
-    let g:auto_save = 1  " enable AutoSave on Vim startup
-    " let g:auto_save_silent = 1  " do not display the auto-save notification
-    let g:auto_save_write_all_buffers = 1  " write all open buffers as if you would use :wa
 
 " =========================================================== Plugin Config End
 
@@ -934,7 +931,7 @@
 
 
 " ======================= UltiSnips ========================
-    ino <silent> <c-x><c-a> <c-r>=utils#ulti_complete()<cr>
+    ino <silent> <c-x><c-a> <c-r>=Ulti_complete()<cr>
 
 " ====================== visual-split ======================
     vmap <C-w>k <Plug>(Visual-Split-VSSplitAbove)
@@ -1015,20 +1012,22 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==================== Smart close by q ====================
     " 原始q录制宏可以按 <A-q>
-    nnoremap <silent> q :call utils#SmartClose()<cr>
+    nnoremap <silent> q :call SmartClose()<cr>
     nnoremap <silent> Q :Bclose<CR>
 
 " ====================== Hungry delete ======================
     nmap <BS> <Esc>vgelda
 
 " ====================== For-Markdown ======================
+    let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
     augroup PrevimSettings
         autocmd!
         autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
     augroup END
 
     autocmd FileType markdown set shiftwidth=2
-    autocmd FileType markdown nmap <silent> <leader>m :PrevimOpen<CR>
+    autocmd FileType markdown nmap <silent> <leader>m : MarkdownPreview<CR>
+    autocmd FileType markdown nmap <silent> <leader>s : MarkdownPreviewStop<CR>
     autocmd FileType markdown nmap <silent> <Tab> zr
     autocmd FileType markdown nmap <silent> <S-Tab> zm
 

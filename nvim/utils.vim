@@ -2,7 +2,7 @@
 "                               Useful Functions                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 借鉴自SpaceVim，绑定quit到q按键
-fu! utils#SmartClose() abort
+fu! SmartClose() abort
     "let ignorewin = get(g:,'spacevim_smartcloseignorewin',[])
     "let ignoreft = get(g:, 'spacevim_smartcloseignoreft',[])
     let win_count = winnr('$')
@@ -22,7 +22,7 @@ fu! utils#SmartClose() abort
 endf
 
 " 专门显示snip的补全
-fu! utils#ulti_complete() abort
+fu! Ulti_complete() abort
     if empty(UltiSnips#SnippetsInCurrentScope(1))
         return ''
     endif
@@ -125,4 +125,5 @@ endfunction
 function! HighlightSearchToggle()
     let &hlsearch = (&hls && v:hlsearch ? 0 : 1)
 endfunction
+
 
