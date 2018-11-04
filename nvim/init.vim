@@ -35,7 +35,8 @@
     set tw=79                                " width of document (used by gd) 超过会自动换行
     set nowrap                               " 禁止折行
     set fenc=utf-8                           " 设定默认解码
-    set list listchars=trail:๏,              " 方便显示tab 和 空格
+    " set list listchars=trail:๏              " 方便显示tab 和 空格
+    " set listchars=tab:>-
     set smarttab                             " 在行和段开始处使用制表符
     set expandtab                            " 用空格代替制表符
     set showtabline=1                        " always show the tabline
@@ -162,6 +163,7 @@
     " 语言相关
     Plug 'vhdirk/vim-cmake'                 , { 'for' : ['c','cpp','hpp','h']}
     Plug 'leafgarland/typescript-vim'       , { 'for' : ['typescript']}
+    Plug 'fatih/vim-go'                     , { 'for' : ['go'], 'do': ':GoUpdateBinaries'}
 
 
 " ========================== 实用类 ===========================
@@ -242,11 +244,13 @@
     Plug 'wakatime/vim-wakatime'            , {'on': []}              " 记录编程时间
     Plug 'junegunn/goyo.vim'                , {'on':'Goyo'}           " 无打扰模式
 
-    Plug 'nelstrom/vim-markdown-folding'    , { 'for':'markdown'}     " Markdown插件
+    Plug 'Chandlercjy/vim-markdown-folding' , { 'for':'markdown'}     " Markdown插件
     Plug 'iamcco/markdown-preview.vim'      , { 'for':'markdown'}     " Markdown插件
     Plug 'iamcco/mathjax-support-for-mkdp'  , { 'for':'markdown'}     " Markdown插件
     Plug 'tyru/open-browser.vim'
     Plug 'mzlogin/vim-markdown-toc'         , { 'for':'markdown'}
+    Plug 'gabrielelana/vim-markdown'         , { 'for':'markdown'}
+
     Plug 'pangloss/vim-javascript'          , { 'for' : ['javascript']} " 需要测试
 
     " 方便地控制窗口
@@ -282,7 +286,6 @@
         autocmd InsertEnter * call plug#load('ultisnips') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('MatchTagAlways') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-devicons') | autocmd! lazy_load
-
     augroup END
 " ============================================================== Initialize End
 
@@ -297,7 +300,7 @@
         let g:python_host_skip_check=1
         let g:python3_host_skip_check=1
         let g:python3_host_prog='python'
-        " let g:python_host_prog='python'
+        let g:python_host_prog=''
 
         "Neovim Terminal变换
         tnoremap <C-h> <C-\><C-N><C-w>h
@@ -423,7 +426,7 @@
 
 
 " ====================== vim-anyfold =======================
-    let g:anyfold_activate=1
+    autocmd Filetype python,vim AnyFoldActivate
     let g:anyfold_fold_comments=1
 
 " ======================== neoterm =========================
@@ -446,8 +449,9 @@
                 \   'cpp': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'c': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'typescript': ['prettier','remove_trailing_lines','trim_whitespace'],
-                \   'javascript': ['prettier', 'importjs', 'remove_trailing_lines', 'trim_whitespace' ],
+                \   'javascript': ['prettier', 'remove_trailing_lines', 'trim_whitespace' ],
                 \   'html': ['tidy','remove_trailing_lines','trim_whitespace'],
+                \   'go': ['gofmt','goimports','remove_trailing_lines','trim_whitespace'],
                 \}
 
 
@@ -519,11 +523,15 @@
 " ================ vim-gfm-syntax markdown =================
     let g:markdown_fenced_languages = ['cpp', 'ruby', 'json','python', 'r']
 
+" ====================== vim-markdown ======================
+    let g:markdown_enable_mappings = 0
+    let g:markdown_enable_spell_checking = 0
+    let g:markdown_enable_conceal = 0
 
 " ===================== vim-table-mode =====================
-    let g:table_mode_corner='+'
-    let g:table_mode_corner_corner='+'
-    let g:table_mode_header_fillchar='='
+    let g:table_mode_corner='|'
+    let g:table_mode_corner_corner='|'
+    let g:table_mode_header_fillchar='-'
 
 " ===================== Nerd Commenter =====================
     let g:NERDSpaceDelims = 1
@@ -557,6 +565,7 @@
     let g:javascript_plugin_jsdoc = 1
     let g:javascript_plugin_ngdoc = 1
     let g:javascript_plugin_flow = 1
+
 
 " ====================== vim-polyglot ======================
     " Python
@@ -641,10 +650,12 @@
     augroup END
 
     autocmd FileType markdown set shiftwidth=2
-    autocmd FileType markdown nmap <silent> <leader>m : MarkdownPreview<CR>
-    autocmd FileType markdown nmap <silent> <leader>s : MarkdownPreviewStop<CR>
-    autocmd FileType markdown nmap <silent> <Tab> zr
-    autocmd FileType markdown nmap <silent> <S-Tab> zm
+    autocmd FileType markdown nmap <buffer> <silent> <leader>m :MarkdownPreview<CR>
+    autocmd FileType markdown nmap <buffer> <silent> <leader>s :MarkdownPreviewStop<CR>
+    autocmd FileType markdown nmap <buffer> <silent> <leader>e :MarkdownEditBlock<CR>
+
+" ======================== wildfire ========================
+  let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it", "i`"]
 
 " =========================================================== Plugin Config End
 
@@ -675,9 +686,8 @@
 
 
 " ====================== Comma-prefix ======================
-    nmap ,cc <Plug>NERDCommenterToggle
-    omap ,cc <Plug>NERDCommenterToggle
-    vmap ,cc <Plug>NERDCommenterToggle
+    map ,cc <Plug>NERDCommenterToggle
+    map ; <Plug>NERDCommenterToggle
     let g:comma_prefix_dict.c = {
                 \ 'name': '+nerd-comenter && cd',
                 \ 'A' : ['<Plug>NERDCommenterAppend'                   , 'NERDComment Append']        ,
@@ -850,7 +860,13 @@
 " 9. Plugin KeyBindings                                                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ===================== YouCompleteMe ======================
-    nnoremap <S-Tab> :YcmCompleter GetDoc<CR>
+   autocmd Filetype cpp nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+   autocmd Filetype python nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+   autocmd Filetype javascript.jsx nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+   autocmd Filetype typescript nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+
+" ========================= vim-go =========================
+    autocmd Filetype go nnoremap <buffer> <S-Tab> :GoDoc<CR>
 
 " ======================= vim-swoop ========================
     map <C-S> :call SwoopMulti()<CR>
@@ -935,12 +951,9 @@
     imap <A-Right> <ESC>>>A
 
 " ======================== Neo-term ========================
-    nmap <A-f> :TREPLSendFile<CR>
-    nmap <A-r> <Plug>(neoterm-repl-send)
-    nmap <A-l> <Plug>(neoterm-repl-send-line)j
-    vmap <A-f> :TREPLSendFile<CR>
-    vmap <A-r> <Plug>(neoterm-repl-send)
-    vmap <A-l> <Plug>(neoterm-repl-send-line)j
+    map <A-f> :TREPLSendFile<CR>
+    vmap <A-CR> <Plug>(neoterm-repl-send)
+    nmap <A-CR> <Plug>(neoterm-repl-send-line)j
 
 
 " ======================= UltiSnips ========================
@@ -1027,10 +1040,28 @@
     " 原始q录制宏可以按 <A-q>
     nnoremap <silent> q :call SmartClose()<cr>
     nnoremap <silent> Q :Bclose<CR>
-    nnoremap <C-q> :wqa<CR>
+    nnoremap <C-q> :wq<CR>
+    nnoremap <silent> <A-q> q
+
+" ===================== Smart Folding ======================
+    autocmd FileType markdown,vim nmap <buffer> <silent> <Tab> zr
+    autocmd FileType markdown,vim nmap <buffer> <silent> <S-Tab> zm
 
 " ====================== Hungry delete ======================
     nmap <BS> <Esc>vgelda
+
+" ===================== Buffer Switch ======================
+    map [b :bp<CR>
+    map ]b :bn<CR>
+
+" =================== vim-surround ====================
+    vmap ( S)
+    vmap ) S)
+    vmap [ S]
+    vmap ] S]
+    vmap " S"
+    vmap ' S'
+    vmap ` S`
 
 " ==================== Testing .....??? ====================
     " nmap ,f: :%s/：/:/g<CR>
@@ -1040,4 +1071,5 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
-""
+
+

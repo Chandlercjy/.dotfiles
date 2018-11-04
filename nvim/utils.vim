@@ -78,7 +78,7 @@ func! AsyncRun_Code()
     elseif &filetype == 'html'
         exec "!firefox % &"
     elseif &filetype == 'go'
-        :AsyncRun time go run %
+        :AsyncRun -raw time go run %
     " elseif &filetype == 'java'
         " exec "!javac %"
         " exec "!time java %<"
