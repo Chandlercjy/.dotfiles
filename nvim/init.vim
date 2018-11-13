@@ -103,8 +103,6 @@
                         \ exe "normal! g`\"" |
                         \ endif
 
-" ======================= Rename CMD =======================
-    :command! -nargs=1 Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
 " ======================= Auto-Save ========================
     autocmd FocusLost * :wa|echo "Autosaved!"
     set autowriteall
@@ -229,6 +227,9 @@
 
     " 方便的调用终端
     Plug 'wvffle/vimterm'
+
+    " 各种实用命令
+    Plug 'tpope/vim-eunuch'
 
 " ======================== 系统增强类 =========================
     Plug 'pseewald/vim-anyfold'                      " 加强缩进折叠
@@ -1027,6 +1028,24 @@
     " | P   | 为当前文件运行 “git add -patch” |
     " | C   | 调用 :Gcommit                   |
     " |-----|---------------------------------|
+
+" ======================= vim-eunuch =======================
+    " |-------------------|----------------------------------------------------------------------|
+    " | Key               | Action                                                               |
+    " |-------------------|----------------------------------------------------------------------|
+    " | :Delete           | Delete a buffer and the file on disk simultaneously.                 |
+    " | :Unlink           | Like:Delete, but keeps the now empty buffer.                         |
+    " | :Move             | Rename a buffer and the file on disk simultaneously.                 |
+    " | :Rename           | Like: Move, but relative to the current file's containing directory. |
+    " | :Chmod            | Change the permissions of the current file.                          |
+    " | :Mkdir            | Create a directory, defaulting to the parent of the current file.    |
+    " | :Cfind            | Run find and load the results into the quickfix list.                |
+    " | :Clocate          | Run locate and load the results into the quickfix list.              |
+    " | :Lfind / :Llocate | Like above, but use the location list.                               |
+    " | :Wall             | Write every open window. Handy for kicking off tools like guard.     |
+    " | :SudoWrite        | Write a privileged file with sudo.                                   |
+    " | :SudoEdit         | Edit a privileged file with sudo.                                    |
+    " |-------------------|----------------------------------------------------------------------|
 
 " ====================================================== Plugin KeyBindings End
 
