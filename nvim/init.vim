@@ -122,12 +122,12 @@
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'drewtempelmeyer/palenight.vim'    " Load by Default
-    Plug 'morhetz/gruvbox'                  , {'on':['Colors']}
-    Plug 'ayu-theme/ayu-vim'                , {'on':['Colors']}
-    Plug 'arcticicestudio/nord-vim'         , {'on':['Colors']}
-    Plug 'rakr/vim-one'                     , {'on':['Colors']}
-    Plug 'mhartington/oceanic-next'         , {'on':['Colors']}
-    Plug 'ryanoasis/vim-devicons'           , {'on':[]}
+    Plug 'morhetz/gruvbox'                          , {'on':['Colors']}
+    Plug 'ayu-theme/ayu-vim'                        , {'on':['Colors']}
+    Plug 'arcticicestudio/nord-vim'                 , {'on':['Colors']}
+    Plug 'rakr/vim-one'                             , {'on':['Colors']}
+    Plug 'mhartington/oceanic-next'                 , {'on':['Colors']}
+    Plug 'ryanoasis/vim-devicons'                   , {'on':[]}
 
 " ========================== 代码类 ===========================
     " 强大的各种语言支持
@@ -137,33 +137,33 @@
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'w0rp/ale'
-    Plug 'Valloric/YouCompleteMe'           , { 'do': './install.py --clang-completer' }
-    Plug 'rdnetto/YCM-Generator'            , {'on':'YcmGenerateConfig', 'branch': 'stable'}
+    Plug 'Valloric/YouCompleteMe'                   , { 'do': './install.py --clang-completer' }
+    Plug 'rdnetto/YCM-Generator'                    , {'on':'YcmGenerateConfig', 'branch': 'stable'}
 
     " 异步运行
-    Plug 'skywind3000/asyncrun.vim'         , { 'on': ['AsyncRun','AsyncStop']}
+    Plug 'skywind3000/asyncrun.vim'                 , { 'on': ['AsyncRun','AsyncStop']}
 
     " REPL
     Plug 'ConradIrwin/vim-bracketed-paste'
-    Plug 'Chandlercjy/neoterm'              , {'on':[ 'TREPLSendFile', '<Plug>(neoterm-repl-send)', '<Plug>(neoterm-repl-send-line)' ]}
+    Plug 'Chandlercjy/neoterm'                      , {'on':[ 'TREPLSendFile', '<Plug>(neoterm-repl-send)', '<Plug>(neoterm-repl-send-line)' ]}
 
     " Git
-    Plug 'tpope/vim-fugitive'               , {'on': ['Gblame', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
+    Plug 'tpope/vim-fugitive'                       , {'on': ['Gblame', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push']}
     Plug 'junegunn/gv.vim'
     Plug 'airblade/vim-gitgutter'
-    Plug 'Chandlercjy/git-blame.vim'        , { 'on': ['GitBlame']}
+    Plug 'Chandlercjy/git-blame.vim'                , { 'on': ['GitBlame']}
 
 
     " 自动生成ctags和查看
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'skywind3000/gutentags_plus'
-    Plug 'majutsushi/tagbar'                , {'on':['TagbarToggle']}
+    Plug 'majutsushi/tagbar'                        , {'on':['TagbarToggle']}
 
 
     " 语言相关
-    Plug 'vhdirk/vim-cmake'                 , { 'for' : ['c','cpp','hpp','h']}
-    Plug 'leafgarland/typescript-vim'       , { 'for' : ['typescript']}
-    Plug 'fatih/vim-go'                     , { 'for' : ['go'], 'do': ':GoUpdateBinaries'}
+    Plug 'vhdirk/vim-cmake'                         , { 'for' : ['c','cpp','hpp','h']}
+    Plug 'leafgarland/typescript-vim'               , { 'for' : ['typescript']}
+    Plug 'fatih/vim-go'                             , { 'for' : ['go'], 'do': ':GoUpdateBinaries'}
 
 
 " ========================== 实用类 ===========================
@@ -179,90 +179,91 @@
     " 通用编辑
     Plug 'terryma/vim-multiple-cursors'
     Plug 'jiangmiao/auto-pairs'
-    Plug 'scrooloose/nerdcommenter'         , { 'on': ['<Plug>NERDCommenterToggle', '<Plug>NERDCommenterAppend'] }
-    Plug 'tpope/vim-surround'               , { 'on': []}
-    Plug 'mbbill/undotree'                  , { 'on':  'UndotreeToggle' }
-    Plug 'simnalamburt/vim-mundo'           , { 'on':  'MundoToggle' }
+    Plug 'scrooloose/nerdcommenter'                 , { 'on': ['<Plug>NERDCommenterToggle', '<Plug>NERDCommenterAppend'] }
+    Plug 'tpope/vim-surround'                       , { 'on': []}
+    Plug 'mbbill/undotree'                          , { 'on':  'UndotreeToggle' }
+    Plug 'simnalamburt/vim-mundo'                   , { 'on':  'MundoToggle' }
 
     " 左边栏显示mark
     Plug 'kshenoy/vim-signature'
 
     " Docker管理
-    Plug 'kevinhui/vim-docker-tools'        , { 'on':  'DockerToolsToggle' }
+    Plug 'kevinhui/vim-docker-tools'                , { 'on':  'DockerToolsToggle' }
 
     " 文件管理
-    Plug 'scrooloose/nerdtree'              , { 'on':  'NERDTreeToggle' }
-    Plug 'francoiscabrol/ranger.vim'        , { 'on':'Ranger'}
+    Plug 'scrooloose/nerdtree'                      , { 'on':  'NERDTreeToggle' }
+    Plug 'francoiscabrol/ranger.vim'                , { 'on':'Ranger'}
     Plug 'rbgrouleff/bclose.vim'
 
     " 搜索
-    Plug 'junegunn/fzf'                     , {  'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf'                             , {  'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     Plug 'pelodelfuego/vim-swoop'
-    Plug 'dyng/ctrlsf.vim'                  , { 'on':'CtrlSF'}
+    Plug 'dyng/ctrlsf.vim'                          , { 'on':'CtrlSF'}
 
     " 复制粘贴记录
-    Plug 'Shougo/neoyank.vim'               , {'on': 'FZFNeoyank'}
-    Plug 'justinhoward/fzf-neoyank'         , {'on': 'FZFNeoyank'}
+    Plug 'Shougo/neoyank.vim'                       , {'on': 'FZFNeoyank'}
+    Plug 'justinhoward/fzf-neoyank'                 , {'on': 'FZFNeoyank'}
 
     " 实时显示正则替换
-    Plug 'osyo-manga/vim-over'              , { 'on':'OverCommandLine'}
+    Plug 'osyo-manga/vim-over'                      , { 'on':'OverCommandLine'}
 
     " 给同样的单词加下划线
     Plug 'itchyny/vim-cursorword'
 
     " 高亮html/xml tags
-    Plug 'Valloric/MatchTagAlways'          , { 'on':[]}
+    Plug 'Valloric/MatchTagAlways'                  , { 'on':[]}
 
     " 快速跳转
-    Plug 'easymotion/vim-easymotion'        , {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
+    Plug 'easymotion/vim-easymotion'                , {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
     Plug 'rhysd/clever-f.vim'
 
     " 对齐格式
-    Plug 'junegunn/vim-easy-align'          , { 'on': ['<Plug>(EasyAlign)']}
+    Plug 'junegunn/vim-easy-align'                  , { 'on': ['<Plug>(EasyAlign)']}
 
     " 方便地移动上下行
-    Plug 'matze/vim-move'                   , { 'on': [ '<Plug>MoveLineDown', '<Plug>MoveLineUp' ]}
+    Plug 'matze/vim-move'                           , { 'on': [ '<Plug>MoveLineDown', '<Plug>MoveLineUp' ]}
 
     " 强大的表格模式
-    Plug 'dhruvasagar/vim-table-mode'       , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
+    Plug 'dhruvasagar/vim-table-mode'               , { 'on': [ 'TableModeToggle', '<Plug>(table-mode-tableize)' ]}
 
     " 方便的调用终端
     Plug 'wvffle/vimterm'
 
 " ======================== 系统增强类 =========================
-    Plug 'pseewald/vim-anyfold'           " 加强缩进折叠
-    Plug 'tpope/vim-repeat'               " 系统.命令的加强
-    Plug 'pbrisbin/vim-mkdir'             " 可以自动创建文件夹不报错
-    Plug 'christoomey/vim-tmux-navigator' " Tmux加强
+    Plug 'pseewald/vim-anyfold'                      " 加强缩进折叠
+    Plug 'tpope/vim-repeat'                          " 系统.命令的加强
+    Plug 'pbrisbin/vim-mkdir'                        " 可以自动创建文件夹不报错
+    Plug 'christoomey/vim-tmux-navigator'            " Tmux加强
     Plug 'tmux-plugins/vim-tmux-focus-events'
 
 
 " ========================== 趣味类 ===========================
-    Plug 'yuttie/comfortable-motion.vim'                             " 舒服的滚动
-    Plug 'tweekmonster/startuptime.vim'     , {'on': ['StartupTime']} " 检查启动时间
-    Plug 'wakatime/vim-wakatime'            , {'on': []}              " 记录编程时间
-    Plug 'junegunn/goyo.vim'                , {'on':'Goyo'}           " 无打扰模式
+    Plug 'yuttie/comfortable-motion.vim'                                      " 舒服的滚动
+    Plug 'tweekmonster/startuptime.vim'             , {'on': ['StartupTime']} " 检查启动时间
+    Plug 'wakatime/vim-wakatime'                    , {'on': []}              " 记录编程时间
+    Plug 'junegunn/goyo.vim'                        , {'on':'Goyo'}           " 无打扰模式
 
-    Plug 'Chandlercjy/vim-markdown-folding' , { 'for':'markdown'}     " Markdown插件
-    Plug 'iamcco/markdown-preview.vim'      , { 'for':'markdown'}     " Markdown插件
-    Plug 'iamcco/mathjax-support-for-mkdp'  , { 'for':'markdown'}     " Markdown插件
+    Plug 'Chandlercjy/vim-markdown-folding'         , { 'for':'markdown'}     " Markdown插件
+    Plug 'Chandlercjy/vim-markdown-edit-code-block' , { 'for':'markdown'}
+    Plug 'iamcco/markdown-preview.vim'              , { 'for':'markdown'}     " Markdown插件
+    Plug 'iamcco/mathjax-support-for-mkdp'          , { 'for':'markdown'}     " Markdown插件
     Plug 'tyru/open-browser.vim'
-    Plug 'mzlogin/vim-markdown-toc'         , { 'for':'markdown'}
-    Plug 'gabrielelana/vim-markdown'         , { 'for':'markdown'}
+    Plug 'mzlogin/vim-markdown-toc'                 , { 'for':'markdown'}
+    Plug 'plasticboy/vim-markdown'                  , { 'for':'markdown'}
+    Plug 'lvht/tagbar-markdown'                     , { 'for':'markdown'}
 
-    Plug 'pangloss/vim-javascript'          , { 'for' : ['javascript']} " 需要测试
+    Plug 'pangloss/vim-javascript'                  , { 'for' : ['javascript']} " 需要测试
 
     " 方便地控制窗口
-    Plug 'romgrk/winteract.vim'             , {'on': 'InteractiveWindow'}
-    Plug 't9md/vim-choosewin'               , {'on': ['<Plug>(choosewin)']}
-    Plug 'wellle/visual-split.vim'          , {'on':['<Plug>(Visual-Split-VSSplitAbove)', '<Plug>(Visual-Split-VSSplitBelow)']}
+    Plug 'romgrk/winteract.vim'                     , {'on': 'InteractiveWindow'}
+    Plug 't9md/vim-choosewin'                       , {'on': ['<Plug>(choosewin)']}
+    Plug 'wellle/visual-split.vim'                  , {'on':['<Plug>(Visual-Split-VSSplitAbove)', '<Plug>(Visual-Split-VSSplitBelow)']}
 
     " PlantUML
-    Plug 'scrooloose/vim-slumlord'          , { 'for':'plantuml'}
-    Plug 'tyru/open-browser.vim'            , { 'for':'plantuml'}
-    Plug 'weirongxu/plantuml-previewer.vim' , { 'for':'plantuml'}
-
+    " Plug 'scrooloose/vim-slumlord'                , { 'for':'plantuml'}
+    Plug 'tyru/open-browser.vim'                    , { 'for':'plantuml'}
+    Plug 'weirongxu/plantuml-previewer.vim'         , { 'for':'plantuml'}
 
 
     call plug#end()
@@ -519,14 +520,10 @@
     let g:EasyMotion_smartcase = 1 " 忽略大小写
     let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
-
-" ================ vim-gfm-syntax markdown =================
-    let g:markdown_fenced_languages = ['cpp', 'ruby', 'json','python', 'r']
-
 " ====================== vim-markdown ======================
-    let g:markdown_enable_mappings = 0
-    let g:markdown_enable_spell_checking = 0
-    let g:markdown_enable_conceal = 0
+    let g:vim_markdown_fenced_languages = ['javascript=cpp',
+          \ 'python=python'
+          \ ]
 
 " ===================== vim-table-mode =====================
     let g:table_mode_corner='|'
@@ -553,7 +550,7 @@
 
 " ======================== Tagbar ==========================
     let g:tagbar_width = 30          " 设置tagbar的宽度为30列，默认40
-    let g:tagbar_left = 1
+    let g:tagbar_left = 0
 
 " ======================= vim-repeat =======================
     silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -655,7 +652,7 @@
     autocmd FileType markdown nmap <buffer> <silent> <leader>e :MarkdownEditBlock<CR>
 
 " ======================== wildfire ========================
-  let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it", "i`"]
+  let g:wildfire_objects = ["iw","i'", 'i"', "i)", "i]", "i}", "ip", "it", "i`"]
 
 " =========================================================== Plugin Config End
 
@@ -729,8 +726,7 @@
                 \}
 
     " 复制达到剪贴板
-    nmap ,y "+y
-    vmap ,y "+y
+    map ,y "+y
     let g:comma_prefix_dict.y = "yank to clipboard"
     let g:comma_prefix_dict.f = [':ALEFix | wa'            , 'ALEFix and save']
     let g:comma_prefix_dict.q = [':call QuickfixToggle()'  , 'QuickfixToggle']
@@ -1021,6 +1017,17 @@
     " | }|          | Move to the cell below          |
     " +-------------+---------------------------------+
 
+
+" ====================== vim-fugitive ======================
+    " |-----|---------------------------------|
+    " | Key | Action                          |
+    " |-----|---------------------------------|
+    " | -   | 添加/删除文件                   |
+    " | \   | 向下分割一个窗口打开当前文件    |
+    " | P   | 为当前文件运行 “git add -patch” |
+    " | C   | 调用 :Gcommit                   |
+    " |-----|---------------------------------|
+
 " ====================================================== Plugin KeyBindings End
 
 " ================= plantuml-previewer.vim =================
@@ -1040,7 +1047,7 @@
     " 原始q录制宏可以按 <A-q>
     nnoremap <silent> q :call SmartClose()<cr>
     nnoremap <silent> Q :Bclose<CR>
-    nnoremap <C-q> :wq<CR>
+    nnoremap <C-q> :wqa<CR>
     nnoremap <silent> <A-q> q
 
 " ===================== Smart Folding ======================
@@ -1059,7 +1066,6 @@
     vmap ) S)
     vmap [ S]
     vmap ] S]
-    vmap " S"
     vmap ' S'
     vmap ` S`
 
@@ -1071,5 +1077,7 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
+
+
 
 
