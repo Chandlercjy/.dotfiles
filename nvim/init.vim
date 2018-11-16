@@ -126,6 +126,7 @@
     Plug 'rakr/vim-one'                             , {'on':['Colors']}
     Plug 'mhartington/oceanic-next'                 , {'on':['Colors']}
     Plug 'ryanoasis/vim-devicons'                   , {'on':[]}
+    Plug 'gcavallanti/vim-noscrollbar'
 
 " ========================== 代码类 ===========================
     " 强大的各种语言支持
@@ -387,6 +388,8 @@
     let g:airline#extensions#tabline#formatter = 'unique_tail'
     let g:airline_theme='bubblegum'
     let g:airline#extensions#ale#enabled = 1
+    " add scroll bar
+    let g:airline_section_c = airline#section#create(['%{noscrollbar#statusline(9,''■'',''◫'',[''◧''],[''◨''])}', ' %{getcwd()}'])
 
 " ====================== indent line =======================
     "let g:indentLine_bgcolor_gui = '#272727'
@@ -451,7 +454,7 @@
                 \   'cpp': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'c': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'typescript': ['prettier','remove_trailing_lines','trim_whitespace'],
-                \   'javascript': ['prettier', 'remove_trailing_lines', 'trim_whitespace' ],
+                \   'javascript': ['prettier','importjs', 'remove_trailing_lines', 'trim_whitespace' ],
                 \   'html': ['tidy','remove_trailing_lines','trim_whitespace'],
                 \   'go': ['gofmt','goimports','remove_trailing_lines','trim_whitespace'],
                 \}
@@ -543,15 +546,18 @@
     let g:bclose_no_plugin_maps = 0 " Bclose为在Neovim下Ranger的依赖
 
 " ======================== AsyncRun ========================
-    let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml'] 
+    let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml']
 
     let g:asyncrun_open = 10
     let $PYTHONUNBUFFERED=1
     let g:asyncrun_save = 2 " non-zero to save current(1) or all(2) modified buffer(s) before executing
 
 " ======================== Tagbar ==========================
-    let g:tagbar_width = 30          " 设置tagbar的宽度为30列，默认40
+    let g:tagbar_width = 40          " 设置tagbar的宽度为30列，默认40
     let g:tagbar_left = 0
+    let g:tagbar_map_closefold = "h"
+    let g:tagbar_map_openfold = "l"
+
 
 " ======================= vim-repeat =======================
     silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -578,25 +584,25 @@
     let g:cpp_experimental_simple_template_highlight = 1
 
 " ===================== vim-choosewin ======================
-	" use overlay feature
-	let g:choosewin_overlay_enable = 1
+    " use overlay feature
+    let g:choosewin_overlay_enable = 1
 
-	" workaround for the overlay font being broken on mutibyte buffer.
-	let g:choosewin_overlay_clear_multibyte = 1
+    " workaround for the overlay font being broken on mutibyte buffer.
+    let g:choosewin_overlay_clear_multibyte = 1
 
-	" tmux-like overlay color
-	let g:choosewin_color_overlay = {
-	      \ 'gui': ['DodgerBlue3', 'DodgerBlue3'],
-	      \ 'cterm': [25, 25]
-	      \ }
-	let g:choosewin_color_overlay_current = {
-	      \ 'gui': ['firebrick1', 'firebrick1'],
-	      \ 'cterm': [124, 124]
-	      \ }
+    " tmux-like overlay color
+    let g:choosewin_color_overlay = {
+                \ 'gui': ['DodgerBlue3', 'DodgerBlue3'],
+                \ 'cterm': [25, 25]
+                \ }
+    let g:choosewin_color_overlay_current = {
+                \ 'gui': ['firebrick1', 'firebrick1'],
+                \ 'cterm': [124, 124]
+                \ }
 
-	let g:choosewin_blink_on_land      = 0 " don't blink at land
-	let g:choosewin_statusline_replace = 0 " don't replace statusline
-	let g:choosewin_tabline_replace    = 0 " don't replace tabline
+    let g:choosewin_blink_on_land      = 0 " don't blink at land
+    let g:choosewin_statusline_replace = 0 " don't replace statusline
+    let g:choosewin_tabline_replace    = 0 " don't replace tabline
 
 
 
@@ -765,10 +771,10 @@
                 \ 't': [':TableModeToggle'                 , 'table-mode-Toggle']         ,
                 \ 'd': [':tabnew % | normal gTZZgt'        , 'Drag-buffer-to-New-Tab']    ,
                 \ 'D': [':DockerToolsToggle'               , ':DockerTools-Toggle']       ,
-                \ 'g': [':GitGutterToggle'                 , 'GitGutter-Toggle']          ,
+                \ 'G': [':GitGutterToggle'                 , 'GitGutter-Toggle']          ,
                 \ 'a': [':ALEToggle'                       , 'ALE-Toggle']                ,
                 \ 'u': [':MundoToggle'                     , 'Mundo-Toggle']              ,
-                \ 'f': [':Goyo'                            , 'Free-Distraction-Toggle']   ,
+                \ 'g': [':Goyo'                            , 'Goyo-Toggle']   ,
                 \ 'U': [':UndotreeToggle'                  , 'UndotreeToggle']            ,
                 \ 'm': [':SignatureToggleSigns'            , 'Marks-Toggle']              ,
                 \ 's': [':setlocal spell! spelllang=en_us' , 'Spell-Toggle']              ,
@@ -1096,7 +1102,3 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
-
-
-
-

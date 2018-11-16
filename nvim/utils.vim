@@ -85,13 +85,18 @@
         endif
     endfunc
 
-
     function! QuickfixToggle() 
-        let qfw = 0         " find qf window, if any
-        windo if &l:buftype == "quickfix" | let qfw = winnr() | endif 
+        " remember where we are 
+        let winnr = winnr() 
+        " find qf window, if any 
+        let qfw = 0 
+        windo if &l:buftype == "quickfix" | 
+                    \	let qfw = winnr() | endif 
         if qfw 
+            " close qf window 
             cclose 
         else 
+            " open qf window as last window, fullwidth 
             bot copen 
         endif 
         " go back to where we started from 
