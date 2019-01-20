@@ -211,7 +211,7 @@
     Plug 'itchyny/vim-cursorword'
 
     " 高亮html/xml tags
-    Plug 'Valloric/MatchTagAlways'                  , { 'on':[]}
+    Plug 'Valloric/MatchTagAlways'                  , { 'for':['html','tags']}
 
     " 快速跳转
     Plug 'easymotion/vim-easymotion'                , {'on': ['<Plug>(easymotion-overwin-f','<Plug>(easymotion-Fn']}
@@ -246,6 +246,12 @@
     Plug 'wakatime/vim-wakatime'                    , {'on': []}              " 记录编程时间
     Plug 'junegunn/goyo.vim'                        , {'on':'Goyo'}           " 无打扰模式
 
+    Plug 'prabirshrestha/async.vim'
+    Plug 'christianrondeau/vim-base64'
+    " Plug 'vim-pandoc/vim-pandoc'
+    " Plug 'vim-pandoc/vim-pandoc-syntax'
+    " Plug 'vim-pandoc/vim-pandoc-after'
+    Plug 'tex/vimpreviewpandoc'
     Plug 'Chandlercjy/vim-markdown-folding'         , { 'for':'markdown'}     " Markdown插件
     Plug 'Chandlercjy/vim-markdown-edit-code-block' , { 'for':'markdown'}
     Plug 'iamcco/markdown-preview.vim'              , { 'for':'markdown'}     " Markdown插件
@@ -253,6 +259,7 @@
     Plug 'tyru/open-browser.vim'
     Plug 'mzlogin/vim-markdown-toc'                 , { 'for':'markdown'}
     Plug 'plasticboy/vim-markdown'                  , { 'for':'markdown'}
+
     Plug 'lvht/tagbar-markdown'                     , { 'for':'markdown'}
 
     Plug 'pangloss/vim-javascript'                  , { 'for' : ['javascript']} " 需要测试
@@ -265,7 +272,7 @@
     " PlantUML
     " Plug 'scrooloose/vim-slumlord'                , { 'for':'plantuml'}
     Plug 'tyru/open-browser.vim'                    , { 'for':'plantuml'}
-    Plug 'weirongxu/plantuml-previewer.vim'         , { 'for':'plantuml'}
+    Plug 'weirongxu/plantuml-previewer.vim'         , { 'for':'plantuml'}  " 还需要安装 Graphviz 依赖
 
 
     call plug#end()
@@ -285,9 +292,7 @@
         autocmd!
         autocmd InsertEnter * call plug#load('vim-wakatime') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-surround') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('vim-gutentags') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('ultisnips') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('MatchTagAlways') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-devicons') | autocmd! lazy_load
     augroup END
 " ============================================================== Initialize End
@@ -389,7 +394,7 @@
     let g:airline_theme='bubblegum'
     let g:airline#extensions#ale#enabled = 1
     " add scroll bar
-    let g:airline_section_c = airline#section#create(['%{noscrollbar#statusline(9,''■'',''◫'',[''◧''],[''◨''])}', ' %{getcwd()}'])
+    let g:airline_section_c = airline#section#create(['%{noscrollbar#statusline(9,''■'',''◫'',[''◧''],[''◨''])}', ' %{expand("%:t")}'])
 
 " ====================== indent line =======================
     "let g:indentLine_bgcolor_gui = '#272727'
@@ -449,13 +454,15 @@
     let g:ale_javascript_prettier_options = '--config ~/.prettierrc'
     let g:ale_fixers = {
                 \   'vim': ['remove_trailing_lines','trim_whitespace'],
-                \   'python': ['add_blank_lines_for_python_control_statements','black','isort','remove_trailing_lines','trim_whitespace'],
+                \   'uml': ['remove_trailing_lines','trim_whitespace'],
+                \   'python': ['black','yapf','isort','remove_trailing_lines','trim_whitespace'],
                 \   'markdown': ['prettier','remove_trailing_lines','trim_whitespace'],
                 \   'cpp': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'c': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'typescript': ['prettier','remove_trailing_lines','trim_whitespace'],
                 \   'javascript': ['prettier','importjs', 'remove_trailing_lines', 'trim_whitespace' ],
                 \   'html': ['tidy','remove_trailing_lines','trim_whitespace'],
+                \   'sh': ['shfmt','remove_trailing_lines','trim_whitespace'],
                 \   'go': ['gofmt','goimports','remove_trailing_lines','trim_whitespace'],
                 \}
 
@@ -554,7 +561,7 @@
 
 " ======================== Tagbar ==========================
     let g:tagbar_width = 40          " 设置tagbar的宽度为30列，默认40
-    let g:tagbar_left = 0
+    let g:tagbar_left = 1
     let g:tagbar_map_closefold = "h"
     let g:tagbar_map_openfold = "l"
 
@@ -636,6 +643,8 @@
     " forbid gutentags adding gtags databases
     let g:gutentags_auto_add_gtags_cscope = 0
     let g:gutentags_plus_nomap = 1
+    " let g:gutentags_trace = 1
+
 
 " ======================== clever-f ========================
     let g:clever_f_smart_case = 1
@@ -654,6 +663,7 @@
     augroup END
 
     autocmd FileType markdown set shiftwidth=2
+    autocmd FileType markdown nmap <buffer> <silent> o A<CR>
     autocmd FileType markdown nmap <buffer> <silent> <leader>m :MarkdownPreview<CR>
     autocmd FileType markdown nmap <buffer> <silent> <leader>s :MarkdownPreviewStop<CR>
     autocmd FileType markdown nmap <buffer> <silent> <leader>e :MarkdownEditBlock<CR>
@@ -761,7 +771,6 @@
                 \ 'name' : '+files' ,
                 \ 'f': [':FZF'                          , 'FZF-Search-File']     ,
                 \ 'h' : [':History'                     , 'History-File-Search'] ,
-                \ 's': [':wa|echo "All Buffers Saved!"' , 'save all buffers']    ,
                 \ 'r': [':Ranger'                       , 'Ranger']              ,
                 \ }
 
@@ -935,7 +944,7 @@
     let g:UltiSnipsJumpBackwardTrigger= "<C-p>"
 
 " ===================== vim-easymotion =====================
-    nmap t <Plug>(easymotion-overwin-f)
+    nmap <C-e> <Plug>(easymotion-overwin-f)
     nmap ? <Plug>(easymotion-Fn)
 
 " ===================== vim-easy-align =====================
@@ -1053,8 +1062,6 @@
     " | :SudoEdit         | Edit a privileged file with sudo.                                    |
     " |-------------------|----------------------------------------------------------------------|
 
-" ====================================================== Plugin KeyBindings End
-
 " ================= plantuml-previewer.vim =================
 
     autocmd FileType plantuml nmap <silent> <leader>m :PlantumlOpen<CR>
@@ -1064,6 +1071,9 @@
     " | :PlantumlSave diagram.png | save to png |
     " | :PlantumlSave diagram.svg | save to svg |
     " +---------------------------+-------------+
+
+" ====================================================== Plugin KeyBindings End
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 10. DIY KeyBindings                                                         "
@@ -1079,20 +1089,30 @@
     autocmd FileType markdown,vim nmap <buffer> <silent> <Tab> zr
     autocmd FileType markdown,vim nmap <buffer> <silent> <S-Tab> zm
 
-" ====================== Hungry delete ======================
+" ===================== Hungry delete ======================
     nmap <BS> <Esc>vgelda
 
 " ===================== Buffer Switch ======================
     map [b :bp<CR>
     map ]b :bn<CR>
 
-" =================== vim-surround ====================
+" ====================== vim-surround ======================
     vmap ( S)
     vmap ) S)
     vmap [ S]
     vmap ] S]
     vmap ' S'
     vmap ` S`
+
+" ============ Smart Search by * in visual mode ============
+    vnoremap * y<Esc>0/<C-R>"<CR>
+
+" ==================== Save all buffers ====================
+    map <leader>s :wa<CR>
+
+" =============== Show folder of current dir ===============
+    map <leader>o :!open %:p:h<CR>
+    
 
 " ==================== Testing .....??? ====================
     " nmap ,f: :%s/：/:/g<CR>
@@ -1102,3 +1122,4 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
+
