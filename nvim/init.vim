@@ -243,7 +243,7 @@
 " ========================== 趣味类 ===========================
     Plug 'yuttie/comfortable-motion.vim'                                      " 舒服的滚动
     Plug 'tweekmonster/startuptime.vim'             , {'on': ['StartupTime']} " 检查启动时间
-    Plug 'wakatime/vim-wakatime'                    , {'on': []}              " 记录编程时间
+    " Plug 'wakatime/vim-wakatime'
     Plug 'junegunn/goyo.vim'                        , {'on':'Goyo'}           " 无打扰模式
 
     Plug 'prabirshrestha/async.vim'
@@ -290,7 +290,6 @@
 " ========================= 延迟加载配置 =========================
     augroup lazy_load
         autocmd!
-        autocmd InsertEnter * call plug#load('vim-wakatime') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-surround') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('ultisnips') | autocmd! lazy_load
         autocmd InsertEnter * call plug#load('vim-devicons') | autocmd! lazy_load
