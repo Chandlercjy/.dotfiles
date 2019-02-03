@@ -67,6 +67,8 @@
             :AsyncRun -raw time python %
         elseif &filetype == 'cpp'
             :AsyncRun -raw g++ -std=c++17 -Wall % -o %< && ./%<
+        elseif &filetype == 'c'
+            :AsyncRun -raw gcc -Wall % -o %< && ./%<
         elseif &filetype == 'typescript'
             :AsyncRun -raw node %
         elseif &filetype == 'javascript.jsx'
