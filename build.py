@@ -4,6 +4,7 @@ from pathlib import Path, PurePath
 home_dir = PurePath(os.path.expanduser("~"))
 neovim_dir = home_dir / ".config" / "nvim"
 emacs_dir = home_dir / ".emacs.d"
+tmux_path = home_dir / ".tmux.conf"
 
 
 def is_exist(dir_path):
@@ -52,6 +53,9 @@ def main():
     os.system("/bin/bash ~/.dotfiles/dot_terminfo/setup.sh")
     print("Term=xterm-24bits has been settled!")
 
+    # Link Tmux
+    if create_link("~/.dotfiles/.tmux.conf", tmux_path):
+        print("tmux.conf 链接创建成功!")
 
 if __name__ == "__main__":
     print("======= Start to link Chandler's dotfiles!! =======")
