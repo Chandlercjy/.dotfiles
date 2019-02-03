@@ -497,7 +497,7 @@
     let g:ale_c_parse_compile_commands = 1 " 在CMAKE中添加 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON) 就可以找到头文件
 
 " ======================= UltiSnips ========================
-    let g:UltiSnipsUsePythonVersion = 3
+    " let g:UltiSnipsUsePythonVersion = 3
     let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
 
 " ===================== YouCompleteMe ======================
@@ -539,6 +539,7 @@
     let g:table_mode_corner='|'
     let g:table_mode_corner_corner='|'
     let g:table_mode_header_fillchar='-'
+    let g:table_mode_sort_map = '<Leader>ts'
 
 " ===================== Nerd Commenter =====================
     let g:NERDSpaceDelims = 1
