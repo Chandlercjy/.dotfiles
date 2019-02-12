@@ -31,3 +31,4 @@ alias v="nvim"
 # alias e='emacs -nw'
 # alias et='emacsclient -t -a ""'
 # alias ec='emacsclient -c -a ""'
+

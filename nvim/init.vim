@@ -794,17 +794,17 @@
 
     let g:space_prefix_dict.g = {
                 \ 'name' : '+git/version-control' ,
-                \ 'b' : ['GitBlame' , 'git-blame']                            ,
-                \ 'v' : ['GV'       , 'Visualize Commits']                    ,
-                \ 'vc' : ['GV!'     , 'Visualize Commits for current buffer'] ,
-                \ 'c' : ['Gcommit'  , 'fugitive-commit']                      ,
-                \ 'd' : ['Gdiff'    , 'fugitive-diff']                        ,
-                \ 'e' : ['Gedit'    , 'fugitive-edit']                        ,
-                \ 'l' : ['Glog'     , 'fugitive-log']                         ,
-                \ 'r' : ['Gread'    , 'fugitive-read']                        ,
-                \ 's' : ['Gstatus'  , 'fugitive-status']                      ,
-                \ 'w' : ['Gwrite'   , 'fugitive-write']                       ,
-                \ 'p' : ['Git push' , 'fugitive-push']                        ,
+                \ 'b' : [':GitBlame' , 'git-blame']                            ,
+                \ 'v' : [':GV'       , 'Visualize Commits']                    ,
+                \ 'vc': [':GV!'     , 'Visualize Commits for current buffer'] ,
+                \ 'c' : [':Gcommit'  , 'fugitive-commit']                      ,
+                \ 'd' : [':Gdiff'    , 'fugitive-diff']                        ,
+                \ 'e' : [':Gedit'    , 'fugitive-edit']                        ,
+                \ 'l' : [':Glog'     , 'fugitive-log']                         ,
+                \ 'r' : [':Gread'    , 'fugitive-read']                        ,
+                \ 's' : [':Gstatus'  , 'fugitive-status']                      ,
+                \ 'w' : [':Gwrite'   , 'fugitive-write']                       ,
+                \ 'p' : [':Git push' , 'fugitive-push']                        ,
                 \ }
 
     map <C-S> :call SwoopMulti()<CR>
