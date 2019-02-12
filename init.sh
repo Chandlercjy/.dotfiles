@@ -9,7 +9,7 @@ export LANG="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 
 # Plugin
-if [[ $(ps $$ | grep $$ | awk '{print $5}') == '/bin/zsh' ]]; then
+if [[ $(ps $$ | grep $$ | awk '{print $5}') == '-zsh' ]]; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 elif [[ $(ps $$ | grep $$ | awk '{print $5}') == 'bash' ]]; then
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash

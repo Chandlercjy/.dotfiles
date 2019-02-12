@@ -125,7 +125,9 @@
     Plug 'arcticicestudio/nord-vim'                 , {'on':['Colors']}
     Plug 'rakr/vim-one'                             , {'on':['Colors']}
     Plug 'mhartington/oceanic-next'                 , {'on':['Colors']}
-    Plug 'ryanoasis/vim-devicons'                   , {'on':[]}
+    Plug 'ryanoasis/vim-devicons'                    "需要安装 https://github.com/ryanoasis/nerd-fonts#option-3-install-script
+
+
     Plug 'gcavallanti/vim-noscrollbar'
 
 " ========================== 代码类 ===========================
@@ -291,8 +293,6 @@
     augroup lazy_load
         autocmd!
         autocmd InsertEnter * call plug#load('vim-surround') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('ultisnips') | autocmd! lazy_load
-        autocmd InsertEnter * call plug#load('vim-devicons') | autocmd! lazy_load
     augroup END
 " ============================================================== Initialize End
 
@@ -306,7 +306,7 @@
         " Neovim 设置
         let g:python_host_skip_check=1
         let g:python3_host_skip_check=1
-        let g:python3_host_prog='python'
+        let g:python3_host_prog='python3'
         let g:python_host_prog=''
 
         "Neovim Terminal变换
@@ -316,7 +316,7 @@
         tnoremap <C-l> <C-\><C-N><C-w>l
     endif
 
-    let g:ycm_python_binary_path = 'python'
+    let g:ycm_python_binary_path = 'python3'
 
 " ============================================================== Initialize End
 
@@ -944,7 +944,7 @@
     let g:UltiSnipsJumpBackwardTrigger= "<C-p>"
 
 " ===================== vim-easymotion =====================
-    nmap <C-e> <Plug>(easymotion-overwin-f)
+    nmap t <Plug>(easymotion-overwin-f)
     nmap ? <Plug>(easymotion-Fn)
 
 " ===================== vim-easy-align =====================
