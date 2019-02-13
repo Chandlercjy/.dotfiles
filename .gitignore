@@ -25,7 +25,7 @@ recentf~
 .mypy_cache
 .vim
 .netrwhist
-custom.vim
+init-custom.vim
 dot_emacs.d/.emacs.d
 nvim/nvim
 dot_emacs.d/undo-tree-history/
