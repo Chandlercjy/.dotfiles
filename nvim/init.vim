@@ -399,6 +399,10 @@
     "let g:indentLine_bgcolor_gui = '#272727'
     "let g:indentLine_color_gui = '#4f4f4f'
 
+" ================= DIY Highlight >80 code =================
+    hi Over80 guifg=fg guibg=red
+    au BufNewFile,BufRead *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs, match Over80 '\%>80v.*'
+
 " ====================================================================== UI End
 
 
@@ -1122,4 +1126,5 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
+
 
