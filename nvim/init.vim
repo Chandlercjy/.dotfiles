@@ -400,8 +400,8 @@
     "let g:indentLine_color_gui = '#4f4f4f'
 
 " ================= DIY Highlight >80 code =================
-    hi Over80 guifg=fg guibg=red
-    au BufNewFile,BufRead *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs, match Over80 '\%>80v.*'
+    hi Over80 guifg=fg  guibg=red
+    au BufNewFile,BufRead *.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.py, match Over80 '\%>80v.*'
 
 " ====================================================================== UI End
 
@@ -746,16 +746,32 @@
                 \   'a':'Find places where current symbol is assigned'     ,
                 \}
 
+    let g:comma_prefix_dict.t = {
+                \ 'name' : '+Toggle'                       ,
+                \ 'd': [':DockerToolsToggle'               , ':DockerTools-Toggle']       ,
+                \ 'G': [':GitGutterToggle'                 , 'GitGutter-Toggle']          ,
+                \ 'a': [':ALEToggle'                       , 'ALE-Toggle']                ,
+                \ 'u': [':MundoToggle'                     , 'Mundo-Toggle']              ,
+                \ 'g': [':Goyo'                            , 'Goyo-Toggle']               ,
+                \ 'U': [':UndotreeToggle'                  , 'UndotreeToggle']            ,
+                \ 'm': [':SignatureToggleSigns'            , 'Marks-Toggle']              ,
+                \ 's': [':setlocal spell! spelllang=en_us' , 'Spell-Toggle']              ,
+                \ 'S': [':AutoSaveToggle'                  , 'AutoSaveToggle']            ,
+                \ 'c': [':call ComfortableMotionToggle()'  , 'Comfortable-Motion-Toggle'] ,
+                \ 'b': [':call BackgroundColorToggle()'    , 'BackgroundColorToggle']     ,
+                \ 'o': [':call HighlightOver80Toggle()'    , 'HighlightOver80Toggle!']    ,
+                \ }
+
+
     " 复制达到剪贴板
     map ,y "+y
     let g:comma_prefix_dict.y = "yank to clipboard"
-    let g:comma_prefix_dict.f = [':ALEFix | wa'            , 'ALEFix and save']
-    let g:comma_prefix_dict.q = [':call QuickfixToggle()'  , 'QuickfixToggle']
+    let g:comma_prefix_dict.f = [':ALEFix | wa'               , 'ALEFix and save']
+    let g:comma_prefix_dict.q = [':call QuickfixToggle()'     , 'QuickfixToggle']
     let g:comma_prefix_dict.l = [':call LocationListToggle()' , 'LocationListToggle']
-    let g:comma_prefix_dict.r = [':call AsyncRun_Code()'   , 'AsyncRun Code!']
-    let g:comma_prefix_dict.s = [':AsyncStop'              , 'AsyncStop']
-
-    let g:comma_prefix_dict.g = [':YcmCompleter GoTo'      , 'YCM-GoTo']
+    let g:comma_prefix_dict.r = [':call AsyncRun_Code()'      , 'AsyncRun Code!']
+    let g:comma_prefix_dict.s = [':AsyncStop'                 , 'AsyncStop']
+    let g:comma_prefix_dict.g = [':YcmCompleter GoTo'         , 'YCM-GoTo']
 
 
 
@@ -779,21 +795,9 @@
                 \ }
 
     let g:space_prefix_dict.t = {
-                \ 'name' : '+Tabs_Toggle'                  ,
-                \ 'n': [':tabnew'                          , 'New-Tab']                   ,
-                \ 't': [':TableModeToggle'                 , 'table-mode-Toggle']         ,
-                \ 'd': [':tabnew % | normal gTZZgt'        , 'Drag-buffer-to-New-Tab']    ,
-                \ 'D': [':DockerToolsToggle'               , ':DockerTools-Toggle']       ,
-                \ 'G': [':GitGutterToggle'                 , 'GitGutter-Toggle']          ,
-                \ 'a': [':ALEToggle'                       , 'ALE-Toggle']                ,
-                \ 'u': [':MundoToggle'                     , 'Mundo-Toggle']              ,
-                \ 'g': [':Goyo'                            , 'Goyo-Toggle']   ,
-                \ 'U': [':UndotreeToggle'                  , 'UndotreeToggle']            ,
-                \ 'm': [':SignatureToggleSigns'            , 'Marks-Toggle']              ,
-                \ 's': [':setlocal spell! spelllang=en_us' , 'Spell-Toggle']              ,
-                \ 'S': [':AutoSaveToggle'                  , 'AutoSaveToggle']            ,
-                \ 'c': [':call ComfortableMotionToggle()'  , 'Comfortable-Motion-Toggle'] ,
-                \ 'b': [':call BackgroundColorToggle()'    , 'BackgroundColorToggle']     ,
+                \ 'name' : '+Tabs'                  ,
+                \ 'n': [':tabnew'                   , 'New-Tab']                ,
+                \ 'd': [':tabnew % | normal gTZZgt' , 'Drag-buffer-to-New-Tab'] ,
                 \ }
 
     let g:space_prefix_dict.g = {
