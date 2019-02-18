@@ -760,6 +760,7 @@
                 \ 'c': [':call ComfortableMotionToggle()'  , 'Comfortable-Motion-Toggle'] ,
                 \ 'b': [':call BackgroundColorToggle()'    , 'BackgroundColorToggle']     ,
                 \ 'o': [':call HighlightOver80Toggle()'    , 'HighlightOver80Toggle!']    ,
+                \ 't': [':TableModeToggle'                 , 'table-mode-Toggle']         ,
                 \ }
 
 
