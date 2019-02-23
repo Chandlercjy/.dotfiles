@@ -467,6 +467,7 @@
                 \   'html': ['tidy','remove_trailing_lines','trim_whitespace'],
                 \   'sh': ['shfmt','remove_trailing_lines','trim_whitespace'],
                 \   'go': ['gofmt','goimports','remove_trailing_lines','trim_whitespace'],
+                \   'cmake': ['cmakeformat','remove_trailing_lines','trim_whitespace'],
                 \}
 
 
