@@ -11,6 +11,15 @@ export LANGUAGE="en_US.UTF-8"
 # Plugin
 if [[ $(ps $$ | grep $$ | awk '{print $5}') == '-zsh' ]]; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    DISABLE_AUTO_TITLE="true"
+    export ZSH=$HOME/.oh-my-zsh
+    ZSH_THEME="robbyrussell"
+    plugins=(
+        git
+        autojump
+    )
+    source $ZSH/oh-my-zsh.sh
+    DISABLE_AUTO_TITLE="true"
 elif [[ $(ps $$ | grep $$ | awk '{print $5}') == 'bash' ]]; then
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 fi
@@ -26,9 +35,16 @@ fi
 
 # ========================= Alias ==========================
 alias v="nvim"
+alias ll="ls -la -h"
 
 # Emacs
 # alias e='emacs -nw'
 # alias et='emacsclient -t -a ""'
 # alias ec='emacsclient -c -a ""'
 
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .repo -g ""'
+export MAN_DISABLE_SECCOMP=1 # Fix Man bugs
+
+# ========================== Lib ===========================
+export LD_LIBRARY=$LD_LIBRARY:/usr/local/lib
+export PATH=$PATH:/usr/local/bin
