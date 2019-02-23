@@ -82,6 +82,18 @@ def link_prettierrc():
     config_path = HOME_DIR / ".dotfiles" / "dot_prettierrc"
     create_link_or_bak(config_path, prettierrc_path)
 
+    
+def add_source_shell():
+    zshrc_path = os.path.expanduser("~") + "/.zshrc"
+    mark="added by dotfiles!"
+    sed_cmd = ["sed", "-i", f"/{mark}/d", zshrc_path]
+    subprocess.check_call(sed_cmd)
+    script = (f"source ~/.dotfiles/init-shell.sh # {mark}")
+    with open(zshrc_path, "a") as file:
+        file.write(f"# Shell Initialization {mark}\n")
+        file.write(script)
+    print(f"Add source to {zshrc_path} successfully!")
+
 
 def main():
     link_neovim()
@@ -89,6 +101,7 @@ def main():
     install_xterm24()
     link_tmux()
     link_prettierrc()
+    add_source_shell()
 
 
 if __name__ == "__main__":
