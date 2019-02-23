@@ -26,11 +26,7 @@ fi
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 
 # =================== 取消brew自动更新 =====================
-
-if [[ "$(uname)"=="Darwin" ]]; then
-    export HOMEBREW_NO_AUTO_UPDATE=true
-
-fi
+export HOMEBREW_NO_AUTO_UPDATE=true
 
 # ========================= Alias ==========================
 alias v="nvim"
@@ -45,5 +41,5 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .repo -g ""'
 export MAN_DISABLE_SECCOMP=1 # Fix Man bugs
 
 # ========================== Lib ===========================
-export LD_LIBRARY=$LD_LIBRARY:/usr/local/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export PATH=$PATH:/usr/local/bin
