@@ -6,7 +6,7 @@ import sys
 
 
 def cmd_exist(cmd):
-    return (subprocess.call(["which", cmd],
+    return (subprocess.call(["command", "-v", cmd],
                             stderr=subprocess.PIPE,
                             stdout=subprocess.PIPE) == 0)
 
@@ -17,6 +17,7 @@ def install(cmd, packages):
     :params packages: list
 
     """
+    print("Execute: ", cmd + packages)
     subprocess.call(cmd + packages)
 
 
@@ -75,10 +76,17 @@ def install_clang_format():
         # enable : scl enable llvm-toolset-7 bash
         # clang-format is in /opt/rh/llvm-toolset-7/bin
 
+
+def install_ranger():
+    install(["pip3 install"], ["ranger-fm"])
+
+
 def main():
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 1:
         if sys.argv[1] == "ag":
             install_ag()
+        elif sys.argv[1] == "tmux":
+            install_tmux()
         elif sys.argv[1] == "python_formatter":
             install_python_formatter()
         elif sys.argv[1] == "prettier":
@@ -98,10 +106,12 @@ def main():
             python_formatter
             prettier
             clang-format
+            ranger
 
             all                 --install all above
 
             """)
+
 
 if __name__ == "__main__":
     main()
