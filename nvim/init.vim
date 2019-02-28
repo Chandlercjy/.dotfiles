@@ -149,7 +149,7 @@
     Plug 'Chandlercjy/neoterm'                      , {'on':[ 'TREPLSendFile', '<Plug>(neoterm-repl-send)', '<Plug>(neoterm-repl-send-line)' ]}
 
     " Git
-    Plug 'tpope/vim-fugitive'                       , {'on': ['Gblame', 'Gcommit', 'Gdiff', 'Gedit', 'Glog', 'Gread', 'Gstatus', 'Gwrite', 'Git push','GV','GV!']}
+    Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
     Plug 'airblade/vim-gitgutter'
     Plug 'Chandlercjy/git-blame.vim'                , { 'on': ['GitBlame']}

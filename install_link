@@ -86,8 +86,10 @@ def link_prettierrc():
 def add_source_shell():
     zshrc_path = os.path.expanduser("~") + "/.zshrc"
     mark = "added by dotfiles!"
-    sed_cmd = ["sed", "-i", "", f"/{mark}/d", zshrc_path]
-    subprocess.check_call(sed_cmd)
+    mac_sed_cmd = ["sed", "-i", "", f"/{mark}/d", zshrc_path]
+    sed_cmd = ["sed", "-i", f"/{mark}/d", zshrc_path]
+    subprocess.Popen(sed_cmd,stderr=subprocess.PIPE).wait()
+    subprocess.Popen(mac_sed_cmd,stderr=subprocess.PIPE).wait()
     script = f"source ~/.dotfiles/init-shell.sh # {mark}"
     with open(zshrc_path, "a") as file:
         file.write(f"# Shell Initialization {mark}\n")
