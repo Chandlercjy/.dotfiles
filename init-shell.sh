@@ -10,13 +10,6 @@ export LANGUAGE="en_US.UTF-8"
 
 # Plugin
 if [[ $(ps $$ | grep $$ | awk '{print $5}') == '-zsh' ]]; then
-    export ZSH=$HOME/.oh-my-zsh
-    ZSH_THEME="robbyrussell"
-    plugins=(
-        git
-        autojump
-    )
-    source $ZSH/oh-my-zsh.sh
     DISABLE_AUTO_TITLE="true"
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 elif [[ $(ps $$ | grep $$ | awk '{print $5}') == 'bash' ]]; then

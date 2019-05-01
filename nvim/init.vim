@@ -468,11 +468,12 @@
                 \   'sh': ['shfmt','remove_trailing_lines','trim_whitespace'],
                 \   'go': ['gofmt','goimports','remove_trailing_lines','trim_whitespace'],
                 \   'cmake': ['cmakeformat','remove_trailing_lines','trim_whitespace'],
+                \   'yaml': ['prettier','remove_trailing_lines','trim_whitespace'],
                 \}
 
 
     " 保存时自动调整
-    " let g:ale_fix_on_save = 1
+    let g:ale_fix_on_save = 1
 
     " 控制刷新频率
     let g:ale_lint_on_enter = 0 "打开文件时不进行检查
@@ -862,6 +863,8 @@
     let g:space_prefix_dict['-']  = [':SSave! default' , "Save-Session-default"]
     let g:space_prefix_dict['=']  = [':SLoad default' , "Load-Session-default"]
 
+    vmap : :OverCommandLine<CR>
+
 
 " =================== Parentheses-prefex ===================
     let g:left_parentheses_prefix_dict.g  = ['<Plug>GitGutterNextHunk', "GitGutterNextHunk"]
@@ -1122,7 +1125,7 @@
 
 " =============== Show folder of current dir ===============
     map <leader>o :!open %:p:h<CR>
-    
+
 
 " ==================== Testing .....??? ====================
     " nmap ,f: :%s/：/:/g<CR>
@@ -1132,5 +1135,3 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
-
-
