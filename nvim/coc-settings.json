@@ -1,0 +1,25 @@
+{
+
+    "suggest.triggerAfterInsertEnter": true,
+    "suggest.timeout": 500,
+    "suggest.noselect": false,
+    "suggest.detailField":"abbr",
+    "suggest.triggerCompletionWait": 100,
+    "suggest.echodocSupport": true,
+    "coc.preferences.formatOnType": true,
+    "suggest.enablePreview":false,
+    "suggest.preferCompleteThanJumpPlaceholder": true,
+
+    //python
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+
+    "languageserver": {
+        "clangd": {
+            "command": "clangd",
+            "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "filetypes": ["c", "cpp", "objc", "objcpp"]
+        }
+    },
+    "java.errors.incompleteClasspath.severity": "ignore"
+}

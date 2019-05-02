@@ -18,12 +18,16 @@
     set autoread                             " 文件自动重载
     set confirm                              " 在处理未保存或只读文件的时候，弹出确认
     set nobackup                             " 不要备份文件
+    set nowritebackup
     set noswapfile                           " 不产生临时备份文件
     set undofile                             " tell it to use an undo file
     set undodir=~/.vimundo/                  " set a directory to store the undo history
     set undolevels=1000                      " max number of undos
     set undoreload=10000                     " max lines to to save for undo
     set hidden                               " vim切换buffer(文件/tab)后仍然保留undo
+    set updatetime=300
+    set shortmess+=c
+    set signcolumn=yes
 
     " 编辑类
     set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
@@ -138,8 +142,18 @@
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'w0rp/ale'
-    Plug 'Valloric/YouCompleteMe'                   , { 'do': './install.py --clang-completer' }
-    Plug 'rdnetto/YCM-Generator'                    , {'on':'YcmGenerateConfig', 'branch': 'stable'}
+    " Plug 'Valloric/YouCompleteMe'                   , { 'do': './install.py --clang-completer' }
+    " Plug 'rdnetto/YCM-Generator'                    , {'on':'YcmGenerateConfig', 'branch': 'stable'}
+    Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'} " Install nightly build, replace ./install.sh with install.cmd on windows
+    " curl --fail -L https://install-node.now.sh/latest | sh " install nodejs >=8.0
+    " curl --compressed -o- -L https://yarnpkg.com/install.sh | bash " Install yarn
+    " :CocInstall coc-python
+    " :CocInstall coc-yaml
+    " :CocInstall coc-html
+    " :CocInstall coc-tsserver
+    " :CocInstall coc-css
+    " :CocInstall coc-java
+    " :CocInstall coc-ultisnips
 
     " 异步运行
     Plug 'skywind3000/asyncrun.vim'                 , { 'on': ['AsyncRun','AsyncStop']}
@@ -393,15 +407,12 @@
     let g:airline_theme='bubblegum'
     let g:airline#extensions#ale#enabled = 1
     " add scroll bar
-    let g:airline_section_c = airline#section#create(['%{noscrollbar#statusline(9,''■'',''◫'',[''◧''],[''◨''])}', ' %{expand("%:t")}'])
+    let g:airline_section_c = airline#section#create(['%{noscrollbar#statusline(9,''■'',''◫'',[''◧''],[''◨''])}', ' %{expand("%:t")}', ' Coc-status: %{coc#status()}'])
+
 
 " ====================== indent line =======================
     "let g:indentLine_bgcolor_gui = '#272727'
     "let g:indentLine_color_gui = '#4f4f4f'
-
-" ================= DIY Highlight >80 code =================
-    hi Over80 guifg=fg  guibg=red
-    au BufNewFile,BufRead *.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.py, match Over80 '\%>80v.*'
 
 " ====================================================================== UI End
 
@@ -507,7 +518,7 @@
     let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
 
 " ===================== YouCompleteMe ======================
-    "set completeopt=longest,menu "关闭弹出原型窗口的功能
+    set completeopt=longest,menu "关闭弹出原型窗口的功能
     let g:ycm_autoclose_preview_window_after_completion=1
     let g:ycm_show_diagnostics_ui = 0 "关闭静态检查
     let g:ycm_min_num_of_chars_for_completion=1 " 从第1个键入字符就开始罗列匹配项
@@ -677,6 +688,61 @@
 " ======================== wildfire ========================
   let g:wildfire_objects = ["iw","i'", 'i"', "i)", "i]", "i}", "ip", "it", "i`"]
 
+
+" ========================== coc.nvim ===========================
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
+
+    inoremap <silent><expr> <S-TAB>
+    \ pumvisible() ? "\<C-p>" :
+    \ <SID>check_back_space() ? "\<S-TAB>" :
+    \ coc#refresh()
+
+    inoremap <silent><expr> <TAB>
+        \ pumvisible() ? coc#_select_confirm() :
+        \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+
+    let g:coc_snippet_next = '<tab>'
+
+    function! s:show_documentation()
+        if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
+
+    " Highlight symbol under cursor on CursorHold
+    autocmd CursorHold * silent cal CocActionAsync('highlight')
+
+    augroup mygroup
+        autocmd!
+        " Setup formatexpr specified filetype(s).
+        autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+        " Update signature help on jump placeholder
+        autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup end
+
+    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+    " Remap for do codeAction of current line
+    nmap <leader>ac  <Plug>(coc-codeaction)
+    " Fix autofix problem of current line
+    nmap <leader>qf  <Plug>(coc-fix-current)
+
+    " Remap keys for gotos
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    nnoremap <silent> <S-TAB> :call <SID>show_documentation()<CR>
+
 " =========================================================== Plugin Config End
 
 
@@ -748,6 +814,8 @@
                 \   'a':'Find places where current symbol is assigned'     ,
                 \}
 
+
+
     let g:comma_prefix_dict.t = {
                 \ 'name' : '+Toggle'                       ,
                 \ 'd': [':DockerToolsToggle'               , ':DockerTools-Toggle']       ,
@@ -760,8 +828,8 @@
                 \ 's': [':setlocal spell! spelllang=en_us' , 'Spell-Toggle']              ,
                 \ 'S': [':AutoSaveToggle'                  , 'AutoSaveToggle']            ,
                 \ 'c': [':call ComfortableMotionToggle()'  , 'Comfortable-Motion-Toggle'] ,
+                \ 'C': [':call ConcealLevelToggle()'     , 'ConcealLevelToggle'] ,
                 \ 'b': [':call BackgroundColorToggle()'    , 'BackgroundColorToggle']     ,
-                \ 'o': [':call HighlightOver80Toggle()'    , 'HighlightOver80Toggle!']    ,
                 \ 't': [':TableModeToggle'                 , 'table-mode-Toggle']         ,
                 \ }
 
@@ -774,7 +842,7 @@
     let g:comma_prefix_dict.l = [':call LocationListToggle()' , 'LocationListToggle']
     let g:comma_prefix_dict.r = [':call AsyncRun_Code()'      , 'AsyncRun Code!']
     let g:comma_prefix_dict.s = [':AsyncStop'                 , 'AsyncStop']
-    let g:comma_prefix_dict.g = [':YcmCompleter GoTo'         , 'YCM-GoTo']
+    let g:comma_prefix_dict.g = ['<Plug>(coc-definition)'         , 'coc-definition']
 
 
 
@@ -828,14 +896,14 @@
                 \ 'c' : [':Colors'                     , 'Colors-Search']         ,
                 \ }
 
-    let g:space_prefix_dict.y = {
-                \ 'name' : '+YouCompleteMe' ,
-                \ 'f' : [':YcmCompleter FixIt'               , 'YCM-FixIt']                 ,
-                \ 'd' : [':YcmCompleter GetDoc'              , 'YCM-GetDoc']                ,
-                \ 't' : [':YcmCompleter GetType'             , 'YCM-GetType']               ,
-                \ 'gf' : [':cd %:p:h | YcmGenerateConfig -f' , 'YCM-Generate-Config-force'] ,
-                \ 'gg' : [':cd %:p:h | YcmGenerateConfig'    , 'YCM-Generate-Config']       ,
-                \ }
+    " let g:space_prefix_dict.y = {
+                " \ 'name' : '+YouCompleteMe' ,
+                " \ 'f' : [':YcmCompleter FixIt'               , 'YCM-FixIt']                 ,
+                " \ 'd' : [':YcmCompleter GetDoc'              , 'YCM-GetDoc']                ,
+                " \ 't' : [':YcmCompleter GetType'             , 'YCM-GetType']               ,
+                " \ 'gf' : [':cd %:p:h | YcmGenerateConfig -f' , 'YCM-Generate-Config-force'] ,
+                " \ 'gg' : [':cd %:p:h | YcmGenerateConfig'    , 'YCM-Generate-Config']       ,
+                " \ }
 
     let g:space_prefix_dict.p = {'name' : '+projects'}
 
@@ -850,14 +918,15 @@
     let g:space_prefix_dict.9 = [':normal 9gt' , 'Tab 9']
     let g:space_prefix_dict.0 = [':tablast'    , 'Tab Last']
 
-    let g:space_prefix_dict.a = [':Ag'                           , 'Ag-search']
-    let g:space_prefix_dict.b = [':Buffers'                      , 'Buffer-list']
-    let g:space_prefix_dict.c = [':call ConcealLevelToggle()'     , 'ConcealLevelToggle']
-    let g:space_prefix_dict.h = [':call HighlightSearchToggle()' , 'HighlightSearchToggle']
-    let g:space_prefix_dict.u = [':MundoToggle'                  , 'MundoToggle']
-    let g:space_prefix_dict[':'] = [":OverCommandLine '<,'>s/"   , 'Over-CommandLine']
-    let g:space_prefix_dict['[']  = ['<Plug>(ale_previous)'      , "ALE_previous"]
-    let g:space_prefix_dict[']'] = ['<Plug>(ale_next)'           , "ALE_NEXT"]
+    let g:space_prefix_dict.a = [':Ag'                             , 'Ag-search']
+    let g:space_prefix_dict.b = [':Buffers'                        , 'Buffer-list']
+    let g:space_prefix_dict.h = [':call HighlightSearchToggle()'   , 'HighlightSearchToggle']
+    let g:space_prefix_dict.u = [':MundoToggle'                    , 'MundoToggle']
+    let g:space_prefix_dict[':'] = [":OverCommandLine '<,'>s/"     , 'Over-CommandLine']
+    " let g:space_prefix_dict['[']  = ['<Plug>(ale_previous)'        , "ALE_previous"]
+    " let g:space_prefix_dict[']'] = ['<Plug>(ale_next)'             , "ALE_NEXT"]
+    let g:space_prefix_dict['[']  = ['<Plug>(coc-diagnostic-prev)' , "coc-dianostic-previous"]
+    let g:space_prefix_dict[']'] = ['<Plug>(coc-diagnostic-next)'  , "coc-dianostic-next"]
 
 
     let g:space_prefix_dict['-']  = [':SSave! default' , "Save-Session-default"]
@@ -885,10 +954,10 @@
 " 9. Plugin KeyBindings                                                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ===================== YouCompleteMe ======================
-   autocmd Filetype cpp nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
-   autocmd Filetype python nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
-   autocmd Filetype javascript.jsx nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
-   autocmd Filetype typescript nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+   " autocmd Filetype cpp nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+   " autocmd Filetype python nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+   " autocmd Filetype javascript.jsx nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+   " autocmd Filetype typescript nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
 
 " ========================= vim-go =========================
     autocmd Filetype go nnoremap <buffer> <S-Tab> :GoDoc<CR>
@@ -1135,3 +1204,4 @@
     " nmap ,f) :%s/）/)/g<CR>
 
 " ========================================================= Awesome KeyMaps End
+"

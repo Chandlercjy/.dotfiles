@@ -87,26 +87,26 @@
         endif
     endfunc
 
-    function! QuickfixToggle() 
-        " remember where we are 
-        let winnr = winnr() 
-        " find qf window, if any 
-        let qfw = 0 
-        windo if &l:buftype == "quickfix" | 
-                    \	let qfw = winnr() | endif 
-        if qfw 
-            " close qf window 
-            cclose 
-        else 
-            " open qf window as last window, fullwidth 
-            bot copen 
-        endif 
-        " go back to where we started from 
-        if (winnr >= qfw) && (winnr > 1) 
-            let winnr = winnr - 1 
-        endif 
-        exe winnr "wincmd w" 
-    endfunction 
+    function! QuickfixToggle()
+        " remember where we are
+        let winnr = winnr()
+        " find qf window, if any
+        let qfw = 0
+        windo if &l:buftype == "quickfix" |
+                    \	let qfw = winnr() | endif
+        if qfw
+            " close qf window
+            cclose
+        else
+            " open qf window as last window, fullwidth
+            bot copen
+        endif
+        " go back to where we started from
+        if (winnr >= qfw) && (winnr > 1)
+            let winnr = winnr - 1
+        endif
+        exe winnr "wincmd w"
+    endfunction
 
     let g:locallist_is_open = 0
     function! LocationListToggle()
@@ -129,15 +129,4 @@
 
     function! HighlightSearchToggle()
         let &hlsearch = (&hls && v:hlsearch ? 0 : 1)
-    endfunction
-
-    let g:highlightover80 = 1
-    function! HighlightOver80Toggle()
-        if g:highlightover80
-            hi Over80 guifg=????? guibg=???
-            let g:highlightover80 = 0
-        else
-            hi Over80 guifg=fg guibg=red
-            let g:highlightover80 = 1
-        endif
     endfunction
