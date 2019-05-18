@@ -70,9 +70,11 @@
         elseif &filetype == 'c'
             :AsyncRun -raw gcc -Wall % -o %< && ./%<
         elseif &filetype == 'typescript'
-            :AsyncRun -raw node %
+            " :AsyncRun -raw tsc % && node %:r.js
+            :AsyncRun -raw ts-node %
+            " :AsyncRun -raw node %:r.js
         elseif &filetype == 'javascript.jsx'
-            :AsyncRun -raw node %<
+            :AsyncRun -raw node %
         elseif &filetype == 'sh'
             :AsyncRun -raw bash %
         elseif &filetype == 'html'
@@ -124,7 +126,7 @@
     endfunction
 
     function! ConcealLevelToggle()
-        let &conceallevel = ( &conceallevel == 3 ? 0 : 3 )
+        let &conceallevel = ( &conceallevel > 0 ? 0 : 2 )
     endfunction
 
     function! HighlightSearchToggle()

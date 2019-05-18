@@ -1,4 +1,5 @@
 auto-save-list
+.vscode
 undohist/*
 vimish-fold/*
 .cache

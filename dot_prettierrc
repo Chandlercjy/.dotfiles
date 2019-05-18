@@ -1,16 +1,22 @@
 {
-    "printWidth":80,
-        "eslintIntegration": true,
-        "stylelintIntegration": true,
-        "tabWidth": 4,
-        "singleQuote": true,
-        "semi": true,
-        "useTabs": false,
-        "proseWrap": "always",
+    "printWidth": 80,
+    "eslintIntegration": true,
+    "stylelintIntegration": true,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "semi": true,
+    "useTabs": false,
+    "proseWrap": "always",
 
-        "overrides": [
+    "overrides": [
         {
-            "files": ["*.json", ".eslintrc", ".tslintrc", ".prettierrc", ".tern-project"],
+            "files": [
+                "*.json",
+                ".eslintrc",
+                ".tslintrc",
+                ".prettierrc",
+                ".tern-project"
+            ],
             "options": {
                 "parser": "json",
                 "tabWidth": 2
@@ -29,7 +35,7 @@
                 "parser": "markdown",
                 "semi": true,
                 "tabWidth": 2,
-                "trailingComma": "es5",
+                "trailingComma": "es6",
                 "jsxBracketSameLine": false,
                 "arrowParens": "avoid",
                 "bracketSpacing": true,
@@ -42,12 +48,11 @@
                 "parser": "babylon",
                 "tabWidth": 4,
                 "singleQuote": true,
-                bracketSpacing: true,
-                jsxBracketSameLine: false,
+                "bracketSpacing": true,
+                "jsxBracketSameLine": false,
 
                 "semi": true,
-                "useTabs": false,
-
+                "useTabs": false
             }
         },
         {
@@ -57,9 +62,8 @@
                 "tabWidth": 4,
                 "singleQuote": true,
                 "semi": true,
-                "useTabs": false,
+                "useTabs": false
             }
-        },
-        ]
+        }
+    ]
 }
-

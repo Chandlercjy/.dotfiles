@@ -58,7 +58,6 @@
     set smartcase
 
     " UI
-    set termguicolors
     set colorcolumn=80
     set rnu                                  " show relative line numbers
     set nu                                   " show line numbers
@@ -124,6 +123,7 @@
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'drewtempelmeyer/palenight.vim'    " Load by Default
+    Plug 'kristijanhusak/vim-hybrid-material'       , {'on':['Colors']}
     Plug 'morhetz/gruvbox'                          , {'on':['Colors']}
     Plug 'ayu-theme/ayu-vim'                        , {'on':['Colors']}
     Plug 'arcticicestudio/nord-vim'                 , {'on':['Colors']}
@@ -142,8 +142,6 @@
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'w0rp/ale'
-    " Plug 'Valloric/YouCompleteMe'                   , { 'do': './install.py --clang-completer' }
-    " Plug 'rdnetto/YCM-Generator'                    , {'on':'YcmGenerateConfig', 'branch': 'stable'}
     Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'} " Install nightly build, replace ./install.sh with install.cmd on windows
     " curl --fail -L https://install-node.now.sh/latest | sh " install nodejs >=8.0
     " curl --compressed -o- -L https://yarnpkg.com/install.sh | bash " Install yarn
@@ -154,6 +152,8 @@
     " :CocInstall coc-css
     " :CocInstall coc-java
     " :CocInstall coc-ultisnips
+    " :CocInstall coc-yank
+    " :CocInstall coc-pairs
 
     " 异步运行
     Plug 'skywind3000/asyncrun.vim'                 , { 'on': ['AsyncRun','AsyncStop']}
@@ -170,8 +170,8 @@
 
 
     " 自动生成ctags和查看
-    Plug 'ludovicchabant/vim-gutentags'
-    Plug 'skywind3000/gutentags_plus'
+    " Plug 'ludovicchabant/vim-gutentags'
+    " Plug 'skywind3000/gutentags_plus'
     Plug 'majutsushi/tagbar'                        , {'on':['TagbarToggle']}
 
 
@@ -189,10 +189,10 @@
     Plug 'yggdroot/indentline'
 
     " 快速选择
-    Plug 'gcmt/wildfire.vim'
+    Plug 'terryma/vim-expand-region'
 
     " 通用编辑
-    Plug 'terryma/vim-multiple-cursors'
+    Plug 'mg979/vim-visual-multi'
     Plug 'jiangmiao/auto-pairs'
     Plug 'scrooloose/nerdcommenter'                 , { 'on': ['<Plug>NERDCommenterToggle', '<Plug>NERDCommenterAppend'] }
     Plug 'tpope/vim-surround'                       , { 'on': []}
@@ -215,10 +215,6 @@
     Plug 'junegunn/fzf.vim'
     Plug 'pelodelfuego/vim-swoop'
     Plug 'dyng/ctrlsf.vim'                          , { 'on':'CtrlSF'}
-
-    " 复制粘贴记录
-    Plug 'Shougo/neoyank.vim'                       , {'on': 'FZFNeoyank'}
-    Plug 'justinhoward/fzf-neoyank'                 , {'on': 'FZFNeoyank'}
 
     " 实时显示正则替换
     Plug 'osyo-manga/vim-over'                      , { 'on':'OverCommandLine'}
@@ -328,6 +324,10 @@
         tnoremap <C-j> <C-\><C-N><C-w>j
         tnoremap <C-k> <C-\><C-N><C-w>k
         tnoremap <C-l> <C-\><C-N><C-w>l
+    endif
+
+    if (has("termguicolors"))
+        set termguicolors
     endif
 
     let g:ycm_python_binary_path = 'python3'
@@ -475,7 +475,8 @@
                 \   'c': ['clang-format','remove_trailing_lines','trim_whitespace'],
                 \   'typescript': ['prettier','remove_trailing_lines','trim_whitespace'],
                 \   'javascript': ['prettier','importjs', 'remove_trailing_lines', 'trim_whitespace' ],
-                \   'html': ['tidy','remove_trailing_lines','trim_whitespace'],
+                \   'html': ['prettier','remove_trailing_lines','trim_whitespace'],
+                \   'json': ['prettier','remove_trailing_lines','trim_whitespace'],
                 \   'sh': ['shfmt','remove_trailing_lines','trim_whitespace'],
                 \   'go': ['gofmt','goimports','remove_trailing_lines','trim_whitespace'],
                 \   'cmake': ['cmakeformat','remove_trailing_lines','trim_whitespace'],
@@ -516,31 +517,6 @@
 " ======================= UltiSnips ========================
     " let g:UltiSnipsUsePythonVersion = 3
     let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
-
-" ===================== YouCompleteMe ======================
-    set completeopt=longest,menu "关闭弹出原型窗口的功能
-    let g:ycm_autoclose_preview_window_after_completion=1
-    let g:ycm_show_diagnostics_ui = 0 "关闭静态检查
-    let g:ycm_min_num_of_chars_for_completion=1 " 从第1个键入字符就开始罗列匹配项
-    let g:ycm_cache_omnifunc=0 " 禁止缓存匹配项,每次都重新生成匹配项
-    let g:ycm_seed_identifiers_with_syntax=1 " 语法关键字补全
-    let g:ycm_complete_in_comments = 1 " 在注
-    let g:ycm_global_ycm_extra_conf='~/.config/nvim/.ycm_extra_conf.py' " 如果找不到conf就用这个
-    let g:ycm_confirm_extra_conf = 0
-    let g:ycm_filetype_blacklist = {
-      \ 'tagbar': 1,
-      \ 'qf': 1,
-      \ 'notes': 1,
-      \ 'markdown': 1,
-      \ 'unite': 1,
-      \ 'text': 1,
-      \ 'vimwiki': 1,
-      \ 'pandoc': 1,
-      \ 'infolog': 1,
-      \ 'mail': 1
-      \}
-    let g:ycm_key_detailed_diagnostics = ''
-
 
 " ===================== vim-easymotion =====================
     let g:EasyMotion_do_mapping = 0
@@ -598,7 +574,7 @@
 " ====================== vim-polyglot ======================
     " Python
     let g:python_highlight_all = 1
-    set re=1 " python语法高亮后会延迟,换用旧款正则表达式引擎即可修复
+    " set re=1 " python语法高亮后会延迟,换用旧款正则表达式引擎即可修复
     " set lazyredraw
 
     " Cpp
@@ -679,34 +655,29 @@
         autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
     augroup END
 
-    autocmd FileType markdown set shiftwidth=2
     autocmd FileType markdown nmap <buffer> <silent> o A<CR>
     autocmd FileType markdown nmap <buffer> <silent> <leader>m :MarkdownPreview<CR>
     autocmd FileType markdown nmap <buffer> <silent> <leader>s :MarkdownPreviewStop<CR>
     autocmd FileType markdown nmap <buffer> <silent> <leader>e :MarkdownEditBlock<CR>
 
-" ======================== wildfire ========================
-  let g:wildfire_objects = ["iw","i'", 'i"', "i)", "i]", "i}", "ip", "it", "i`"]
-
-
-" ========================== coc.nvim ===========================
+" ========================== coc.nvim ======================
     function! s:check_back_space() abort
         let col = col('.') - 1
         return !col || getline('.')[col - 1]  =~ '\s'
     endfunction
 
-    inoremap <silent><expr> <S-TAB>
-    \ pumvisible() ? "\<C-p>" :
-    \ <SID>check_back_space() ? "\<S-TAB>" :
-    \ coc#refresh()
-
     inoremap <silent><expr> <TAB>
-        \ pumvisible() ? coc#_select_confirm() :
-        \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
+                \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
 
-    let g:coc_snippet_next = '<tab>'
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    let g:coc_snippet_next = '<Tab>'
+    let g:coc_snippet_prev = '<S-Tab>'
 
     function! s:show_documentation()
         if (index(['vim','help'], &filetype) >= 0)
@@ -742,6 +713,7 @@
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
     nnoremap <silent> <S-TAB> :call <SID>show_documentation()<CR>
+    nnoremap <silent> <A-y>  :<C-u>CocList -A --normal yank<cr>
 
 " =========================================================== Plugin Config End
 
@@ -758,11 +730,8 @@
     autocmd FileType which_key highlight WhichKeyGroup guifg=PaleGoldenrod
     autocmd  FileType which_key set laststatus=0 noshowmode noruler
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
     map <silent> , :<c-u>WhichKey ','<CR>
     map <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
-    map <silent> [ :<c-u>WhichKey '['<CR>
-    map <silent> ] :<c-u>WhichKey ']'<CR>
 
 
     let g:comma_prefix_dict =  {}
@@ -791,7 +760,6 @@
                 \ 'i': [':PlugInstall' , 'PlugInstall'] ,
                 \ 'U': [':PlugUpgrade' , 'PlugUpgrade'] ,
                 \}
-
     noremap <silent> ,ds :GscopeFind s <C-R><C-W><cr>
     noremap <silent> ,dg :GscopeFind g <C-R><C-W><cr>
     noremap <silent> ,dc :GscopeFind c <C-R><C-W><cr>
@@ -849,13 +817,14 @@
 
 " ====================== Space-prefix ======================
     let g:space_prefix_dict.v = {
-                \ 'name' : '+Neovim_Config',
-                \ 's': [':FZF ~/.config/nvim'               , 'Search config']   ,
-                \ 'p': [':FZF ~/.vim/plugged'               , 'Search plugged']  ,
-                \ 'u': [':e ~/.config/nvim/utils.vim'       , 'utils.vim']       ,
-                \ 'i': [':e ~/.config/nvim/init.vim'        , 'init.vim']        ,
-                \ 'c': [':e ~/.config/nvim/init-custom.vim' , 'init-custom.vim'] ,
-                \ 'r': [':source $MYVIMRC'                  , 'Source vimrc']    ,
+                \ 'name' : '+Neovim_Config'                   ,
+                \ 's': [':FZF ~/.config/nvim'                 , 'Search config']    ,
+                \ 'p': [':FZF ~/.vim/plugged'                 , 'Search plugged']   ,
+                \ 'u': [':e ~/.config/nvim/utils.vim'         , 'utils.vim']        ,
+                \ 'i': [':e ~/.config/nvim/init.vim'          , 'init.vim']         ,
+                \ 'c': [':e ~/.config/nvim/init-custom.vim'   , 'init-custom.vim']  ,
+                \ 'r': [':source $MYVIMRC'                    , 'Source vimrc']     ,
+                \ 'C': [':e ~/.config/nvim/coc-settings.json' , 'coc-setting.json'] ,
                 \}
 
     let g:space_prefix_dict.f = {
@@ -885,8 +854,6 @@
                 \ 'w' : [':Gwrite'   , 'fugitive-write']                       ,
                 \ 'p' : [':Git push' , 'fugitive-push']                        ,
                 \ }
-
-    map <C-S> :call SwoopMulti()<CR>
     let g:space_prefix_dict.s = {
                 \ 'name' : '+Swoop/Search' ,
                 \ 's' : [':call SwoopMultiSelection()' , 'swoop-multi-selection'] ,
@@ -895,15 +862,6 @@
                 \ 'hs' : [':History/'                  , 'History-Search']        ,
                 \ 'c' : [':Colors'                     , 'Colors-Search']         ,
                 \ }
-
-    " let g:space_prefix_dict.y = {
-                " \ 'name' : '+YouCompleteMe' ,
-                " \ 'f' : [':YcmCompleter FixIt'               , 'YCM-FixIt']                 ,
-                " \ 'd' : [':YcmCompleter GetDoc'              , 'YCM-GetDoc']                ,
-                " \ 't' : [':YcmCompleter GetType'             , 'YCM-GetType']               ,
-                " \ 'gf' : [':cd %:p:h | YcmGenerateConfig -f' , 'YCM-Generate-Config-force'] ,
-                " \ 'gg' : [':cd %:p:h | YcmGenerateConfig'    , 'YCM-Generate-Config']       ,
-                " \ }
 
     let g:space_prefix_dict.p = {'name' : '+projects'}
 
@@ -931,7 +889,6 @@
 
     let g:space_prefix_dict['-']  = [':SSave! default' , "Save-Session-default"]
     let g:space_prefix_dict['=']  = [':SLoad default' , "Load-Session-default"]
-
     vmap : :OverCommandLine<CR>
 
 
@@ -953,11 +910,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 9. Plugin KeyBindings                                                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ===================== YouCompleteMe ======================
-   " autocmd Filetype cpp nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
-   " autocmd Filetype python nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
-   " autocmd Filetype javascript.jsx nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
-   " autocmd Filetype typescript nnoremap <buffer> <S-Tab> :YcmCompleter GetDoc<CR>
+" ==================== vim-expand-region ===================
+    map <CR> <Plug>(expand_region_expand)
+    map _ <Plug>(expand_region_shrink)
 
 " ========================= vim-go =========================
     autocmd Filetype go nnoremap <buffer> <S-Tab> :GoDoc<CR>
@@ -995,25 +950,15 @@
     " | Filetypes      | File types                                          |
     " +----------------+-----------------------------------------------------+
 
-" ====================== FZF-Neoyank =======================
-  map <A-y> :FZFNeoyank<CR>
-
 " ======================= GitGutter ========================
     let g:gitgutter_map_keys = 0
 
-" ================== vim-multiple-cursors ===================
-    let g:multi_cursor_use_default_mapping=0
-    let g:multi_cursor_next_key='<C-n>'
-    let g:multi_cursor_prev_key='<C-p>'
-    let g:multi_cursor_skip_key='<C-x>'
-    let g:multi_cursor_quit_key='<Esc>'
-
-" ======================== NERDTree ========================
+" ================== NERDtree ===================
     map <F2> :NERDTreeToggle<CR>
     let NERDTreeWinPos="left"
     let NERDTreeIgnore=['\.pyc','\~$','\.swp'] " 忽略一下文件的显示
 
-" ========================= Tagbar =========================
+" ========================= Tarbar =========================
     nmap <silent> <F4> :TagbarToggle<CR>
 
 " ======================== vimterm =========================
@@ -1048,7 +993,6 @@
     map <A-f> :TREPLSendFile<CR>
     vmap <A-CR> <Plug>(neoterm-repl-send)
     nmap <A-CR> <Plug>(neoterm-repl-send-line)j
-
 
 " ======================= UltiSnips ========================
     ino <silent> <c-x><c-a> <c-r>=Ulti_complete()<cr>
@@ -1145,7 +1089,6 @@
     " |-------------------|----------------------------------------------------------------------|
 
 " ================= plantuml-previewer.vim =================
-
     autocmd FileType plantuml nmap <silent> <leader>m :PlantumlOpen<CR>
     " +---------------------------+-------------+
     " | Command                   | Action      |
@@ -1161,7 +1104,6 @@
 " 10. DIY KeyBindings                                                         "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==================== Smart close by q ====================
-    " 原始q录制宏可以按 <A-q>
     nnoremap <silent> q :call SmartClose()<cr>
     nnoremap <silent> Q :Bclose<CR>
     nnoremap <C-q> :wqa<CR>
@@ -1195,13 +1137,4 @@
 " =============== Show folder of current dir ===============
     map <leader>o :!open %:p:h<CR>
 
-
-" ==================== Testing .....??? ====================
-    " nmap ,f: :%s/：/:/g<CR>
-    " nmap ,f, :%s/，/, /g<CR>
-    " nmap ,f,, :%s/,/, /g<CR> :%s/,  /, /g<CR>
-    " nmap ,f( :%s/（/(/g<CR>
-    " nmap ,f) :%s/）/)/g<CR>
-
 " ========================================================= Awesome KeyMaps End
-"
