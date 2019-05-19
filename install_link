@@ -43,7 +43,7 @@ def create_link_or_bak(config_path, obj_path):
 
 def link_neovim():
     neovim_dir = HOME_DIR / ".config" / "nvim"
-    config_dir = HOME_DIR / ".dotfiles" / "nvim"
+    config_dir = HOME_DIR / ".dotfiles" / "nvim_dein"
     if not is_exist(neovim_dir.parent):
         os.mkdir(neovim_dir.parent)  # create ~/.config
         print(f"Establishing {neovim_dir.parent}.")
