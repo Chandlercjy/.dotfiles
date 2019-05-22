@@ -7,7 +7,7 @@
   [vim-which-key](https://github.com/liuchengxu/vim-which-key) just like
   [SpaceVim](https://github.com/SpaceVim/SpaceVim)
 - Lazy load all most of plugin, minimize startup time less than **85ms**.
-- You can customize configuration in customize.vim
+- You can customize configuration in ~/.config/nvim/init-custom.vim
 
 
 ![neovim-start](./images/neovim-start.png)

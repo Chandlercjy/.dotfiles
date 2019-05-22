@@ -1,0 +1,83 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+build = './install.sh nightly'
+hook_add = 'source ~/.config/nvim/config/coc.vim'
+
+# curl --fail -L https://install-node.now.sh/latest | sh " install nodejs >=8.0
+# curl --compressed -o- -L https://yarnpkg.com/install.sh | bash " Install yarn
+# :CocInstall coc-python
+# :CocInstall coc-tsserver
+# :CocInstall coc-java
+# :CocInstall coc-yaml
+# :CocInstall coc-ultisnips
+# :CocInstall coc-yank
+# :CocInstall coc-pairs
+# :CocInstall coc-emmet
+# :CocInstall coc-html
+# :CocInstall coc-css
+# :CocInstall coc-json
+# :CocInstall coc-vimlsp
+# :CocInstall coc-imselect # 输入法切换,内容为中文时，会自动切换，按esc后自动切换成英文
+
+
+[[plugins]]
+repo = 'SirVer/ultisnips'          # 代码补全
+hook_add = 'source ~/.config/nvim/config/ultisnips.vim'
+
+[[plugins]]
+repo = 'liuchengxu/vim-which-key'
+hook_add = 'source ~/.config/nvim/config/vim-which-key.vim'
+
+# ======================= 主题美化类 ========================
+
+[[plugins]]
+repo = 'mhinz/vim-startify'
+depends = 'vim-devicons'
+hook_add = 'source ~/.config/nvim/config/vim-startify.vim'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = 'source ~/.config/nvim/config/vim-airline.vim'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+depends = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'                    # 需要安装 https://github.com/ryanoasis/nerd-fonts#option-3-install-script
+
+[[plugins]] # 进度滚动条
+repo = 'gcavallanti/vim-noscrollbar'
+
+
+[[plugins]]
+repo = 'drewtempelmeyer/palenight.vim'    # Load by Default
+hook_add = '''
+    colorscheme palenight
+    " let g:palenight_terminal_italics=1
+
+    function! Custom_Theme_Strengthen() " 加强cursorline对比度
+        if g:colors_name == 'palenight'
+                augroup Strengthen
+                    autocmd InsertLeave * highlight CursorLine guibg=#2f3843
+                    autocmd InsertEnter * highlight CursorLine guibg=#2b323b
+                augroup END
+        else
+            autocmd! Strengthen
+        endif
+
+        highlight Folded guifg=lightblue
+    endfunction
+
+    call Custom_Theme_Strengthen()
+
+    autocmd ColorScheme * call Custom_Theme_Strengthen()
+    '''
+
+
+
+

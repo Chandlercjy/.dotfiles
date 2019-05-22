@@ -1,26 +1,27 @@
 
-"" ================== Initialize Which-key ==================
-set timeoutlen=500
-" let g:mapleader = ","
+" ================== Initialize Which-key ==================
+    set timeoutlen=500
+    " let g:mapleader = ","
 
-" 高亮prefix
-autocmd! FileType which_key
-autocmd FileType which_key highlight WhichKeyGroup guifg=PaleGoldenrod
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-            \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-map <silent> , :<c-u>WhichKey ','<CR>
-map <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
+    " 高亮prefix
+    autocmd! FileType which_key
+    autocmd FileType which_key highlight WhichKeyGroup guifg=PaleGoldenrod
+    autocmd  FileType which_key set laststatus=0 noshowmode noruler
+                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-"" ====================== Comma-prefix ======================
+    call which_key#register(',', 'g:comma_prefix_dict')
+    call which_key#register('<SPACE>', 'g:space_prefix_dict')
+    call which_key#register('[', 'g:left_parentheses_prefix_dict')
+    call which_key#register(']', 'g:right_parentheses_prefix_dict')
+    nnoremap <silent> , :<c-u>WhichKey ','<CR>
+    nnoremap <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
 
-let g:comma_prefix_dict =  {}
-let g:space_prefix_dict =  {}
-let g:left_parentheses_prefix_dict = {}
-let g:right_parentheses_prefix_dict = {}
-
-
-map ,y "+y
-let g:comma_prefix_dict.y = "yank to clipboard"
+" ====================== Comma-prefix ======================
+    let g:comma_prefix_dict =  {}
+    let g:space_prefix_dict =  {}
+    let g:left_parentheses_prefix_dict = {}
+    let g:right_parentheses_prefix_dict = {}
+    let g:comma_prefix_dict.y = "yank to clipboard"
 
     let g:comma_prefix_dict.c = {
                 \ 'name': '+nerd-comenter && cd',
@@ -28,7 +29,6 @@ let g:comma_prefix_dict.y = "yank to clipboard"
                 \ 'c' : ['<Plug>NERDCommenterToggle'                   , 'NERDComment Toggle']        ,
                 \ 'd' : [':cd %:p:h | echo "Change Dir successfully!"' , 'Back to current directory'] ,
                 \}
-
 
     let g:comma_prefix_dict.p = {
                 \ 'name' : '+Plugin',
@@ -39,29 +39,6 @@ let g:comma_prefix_dict.y = "yank to clipboard"
                 \ 'i': [':PlugInstall' , 'PlugInstall'] ,
                 \ 'U': [':PlugUpgrade' , 'PlugUpgrade'] ,
                 \}
-    noremap <silent> ,ds :GscopeFind s <C-R><C-W><cr>
-    noremap <silent> ,dg :GscopeFind g <C-R><C-W><cr>
-    noremap <silent> ,dc :GscopeFind c <C-R><C-W><cr>
-    noremap <silent> ,dt :GscopeFind t <C-R><C-W><cr>
-    noremap <silent> ,de :GscopeFind e <C-R><C-W><cr>
-    noremap <silent> ,df :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-    noremap <silent> ,di :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-    noremap <silent> ,dd :GscopeFind d <C-R><C-W><cr>
-    noremap <silent> ,da :GscopeFind a <C-R><C-W><cr>
-    let g:comma_prefix_dict.d = {
-                \ 'name' : '+Gtags',
-                \   's':'Find symbol (reference) under cursor'             ,
-                \   'g':'Find symbol definition under cursor'              ,
-                \   'c':'Functions called by this function'                ,
-                \   't':'Functions calling this function'                  ,
-                \   'e':'Find text string under cursor'                    ,
-                \   'f':'Find egrep pattern under cursor'                  ,
-                \   'i':'Find file name under cursor'                      ,
-                \   'd':'Find files #including the file name under cursor' ,
-                \   'a':'Find places where current symbol is assigned'     ,
-                \}
-
-
 
     let g:comma_prefix_dict.t = {
                 \ 'name' : '+Toggle'                       ,
@@ -74,8 +51,8 @@ let g:comma_prefix_dict.y = "yank to clipboard"
                 \ 'm': [':SignatureToggleSigns'            , 'Marks-Toggle']              ,
                 \ 's': [':setlocal spell! spelllang=en_us' , 'Spell-Toggle']              ,
                 \ 'S': [':AutoSaveToggle'                  , 'AutoSaveToggle']            ,
-                \ 'c': [':call ComfortableMotionToggle()'  , 'Comfortable-Motion-Toggle'] ,
-                \ 'C': [':call ConcealLevelToggle()'     , 'ConcealLevelToggle'] ,
+                \ 'c': [':call ConcealLevelToggle()'       , 'ConcealLevelToggle']        ,
+                \ 'C': [':call ComfortableMotionToggle()'  , 'Comfortable-Motion-Toggle'] ,
                 \ 'b': [':call BackgroundColorToggle()'    , 'BackgroundColorToggle']     ,
                 \ 't': [':TableModeToggle'                 , 'table-mode-Toggle']         ,
                 \ }
@@ -94,14 +71,12 @@ let g:comma_prefix_dict.y = "yank to clipboard"
 
 " ====================== Space-prefix ======================
     let g:space_prefix_dict.v = {
-                \ 'name' : '+Neovim_Config'                   ,
-                \ 's': [':FZF ~/.config/nvim'                 , 'Search config']    ,
-                \ 'p': [':FZF ~/.vim/plugged'                 , 'Search plugged']   ,
-                \ 'u': [':e ~/.config/nvim/utils.vim'         , 'utils.vim']        ,
-                \ 'i': [':e ~/.config/nvim/init.vim'          , 'init.vim']         ,
-                \ 'c': [':e ~/.config/nvim/init-custom.vim'   , 'init-custom.vim']  ,
-                \ 'r': [':source $MYVIMRC'                    , 'Source vimrc']     ,
-                \ 'C': [':e ~/.config/nvim/coc-settings.json' , 'coc-setting.json'] ,
+                \ 'name' : '+Neovim_Config'                  ,
+                \ 's': [':FZF ~/.config/nvim'                , 'Search config']    ,
+                \ 'i': [':e ~/.config/nvim/init.vim'         , 'init.vim']         ,
+                \ 'd': [':e ~/.config/nvim/init-default.vim' , 'init-default.vim'] ,
+                \ 'u': [':e ~/.config/nvim/init-utils.vim'   , 'init-utils.vim']   ,
+                \ 'c': [':e ~/.config/nvim/init-custom.vim'  , 'init-custom.vim']
                 \}
 
     let g:space_prefix_dict.f = {
@@ -129,8 +104,9 @@ let g:comma_prefix_dict.y = "yank to clipboard"
                 \ 'r' : [':Gread'    , 'fugitive-read']                        ,
                 \ 's' : [':Gstatus'  , 'fugitive-status']                      ,
                 \ 'w' : [':Gwrite'   , 'fugitive-write']                       ,
-                \ 'p' : [':Git push' , 'fugitive-push']                        ,
+                \ 'p' : [':Gitpush' , 'fugitive-push']                        ,
                 \ }
+
     let g:space_prefix_dict.s = {
                 \ 'name' : '+Swoop/Search' ,
                 \ 's' : [':call SwoopMultiSelection()' , 'swoop-multi-selection'] ,
@@ -157,16 +133,33 @@ let g:comma_prefix_dict.y = "yank to clipboard"
     let g:space_prefix_dict.b = [':Buffers'                        , 'Buffer-list']
     let g:space_prefix_dict.h = [':call HighlightSearchToggle()'   , 'HighlightSearchToggle']
     let g:space_prefix_dict.u = [':MundoToggle'                    , 'MundoToggle']
-    let g:space_prefix_dict[':'] = [":OverCommandLine '<,'>s/"     , 'Over-CommandLine']
-    " let g:space_prefix_dict['[']  = ['<Plug>(ale_previous)'        , "ALE_previous"]
-    " let g:space_prefix_dict[']'] = ['<Plug>(ale_next)'             , "ALE_NEXT"]
     let g:space_prefix_dict['[']  = ['<Plug>(coc-diagnostic-prev)' , "coc-dianostic-previous"]
     let g:space_prefix_dict[']'] = ['<Plug>(coc-diagnostic-next)'  , "coc-dianostic-next"]
 
-
     let g:space_prefix_dict['-']  = [':SSave! default' , "Save-Session-default"]
     let g:space_prefix_dict['=']  = [':SLoad default' , "Load-Session-default"]
-    vmap : :OverCommandLine<CR>
+
+    noremap <silent> ,ds :GscopeFind s <C-R><C-W><cr>
+    noremap <silent> ,dg :GscopeFind g <C-R><C-W><cr>
+    noremap <silent> ,dc :GscopeFind c <C-R><C-W><cr>
+    noremap <silent> ,dt :GscopeFind t <C-R><C-W><cr>
+    noremap <silent> ,de :GscopeFind e <C-R><C-W><cr>
+    noremap <silent> ,df :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+    noremap <silent> ,di :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+    noremap <silent> ,dd :GscopeFind d <C-R><C-W><cr>
+    noremap <silent> ,da :GscopeFind a <C-R><C-W><cr>
+    let g:comma_prefix_dict.d = {
+                \ 'name' : '+Gtags',
+                \   's':'Find symbol (reference) under cursor'             ,
+                \   'g':'Find symbol definition under cursor'              ,
+                \   'c':'Functions called by this function'                ,
+                \   't':'Functions calling this function'                  ,
+                \   'e':'Find text string under cursor'                    ,
+                \   'f':'Find egrep pattern under cursor'                  ,
+                \   'i':'Find file name under cursor'                      ,
+                \   'd':'Find files #including the file name under cursor' ,
+                \   'a':'Find places where current symbol is assigned'     ,
+                \}
 
 
 " =================== Parentheses-prefex ===================
@@ -178,7 +171,3 @@ let g:comma_prefix_dict.y = "yank to clipboard"
     let g:right_parentheses_prefix_dict.a = ['<Plug>(ale_next)'     , "ALE_NEXT"]
 
 " ================== Finalized Which-key ===================
-    call which_key#register(',', 'g:comma_prefix_dict')
-    call which_key#register('<SPACE>', 'g:space_prefix_dict')
-    call which_key#register('[', 'g:left_parentheses_prefix_dict')
-    call which_key#register(']', 'g:right_parentheses_prefix_dict')

@@ -59,10 +59,6 @@ def link_emacs():
     if create_link("~/.dotfiles/dot_emacs.d", emacs_dir):
         print("Link Emacs dotfile successed!")
 
-    print("Copy Emacs diy elpa packages successed!")
-    os.mkdir("~/.dotfiles/dot_emacs.d/elpa")
-    os.system("cp ~/.dotfiles/emacs_diy_elpa/* ~/.dotfiles/dot_emacs.d/elpa")
-
 
 def install_xterm24():
     script_path = HOME_DIR / ".dotfiles" / "dot_terminfo" / "setup.sh"
@@ -88,8 +84,8 @@ def add_source_shell():
     mark = "added by dotfiles!"
     mac_sed_cmd = ["sed", "-i", "", f"/{mark}/d", zshrc_path]
     sed_cmd = ["sed", "-i", f"/{mark}/d", zshrc_path]
-    subprocess.Popen(sed_cmd,stderr=subprocess.PIPE).wait()
-    subprocess.Popen(mac_sed_cmd,stderr=subprocess.PIPE).wait()
+    subprocess.Popen(sed_cmd, stderr=subprocess.PIPE).wait()
+    subprocess.Popen(mac_sed_cmd, stderr=subprocess.PIPE).wait()
     script = f"source ~/.dotfiles/init-shell.sh # {mark}"
     with open(zshrc_path, "a") as file:
         file.write(f"# Shell Initialization {mark}\n")
