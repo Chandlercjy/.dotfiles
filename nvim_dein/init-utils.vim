@@ -123,3 +123,6 @@
     function! HighlightSearchToggle()
         let &hlsearch = (&hls && v:hlsearch ? 0 : 1)
     endfunction
+
+
+    autocmd FileType markdown nmap <buffer> <Space>c :call ConcealLevelToggle()<CR>

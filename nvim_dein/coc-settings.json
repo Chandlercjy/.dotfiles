@@ -39,6 +39,5 @@
       "filetypes": ["c", "cpp", "objc", "objcpp"]
     }
   },
-  "java.errors.incompleteClasspath.severity": "ignore",
-  "suggest.noselect": false
+  "java.errors.incompleteClasspath.severity": "ignore"
 }

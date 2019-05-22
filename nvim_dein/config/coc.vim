@@ -41,7 +41,7 @@ endfunction
 
 
 " To make <cr> select the first completion item and confirm completion when no item have selected:
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
             \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
@@ -69,10 +69,8 @@ let g:coc_snippet_prev = '<S-Tab>'
 " nmap <leader>qf  <Plug>(coc-fix-current)
 
 " " Remap keys for gotos
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-" nnoremap <silent> <A-y>  :<C-u>CocList -A --normal yank<cr>
-" use <tab> for trigger completion and navigate to the next complete item
-
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> <A-y>  :<C-u>CocList -A --normal yank<cr>

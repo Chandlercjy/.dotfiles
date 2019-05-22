@@ -43,3 +43,4 @@
     execute 'source' expand('~/.config/nvim/init-default.vim')
     execute 'source' expand('~/.config/nvim/init-utils.vim')
     execute 'ru' expand('~/.config/nvim/init-custom.vim')
+

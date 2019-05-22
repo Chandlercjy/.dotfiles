@@ -63,6 +63,12 @@ on_cmd = ['GitGutterToggle']
 hook_source = 'let g:gitgutter_map_keys = 0'
 
 
+[[plugins]] 
+repo = 'junegunn/vim-peekaboo'    # 显示”寄存器
+on_path = ".*"
+
+
+
 # ======================== 系统增强类 =========================
 [[plugins]] 
 repo = 'mbbill/undotree'                 # 撤销记录
