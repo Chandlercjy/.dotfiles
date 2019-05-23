@@ -18,6 +18,11 @@ fi
 
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 
+if [ -n "$TMUX" ]; then
+    export TERM=screen-256color
+fi
+
+
 # =================== 取消brew自动更新 =====================
 export HOMEBREW_NO_AUTO_UPDATE=true
 
