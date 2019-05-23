@@ -1,4 +1,4 @@
-"" ===================== vim-choosewin ======================
+" ===================== vim-choosewin ======================
    " use overlay feature
    let g:choosewin_overlay_enable = 1
 
@@ -33,4 +33,3 @@
    " | s   | swap      | Swap windows #1            |
    " | S   | swap_stay | Swap windows but stay #1   |
    " +-----+-----------+----------------------------+
-

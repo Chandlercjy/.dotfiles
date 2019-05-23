@@ -1,3 +1,7 @@
+
+" curl --fail -L https://install-node.now.sh/latest | sh " install nodejs >=8.0
+" curl --compressed -o- -L https://yarnpkg.com/install.sh | bash " Install yarn
+
 function! InstallCocPlugin()
     :CocInstall coc-python
                 \ coc-tsserver
@@ -23,17 +27,6 @@ function! s:show_documentation()
 endfunction
 nnoremap <silent> <S-TAB> :call <SID>show_documentation()<CR>
 
-" " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent cal CocActionAsync('highlight')
-
-augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
@@ -57,6 +50,18 @@ inoremap <silent><expr> <TAB>
 
 let g:coc_snippet_next = '<tab>'
 let g:coc_snippet_prev = '<S-Tab>'
+
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent cal CocActionAsync('highlight')
+
+augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
 
 " " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph

@@ -1,46 +1,4 @@
-# ======================= 主题美化类 ========================
-
-[[plugins]]
-repo = 'kristijanhusak/vim-hybrid-material'       
-on_path ='.*'
-
-
-[[plugins]]
-repo = 'morhetz/gruvbox'                          
-hook_source ='let g:gruvbox_italic=1'
-on_path ='.*'
-
-
-[[plugins]]
-repo = 'ayu-theme/ayu-vim'                        
-on_path ='.*'
-
-
-[[plugins]]
-repo = 'arcticicestudio/nord-vim'                 
-on_path ='.*'
-hook_source = '''
-    let g:nord_italic = 1
-    let g:nord_underline = 1
-    let g:nord_italic_comments = 1
-    let g:nord_comment_brightness = 12
-'''
-
-
-[[plugins]]
-repo = 'rakr/vim-one'                             
-on_path ='.*'
-hook_source = '''
-    let g:one_allow_italics = 1 " I love italic for comments
-'''
-
-
-[[plugins]]
-repo = 'mhartington/oceanic-next'                 
-on_path ='.*'
-
 # ========================== 智能提示 ==========================
-
 [[plugins]] 
 repo = 'yggdroot/indentline'    # 缩进提示
 on_path ='.*'
@@ -66,7 +24,6 @@ hook_source = 'let g:gitgutter_map_keys = 0'
 [[plugins]] 
 repo = 'junegunn/vim-peekaboo'    # 显示”寄存器
 on_path = ".*"
-
 
 
 # ======================== 系统增强类 =========================
@@ -104,8 +61,6 @@ on_path ='.*'
 repo = 'tmux-plugins/vim-tmux-focus-events'
 on_path ='.*'
 
-
-
 [[plugins]] 
 repo = 'ConradIrwin/vim-bracketed-paste' # 使复制到终端的内容不会变乱
 on_path ='.*'
@@ -114,6 +69,7 @@ on_path ='.*'
 [[plugins]] 
 repo = 'mg979/vim-visual-multi'          # 通用编辑
 on_map = {n='<C-n>'}
+
 
 [[plugins]] 
 repo = 'jiangmiao/auto-pairs'            # 自动括号
@@ -175,6 +131,7 @@ hook_add = '''
     map ; <Plug>NERDCommenterToggle
 '''
 
+
 [[plugins]] 
 repo = 'scrooloose/nerdtree'       # 文件管理
 on_cmd = ['NERDTreeToggle']
@@ -184,16 +141,18 @@ hook_add = '''
    let NERDTreeIgnore=['\.pyc','\~$','\.swp'] " 忽略一下文件的显示
 '''
 
+
 [[plugins]] 
 repo = 'majutsushi/tagbar'         # 看标签
 on_cmd = ['TagbarToggle']
 hook_add = 'nmap <silent> <F4> :TagbarToggle<CR>'
 hook_source = '''
-    let g:tagbar_width = 40          " 设置tagbar的宽度为30列，默认40
+    let g:tagbar_width = 30          " 设置tagbar的宽度为30列，默认40
     let g:tagbar_left = 1
     let g:tagbar_map_closefold = "h"
     let g:tagbar_map_openfold = "l"
 '''
+
 
 [[plugins]] 
 repo = 'pelodelfuego/vim-swoop'    # 实用搜索
@@ -205,6 +164,7 @@ hook_source = 'let g:swoopUseDefaultKeyMap = 0'
 [[plugins]] 
 repo = 'dyng/ctrlsf.vim'           # 实用搜索
 on_cmd=['CtrlSF']
+
 
 [[plugins]] 
 repo = 'easymotion/vim-easymotion' # 快速跳转
@@ -236,7 +196,6 @@ hook_add = '''
 '''
 
 
-
 [[plugins]]
 repo = 'tpope/vim-eunuch'          # 各种实用命令
 on_path ='.*'
@@ -249,6 +208,7 @@ on_cmd = [ 'Delete', 'Unlink', 'Move', 'Rename', 'Chmod', 'Mkdir',
 repo = 'junegunn/fzf'                             # 搜索
 build = "./install --all"
 merged='0'
+
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
@@ -267,12 +227,12 @@ hook_source = '''
     let g:bclose_no_plugin_maps = 0 " Bclose为在Neovim下Ranger的依赖
 '''
 
+
 [[plugins]] 
 repo = 'kevinhui/vim-docker-tools'                # Docker管理
 on_cmd = ['DockerToolsToggle' ]
 
 # ========================== 趣味类 ===========================
-
 [[plugins]]
 repo = 'tweekmonster/startuptime.vim'  # 检查启动时间
 on_cmd = ['StartupTime']
@@ -297,7 +257,7 @@ on_cmd = ['Goyo']
 [[plugins]]                            # 实时显示正则替换
 repo = 'osyo-manga/vim-over'                      
 on_cmd = ['OverCommandLine']
-hook_source = 'vmap : :OverCommandLine<CR>'
+hook_add = 'vmap : :OverCommandLine<CR>'
 
 
 [[plugins]]
@@ -306,6 +266,7 @@ on_cmd = ['InteractiveWindow']
 hook_add = '''
     nmap + :InteractiveWindow<CR>
 '''
+
 
 [[plugins]]
 repo = 't9md/vim-choosewin'            # 方便地切换窗口
@@ -333,7 +294,6 @@ hook_add = '''
     map <A-Up> <Plug>MoveLineUp
     map <A-Left> <<
     map <A-Right> >>
-
     imap <A-Down> <ESC><Plug>MoveLineDownA
     imap <A-Up> <ESC><Plug>MoveLineUpA
     imap <A-Left> <ESC><<A
@@ -356,9 +316,8 @@ hook_source = '''
 # ========================== 代码类 ===========================
 [[plugins]]
 repo = 'w0rp/ale'
-on_paht= '.*'
+on_path= '.*'
 hook_source = 'source ~/.config/nvim/config/ale.vim'
-
 
 
 [[plugins]]
@@ -371,10 +330,12 @@ repo = 'tpope/vim-fugitive'        # Git集成
 on_cmd=['Gcommit','Gdiff', 'Gedit', 'Glog', 'Gread',
     'Gstatus', 'Gwrite', 'Gitpush','Gstatus']
 
+
 [[plugins]] 
 repo = 'junegunn/gv.vim'           # Git方便看commit
 depends = 'vim-fugitive'
 on_cmd = ['GV','GV!']
+
 
 [[plugins]] 
 repo = 'Chandlercjy/git-blame.vim' # Git方便看每行commit信息
@@ -401,14 +362,12 @@ hook_add = '''
     map <A-f> :TREPLSendFile<CR>
     vmap <A-CR> <Plug>(neoterm-repl-send)
     nmap <A-CR> <Plug>(neoterm-repl-send-line)j
-
     let g:neoterm_open_in_all_tabs = 0
     let g:neoterm_position = 'vertical'
     let g:neoterm_autoscroll = 1
     let g:neoterm_fixedsize = 1
     let g:neoterm_size = '80'
 '''
-
 
 # 自动生成ctags和查看
 # [[plugins]]
@@ -421,7 +380,6 @@ hook_add = '''
 
 
 #========================== 语言相关 ==========================
-
 [[plugins]]
 repo = 'sheerun/vim-polyglot'                 # 强大的各种语言高亮支持
 on_path = '.*'
@@ -438,9 +396,11 @@ hook_source = '''
    let g:cpp_experimental_simple_template_highlight = 1
 '''
 
+
 [[plugins]]                                   # 快速编译cmake
 repo = 'vhdirk/vim-cmake'   
 on_ft = ['c','cpp','hpp','h']
+
 
 [[plugins]]
 repo = 'cespare/vim-toml'
@@ -456,9 +416,11 @@ let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
 '''
 
+
 [[plugins]]                                   # 高亮html/xml tags
 repo = 'Valloric/MatchTagAlways'
 on_ft =['html','tags']
+
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim' 
@@ -479,13 +441,16 @@ autocmd Filetype go nnoremap <buffer> <S-Tab> :GoDoc<CR>
 repo = 'tex/vimpreviewpandoc'
 on_ft = ['markdown']
 
+
 [[plugins]]
 repo = 'Chandlercjy/vim-markdown-folding'         
 on_ft = ['markdown']
 
+
 [[plugins]]
 repo = 'Chandlercjy/vim-markdown-edit-code-block' 
 on_ft = ['markdown']
+
 
 [[plugins]]
 repo = 'iamcco/markdown-preview.vim'              
@@ -501,6 +466,7 @@ hook_source = '''
     autocmd FileType markdown nmap <buffer> <silent> <leader>s :MarkdownPreviewStop<CR>
     autocmd FileType markdown nmap <buffer> <silent> <leader>e :MarkdownEditBlock<CR>
 '''
+
 
 [[plugins]]
 repo = 'iamcco/mathjax-support-for-mkdp'         
@@ -536,6 +502,7 @@ depends = 'tagbar'
 [[plugins]]
 repo = 'tyru/open-browser.vim'
 on_ft =['plantuml']
+
 
 [[plugins]]
 repo = 'weirongxu/plantuml-previewer.vim' # 还需要安装 Graphviz 依赖
@@ -576,8 +543,6 @@ hook_source = 'autocmd FileType plantuml nmap <silent> <leader>m :PlantumlOpen<C
     #  | Helptags       | Help tags 1                                         |
     #  | Filetypes      | File types                                          |
     #  +----------------+-----------------------------------------------------+
-
-
 
 
 #  ======================= winteract ========================

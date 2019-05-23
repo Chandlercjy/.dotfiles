@@ -76,7 +76,9 @@
                 \ 'i': [':e ~/.config/nvim/init.vim'         , 'init.vim']         ,
                 \ 'd': [':e ~/.config/nvim/init-default.vim' , 'init-default.vim'] ,
                 \ 'u': [':e ~/.config/nvim/init-utils.vim'   , 'init-utils.vim']   ,
-                \ 'c': [':e ~/.config/nvim/init-custom.vim'  , 'init-custom.vim']
+                \ 'c': [':e ~/.config/nvim/init-custom.vim'  , 'init-custom.vim'],
+                \ 't': [':e ~/.config/nvim/config/deindefault.toml'  , 'deindefault.toml'],
+                \ 'l': [':e ~/.config/nvim/config/deinlazy.toml'  , 'deinlazy.toml']
                 \}
 
     let g:space_prefix_dict.f = {

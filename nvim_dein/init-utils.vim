@@ -52,6 +52,9 @@
             exec "!firefox % &"
         elseif &filetype == 'go'
             :AsyncRun -raw time go run %
+        elseif &filetype == 'vim'
+            " :AsyncRun -raw source %
+            :source %
         " elseif &filetype == 'java'
             " exec "!javac %"
             " exec "!time java %<"
