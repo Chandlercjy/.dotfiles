@@ -317,7 +317,7 @@ hook_source = '''
 [[plugins]]
 repo = 'w0rp/ale'
 on_path= '.*'
-hook_source = 'source ~/.config/nvim/config/ale.vim'
+hook_add = 'source ~/.config/nvim/config/ale.vim'
 
 
 [[plugins]]
@@ -356,8 +356,7 @@ hook_source = '''
 
 [[plugins]] 
 repo = 'Chandlercjy/neoterm'       # REPL
-# repo = 'kassio/neoterm'
-on_ft = ['python','js']
+on_ft = ['python']
 hook_add = '''
     map <A-f> :TREPLSendFile<CR>
     vmap <A-CR> <Plug>(neoterm-repl-send)
@@ -365,7 +364,7 @@ hook_add = '''
     let g:neoterm_open_in_all_tabs = 0
     let g:neoterm_position = 'vertical'
     let g:neoterm_autoscroll = 1
-    let g:neoterm_fixedsize = 1
+    let g:neoterm_fixedsize = 0
     let g:neoterm_size = '80'
 '''
 

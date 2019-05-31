@@ -3,7 +3,6 @@
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
     let g:ale_javascript_prettier_options = '--config ~/.prettierrc'
-    let g:ale_javascript_prettier_options = '--config ~/.prettierrc'
     let g:ale_fixers = {
                 \   'vim': ['remove_trailing_lines','trim_whitespace'],
                 \   'uml': ['remove_trailing_lines','trim_whitespace'],
@@ -23,7 +22,7 @@
 
 
     " 保存时自动调整
-    let g:ale_fix_on_save = 1
+    let g:ale_fix_on_save = 0
 
     " 控制刷新频率
     let g:ale_lint_on_enter = 0 "打开文件时不进行检查
@@ -51,3 +50,5 @@
     "let g:ale_cpp_clang_options = '-Wall -std=c++17'
     "let g:ale_javascript_prettier_options = '--tab-width 4 --prose-wrap always'
     let g:ale_c_parse_compile_commands = 1 " 在CMAKE中添加 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON) 就可以找到头文件
+
+

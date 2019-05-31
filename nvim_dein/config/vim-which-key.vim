@@ -15,6 +15,8 @@
     call which_key#register(']', 'g:right_parentheses_prefix_dict')
     nnoremap <silent> , :<c-u>WhichKey ','<CR>
     nnoremap <silent> <SPACE> :<c-u>WhichKey '<SPACE>'<CR>
+    nnoremap <silent> [ :<c-u>WhichKey '['<CR>
+    nnoremap <silent> ] :<c-u>WhichKey ']'<CR>
 
 " ====================== Comma-prefix ======================
     let g:comma_prefix_dict =  {}
@@ -170,7 +172,7 @@
     let g:right_parentheses_prefix_dict.g = ['<Plug>GitGutterPrevHunk', "GitGutterPrevHunk"]
 
 
-    let g:left_parentheses_prefix_dict.a  = ['<Plug>(ale_previous)' , "ALE_previous"]
-    let g:right_parentheses_prefix_dict.a = ['<Plug>(ale_next)'     , "ALE_NEXT"]
+    let g:left_parentheses_prefix_dict.a  = ['ALEPrevious' , "ALE_previous"]
+    let g:right_parentheses_prefix_dict.a = ['ALENext'     , "ALE_NEXT"]
 
 " ================== Finalized Which-key ===================
