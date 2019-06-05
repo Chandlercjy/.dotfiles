@@ -22,7 +22,7 @@
 
 
     " 保存时自动调整
-    let g:ale_fix_on_save = 0
+    autocmd FileType python let g:ale_fix_on_save = 1
 
     " 控制刷新频率
     let g:ale_lint_on_enter = 0 "打开文件时不进行检查

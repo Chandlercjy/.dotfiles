@@ -35,7 +35,6 @@
                 "parser": "markdown",
                 "semi": true,
                 "tabWidth": 2,
-                "trailingComma": "es6",
                 "jsxBracketSameLine": false,
                 "arrowParens": "avoid",
                 "bracketSpacing": true,
