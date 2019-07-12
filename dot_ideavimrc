@@ -1,0 +1,57 @@
+set ignorecase
+set incsearch
+set history
+set viminfo+=!
+set undolevels=1000
+set matchpairs
+
+" 系统支持插件
+set multiple-cursors
+set vim-surround
+
+" 关闭系统提示音
+set visualbell
+set noerrorbells
+
+" 配置文件快速讀取
+map <space>vr :source c:/Users/c00490945/.ideavimrc<CR>
+map <space>vi :e c:/Users/c00490945/.ideavimrc<CR>
+map <space>vg :e c:/Users/c00490945/.gradle/gradle.properties<CR>
+
+
+" 系统剪贴板
+map ,y "+y
+map ,p "+p
+
+" Smart close
+map q :wq<CR>
+nnoremap <A-q> q
+
+" 快速切換buffer
+map [b :action PreviousTab<CR>
+map ]b :action NextTab<CR>
+
+" easy-motion
+nmap t :action KJumpAction<CR>
+
+" Toggle高亮搜索
+nnoremap / :set hls<CR>/
+nnoremap * :set hls<CR>*
+nmap <space>h :set nohls<CR>
+
+map <space>a :action FindInPath<CR>
+map <space>s :action SearchEverywhere<CR>
+
+map ,f :action ReformatCode<CR>
+map ,r :action RunClass<CR>
+map ; :action CommentByLineComment<CR>
+map ,g :action GotoDeclaration<CR>
+map ,b :action ToggleLineBreakpoint<CR>
+nmap <S-tab> :action QuickJavaDoc<CR>
+nmap <C-w>m :action HideAllWindows<CR>
+nmap + :action EditorIncreaseFontSize<CR>
+nmap - :action EditorDecreaseFontSize<CR>
+nmap = :action EditorResetFontSize<CR>
+nmap <space>] :action GotoNextError<CR>
+nmap <space>[ :action GotoPreviousError<CR>
+nmap ? :action ShowErrorDescription<CR>
