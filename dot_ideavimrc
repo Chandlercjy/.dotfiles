@@ -14,9 +14,9 @@ set visualbell
 set noerrorbells
 
 " 配置文件快速讀取
-map <space>vr :source c:/Users/c00490945/.ideavimrc<CR>
-map <space>vi :e c:/Users/c00490945/.ideavimrc<CR>
-map <space>vg :e c:/Users/c00490945/.gradle/gradle.properties<CR>
+map <space>vr :source ~/.ideavimrc<CR>
+map <space>vi :e ~/.ideavimrc<CR>
+map <space>vg :e ~/.gradle/gradle.properties<CR>
 
 
 " 系统剪贴板
