@@ -44,7 +44,7 @@
             " :AsyncRun -raw tsc % && node %:r.js
             :AsyncRun -raw ts-node %
             " :AsyncRun -raw node %:r.js
-        elseif &filetype == 'javascript.jsx'
+        elseif &filetype == 'javascript'
             :AsyncRun -raw node %
         elseif &filetype == 'sh'
             :AsyncRun -raw bash %

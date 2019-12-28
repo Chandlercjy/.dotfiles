@@ -1,8 +1,8 @@
 export EDITOR='nvim' # Editor Shotcut
 
 # System setting
-export TERM=xterm-24bits
-# export TERM=xterm-256color
+# export TERM=xterm-24bits
+export TERM=xterm-256color
 
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
@@ -35,7 +35,7 @@ alias ll="ls -la -h"
 # alias et='emacsclient -t -a ""'
 # alias ec='emacsclient -c -a ""'
 
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .repo -g ""'
+# export FZF_DEFAULT_COMMAND='ag --hidden --ignore .repo -g ""'
 export MAN_DISABLE_SECCOMP=1 # Fix Man bugs
 
 # ========================== Lib ===========================

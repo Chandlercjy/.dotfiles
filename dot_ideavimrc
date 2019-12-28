@@ -7,7 +7,7 @@ set matchpairs
 
 " 系统支持插件
 set multiple-cursors
-set vim-surround
+set surround
 
 " 关闭系统提示音
 set visualbell
@@ -42,8 +42,11 @@ nmap <space>h :set nohls<CR>
 map <space>a :action FindInPath<CR>
 map <space>s :action SearchEverywhere<CR>
 
-map ,f :action ReformatCode<CR>
-map ,r :action RunClass<CR>
+"map ,f :action ReformatCode<CR>
+map ,f :action ReformatWithPrettierAction<CR>
+
+map ,r :action ChooseRunConfiguration<CR>
+map ,e :action RunClass<CR>
 map ; :action CommentByLineComment<CR>
 map ,g :action GotoDeclaration<CR>
 map ,b :action ToggleLineBreakpoint<CR>
@@ -55,3 +58,7 @@ nmap = :action EditorResetFontSize<CR>
 nmap <space>] :action GotoNextError<CR>
 nmap <space>[ :action GotoPreviousError<CR>
 nmap ? :action ShowErrorDescription<CR>
+map <S-CR> :action ExecuteInPyConsoleAction<CR>
+
+map <space>pp :action GotoFile<CR>
+set ideajoin

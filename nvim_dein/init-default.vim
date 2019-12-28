@@ -79,7 +79,7 @@
     set fillchars+=stl:\ ,stlnc:\
 
     " 折叠
-    set foldmethod=indent                    " 基于语法进行代码折叠
+    " set foldmethod=indent                    " 基于语法进行代码折叠
     set nofoldenable                         " 启动 vim 时不折叠代码
     " set foldenable
     " set foldlevel=3
@@ -121,7 +121,7 @@
         " Neovim 设置
         let g:python_host_skip_check=1
         let g:python3_host_skip_check=1
-        let g:python3_host_prog='python3'
+        let g:python3_host_prog='/usr/local/bin/python3'
         let g:python_host_prog=''
 
         "Neovim Terminal变换
@@ -174,3 +174,5 @@
 
     " 复制到剪贴板
     map ,y "+y
+    " 剪贴板粘贴到vim
+    map ,p "+p

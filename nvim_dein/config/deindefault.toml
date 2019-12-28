@@ -3,7 +3,7 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'        # 代码补全
-build = './install.sh nightly'
+rev = 'release'
 hook_add = 'source ~/.config/nvim/config/coc.vim'
 
 [[plugins]]
