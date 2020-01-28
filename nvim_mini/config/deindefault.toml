@@ -1,0 +1,87 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'        # 代码补全
+rev = 'release'
+hook_add = 'source ~/.config/nvim/config/coc.vim'
+
+[[plugins]]
+repo = 'SirVer/ultisnips'         # 自动生成代码
+hook_add = 'source ~/.config/nvim/config/ultisnips.vim'
+
+[[plugins]]
+repo = 'liuchengxu/vim-which-key' # 快捷键导航
+hook_add = 'source ~/.config/nvim/config/vim-which-key.vim'
+
+
+
+[[plugins]] 
+repo = 'itchyny/vim-cursorword' # 给同样的单词加下划线
+on_path ='.*'
+
+
+# ======================= 主题美化类 ========================
+[[plugins]]
+repo = 'mhinz/vim-startify'             # 启动画面
+depends = 'vim-devicons'
+hook_add = 'source ~/.config/nvim/config/vim-startify.vim'
+
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'        # 状态栏
+hook_add = 'source ~/.config/nvim/config/vim-airline.vim'
+
+
+# [[plugins]]
+# repo = 'vim-airline/vim-airline-themes' # 状态栏主题
+# depends = 'vim-airline/vim-airline'
+
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'         # 需要安装 https://github.com/ryanoasis/nerd-fonts#option-3-install-script
+
+
+# [[plugins]]                             # 进度滚动条
+# repo = 'gcavallanti/vim-noscrollbar'
+# depends = 'vim-airline/vim-airline'
+
+
+# ======================= 各种主题 ========================
+[[plugins]]
+repo = 'drewtempelmeyer/palenight.vim'    
+hook_add = 'let g:palenight_terminal_italics=1'
+
+
+[[plugins]]
+repo = 'kristijanhusak/vim-hybrid-material'       
+
+
+[[plugins]]
+repo = 'morhetz/gruvbox'                          
+hook_source ='let g:gruvbox_italic=1'
+
+
+[[plugins]]
+repo = 'ayu-theme/ayu-vim'                        
+
+
+[[plugins]]
+repo = 'arcticicestudio/nord-vim'                 
+hook_source = '''
+    let g:nord_italic = 1
+    let g:nord_underline = 1
+    let g:nord_italic_comments = 1
+    let g:nord_comment_brightness = 12
+'''
+
+
+[[plugins]]
+repo = 'rakr/vim-one'                             
+hook_source = '''
+    let g:one_allow_italics = 1 " I love italic for comments
+'''
+
+
+[[plugins]]
+repo = 'mhartington/oceanic-next'                 

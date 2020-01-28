@@ -3,18 +3,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " 借鉴自SpaceVim，绑定quit到q按键
     fu! SmartClose() abort
-        "let ignorewin = get(g:,'spacevim_smartcloseignorewin',[])
-        "let ignoreft = get(g:, 'spacevim_smartcloseignoreft',[])
         let win_count = winnr('$')
         let num = win_count
-        " for i in range(1,win_count)
-        " " if index(ignorewin , bufname(winbufnr(i))) != -1 || index(ignoreft, getbufvar(bufname(winbufnr(i)),'&filetype')) != -1
-        " " let num = num - 1
-        " " endif
-        " if getbufvar(winbufnr(i),'&buftype') ==# 'quickfix'
-        " let num = num - 1
-        " endif
-        " endfor
         if num == 1
         else
             quit
@@ -42,6 +32,38 @@
     endfu
 
 
+    func! AsyncRun_Code()
+        silent exec "w"
+        if &filetype == 'python'
+            :AsyncRun -raw time python3 %
+        elseif &filetype == 'cpp'
+            :AsyncRun -raw g++ -std=c++17 -Wall % -o %< && ./%<
+        elseif &filetype == 'c'
+            :AsyncRun -raw gcc -Wall % -o %< && ./%<
+        elseif &filetype == 'typescript'
+            " :AsyncRun -raw tsc % && node %:r.js
+            :AsyncRun -raw ts-node %
+            " :AsyncRun -raw node %:r.js
+        elseif &filetype == 'javascript'
+            :AsyncRun -raw node %
+        elseif &filetype == 'sh'
+            :AsyncRun -raw bash %
+        elseif &filetype == 'html'
+            exec "!firefox % &"
+        elseif &filetype == 'go'
+            :AsyncRun -raw time go run %
+        elseif &filetype == 'vim'
+            " :AsyncRun -raw source %
+            :source %
+        " elseif &filetype == 'java'
+            " exec "!javac %"
+            " exec "!time java %<"
+        else
+            echo "No Command for AsyncRun!"
+        endif
+    endfunc
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Toggle Functions                               "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -60,34 +82,6 @@
             let g:comfortable_motion_is_enabled = 1
         endif
     endfunction
-
-    func! AsyncRun_Code()
-        silent exec "w"
-        if &filetype == 'python'
-            :AsyncRun -raw time python3 %
-        elseif &filetype == 'cpp'
-            :AsyncRun -raw g++ -std=c++17 -Wall % -o %< && ./%<
-        elseif &filetype == 'c'
-            :AsyncRun -raw gcc -Wall % -o %< && ./%<
-        elseif &filetype == 'typescript'
-            " :AsyncRun -raw tsc % && node %:r.js
-            :AsyncRun -raw ts-node %
-            " :AsyncRun -raw node %:r.js
-        elseif &filetype == 'javascript.jsx'
-            :AsyncRun -raw node %
-        elseif &filetype == 'sh'
-            :AsyncRun -raw bash %
-        elseif &filetype == 'html'
-            exec "!firefox % &"
-        elseif &filetype == 'go'
-            :AsyncRun -raw time go run %
-        " elseif &filetype == 'java'
-            " exec "!javac %"
-            " exec "!time java %<"
-        else
-            echo "No Command for AsyncRun!"
-        endif
-    endfunc
 
     function! QuickfixToggle()
         " remember where we are
@@ -132,3 +126,6 @@
     function! HighlightSearchToggle()
         let &hlsearch = (&hls && v:hlsearch ? 0 : 1)
     endfunction
+
+
+    autocmd FileType markdown nmap <buffer> <Space>c :call ConcealLevelToggle()<CR>

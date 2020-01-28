@@ -15,7 +15,7 @@
   "diagnostic.warningSign": "⚡",
   "diagnostic.level": "99999",
   "pairs.disableLanguages": ["python"],
-  "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`","<"],
+  "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`", "<"],
 
   // coc-yank
   "yank.highlight.enable": true,

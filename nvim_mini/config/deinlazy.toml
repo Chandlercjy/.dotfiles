@@ -1,0 +1,621 @@
+# ========================== 智能提示 ==========================
+# [[plugins]] 
+# repo = 'yggdroot/indentline'    # 缩进提示
+# on_path ='.*'
+
+
+
+# [[plugins]] 
+# repo = 'kshenoy/vim-signature'  # 左边栏显示mark
+# on_path ='.*'
+
+
+[[plugins]] 
+repo = 'airblade/vim-gitgutter'    # Git标志
+on_map = {n = '<Plug>'}
+on_cmd = ['GitGutterToggle']
+hook_source = 'let g:gitgutter_map_keys = 0'
+
+
+# [[plugins]] 
+# repo = 'junegunn/vim-peekaboo'    # 显示”寄存器
+# on_path = ".*"
+
+
+# ======================== 系统增强类 =========================
+# [[plugins]] 
+# repo = 'mbbill/undotree'                 # 撤销记录
+# on_cmd = ['UndotreeToggle']
+
+[[plugins]] 
+repo = 'simnalamburt/vim-mundo'          # 撤销记录
+on_cmd = ['MundoToggle' ]
+
+
+# [[plugins]]
+# repo = 'pseewald/vim-anyfold'            # 加强缩进折叠
+# on_path ='.*'
+# hook_source = '''
+    # autocmd Filetype python,vim AnyFoldActivate
+    # let g:anyfold_fold_comments=1
+# '''
+
+[[plugins]]
+repo = 'tpope/vim-repeat'                # 系统.命令的加强
+on_path ='.*'
+hook_source = 'silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)'
+
+[[plugins]]
+repo = 'pbrisbin/vim-mkdir'              # 可以自动创建文件夹不报错
+on_path ='.*'
+
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'  # Tmux加强
+on_path ='.*'
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux-focus-events'
+on_path ='.*'
+
+[[plugins]] 
+repo = 'ConradIrwin/vim-bracketed-paste' # 使复制到终端的内容不会变乱
+on_path ='.*'
+
+
+[[plugins]] 
+repo = 'mg979/vim-visual-multi'          # 通用编辑
+on_map = {n='<C-n>'}
+
+
+[[plugins]] 
+repo = 'jiangmiao/auto-pairs'            # 自动括号
+on_path ='.*'
+
+
+[[plugins]] 
+repo = 'rbgrouleff/bclose.vim'           # 完全关闭buffer
+on_cmd = ['Bclose']
+
+
+[[plugins]] 
+repo = 'terryma/vim-expand-region'       # 快速选择
+on_map = {n = '<Plug>'}
+hook_add ='''
+    map <CR> <Plug>(expand_region_expand)
+    map _ <Plug>(expand_region_shrink)
+'''
+
+
+# [[plugins]] 
+# repo = 'rhysd/clever-f.vim'              # 增强f命令
+# on_map = {n = '<Plug>'}
+# hook_add = '''
+    # let g:clever_f_smart_case = 1
+    # let g:clever_f_chars_match_any_signs = ";"
+    # let g:clever_f_not_overwrites_standard_mappings = 0
+    # map f <Plug>(clever-f-f)
+    # map F <Plug>(clever-f-F)
+# '''
+
+
+[[plugins]] 
+repo = 'tpope/vim-surround'              # 快捷键加括号
+on_path ='.*'
+hook_source = '''
+    vmap ( S)
+    vmap ) S)
+    vmap [ S]
+    vmap ] S]
+    vmap ' S'
+    vmap ` S`
+'''
+
+
+# ========================== 实用类 ===========================
+[[plugins]]
+repo = 'wsdjeg/dein-ui.vim'
+on_cmd = ['DeinUpdate']
+
+
+[[plugins]] 
+repo = 'scrooloose/nerdcommenter'  # 注释
+on_path ='.*'
+hook_add = '''
+    let g:NERDSpaceDelims = 1
+    let g:NERDCreateDefaultMappings = 0
+    map ,cc <Plug>NERDCommenterToggle
+    map ; <Plug>NERDCommenterToggle
+'''
+
+
+[[plugins]] 
+repo = 'scrooloose/nerdtree'       # 文件管理
+on_cmd = ['NERDTreeToggle']
+hook_add = '''
+   map <F2> :NERDTreeToggle<CR>
+   let NERDTreeWinPos="left"
+   let NERDTreeIgnore=['\.pyc','\~$','\.swp'] " 忽略一下文件的显示
+'''
+
+
+[[plugins]] 
+repo = 'majutsushi/tagbar'         # 看标签
+on_cmd = ['TagbarToggle']
+hook_add = 'nmap <silent> <F4> :TagbarToggle<CR>'
+hook_source = '''
+    let g:tagbar_width = 30          " 设置tagbar的宽度为30列，默认40
+    let g:tagbar_left = 1
+    let g:tagbar_map_closefold = "h"
+    let g:tagbar_map_openfold = "l"
+'''
+
+
+# [[plugins]] 
+# repo = 'pelodelfuego/vim-swoop'    # 实用搜索
+# on_func = 'SwoopMulti'
+# hook_add = 'map <C-S> :call SwoopMulti()<CR>'
+# hook_source = 'let g:swoopUseDefaultKeyMap = 0'
+
+
+[[plugins]] 
+repo = 'dyng/ctrlsf.vim'           # 实用搜索
+on_cmd=['CtrlSF']
+
+
+[[plugins]] 
+repo = 'easymotion/vim-easymotion' # 快速跳转
+on_map = {n = '<Plug>'}
+hook_add = '''
+    let g:EasyMotion_do_mapping = 0
+    let g:EasyMotion_smartcase = 1 " 忽略大小写
+    let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+    nmap t <Plug>(easymotion-overwin-f)
+    nmap ? <Plug>(easymotion-Fn)
+'''
+
+
+[[plugins]] 
+repo = 'junegunn/vim-easy-align'   # 对齐格式
+on_path ='.*'
+hook_add = '''
+    xmap ga <Plug>(EasyAlign)
+    nmap ga <Plug>(EasyAlign)
+'''
+
+
+[[plugins]]
+repo = 'wvffle/vimterm'            # 方便的调用终端
+on_func = ['vimterm#toggle']
+hook_add = '''
+    nnoremap <F7> :call vimterm#toggle() <CR>
+    tnoremap <F7> <C-\><C-n>:call vimterm#toggle() <CR>
+'''
+
+
+[[plugins]]
+repo = 'tpope/vim-eunuch'          # 各种实用命令
+on_path ='.*'
+on_cmd = [ 'Delete', 'Unlink', 'Move', 'Rename', 'Chmod', 'Mkdir',
+       'Cfind', 'Clocate', 'Lfind', 'Wall', 'SudoWrite', 'SudoEdit']
+
+
+ # ======================= 需要依赖外部插件的 ========================
+[[plugins]] 
+repo = 'junegunn/fzf'                             # 搜索
+build = "./install --all"
+merged='0'
+
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+on_path ='.*'
+hook_source = 'source ~/.config/nvim/config/fzf.vim'
+
+
+[[plugins]]
+repo = 'francoiscabrol/ranger.vim'                
+on_cmd = ['Ranger']
+hook_source = '''
+    let g:NERDTreeHijackNetrw = 0
+    " open ranger when vim open a directory
+    let g:ranger_replace_netrw = 1
+    let g:ranger_map_keys = 0
+    let g:bclose_no_plugin_maps = 0 " Bclose为在Neovim下Ranger的依赖
+'''
+
+
+[[plugins]] 
+repo = 'kevinhui/vim-docker-tools'                # Docker管理
+on_cmd = ['DockerToolsToggle' ]
+
+# ========================== 趣味类 ===========================
+[[plugins]]
+repo = 'tweekmonster/startuptime.vim'  # 检查启动时间
+on_cmd = ['StartupTime']
+
+
+[[plugins]]
+repo = 'yuttie/comfortable-motion.vim' # 舒服的滚动
+on_path ='.*'
+hook_source = '''
+   let g:comfortable_motion_no_default_key_mappings = 1
+   let g:comfortable_motion_impulse_multiplier = 1  " Feel free to increase/decrease this value.
+   let g:comfortable_motion_is_enabled = 0
+   call ComfortableMotionToggle()
+'''
+
+
+# [[plugins]]
+# repo = 'junegunn/goyo.vim'             # 无打扰模式
+# on_cmd = ['Goyo']
+
+
+[[plugins]]                            # 实时显示正则替换
+repo = 'osyo-manga/vim-over'                      
+on_cmd = ['OverCommandLine']
+hook_add = 'vmap : :OverCommandLine<CR>'
+
+
+# [[plugins]]
+# repo = 'romgrk/winteract.vim'          # 方便地控制窗口
+# on_cmd = ['InteractiveWindow']
+# hook_add = '''
+    # nmap + :InteractiveWindow<CR>
+# '''
+
+
+# [[plugins]]
+# repo = 't9md/vim-choosewin'            # 方便地切换窗口
+# on_map = {n = '<Plug>'}
+# hook_source = '''
+    # source ~/.config/nvim/config/vim-choosewin.vim
+    # nmap - <Plug>(choosewin) 
+# '''
+
+
+# [[plugins]] 
+# repo = 'wellle/visual-split.vim'       # 方便的分割
+# on_map = {n = '<Plug>'}
+# hook_add = '''
+    # vmap <C-w>k <Plug>(Visual-Split-VSSplitAbove)
+    # vmap <C-w>j <Plug>(Visual-Split-VSSplitBelow)
+# '''
+
+
+# [[plugins]] 
+# repo = 'matze/vim-move'                # 方便地移动上下行
+# on_map = {n = '<Plug>'}
+# hook_add = '''
+    # map <A-Down> <Plug>MoveLineDown
+    # map <A-Up> <Plug>MoveLineUp
+    # map <A-Left> <<
+    # map <A-Right> >>
+    # imap <A-Down> <ESC><Plug>MoveLineDownA
+    # imap <A-Up> <ESC><Plug>MoveLineUpA
+    # imap <A-Left> <ESC><<A
+    # imap <A-Right> <ESC>>>A
+# '''
+
+
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'    # 强大的表格模式
+on_map = {n = '<Plug>'}
+on_cmd = ['TableModeToggle']
+hook_source = '''
+   let g:table_mode_corner='|'
+   let g:table_mode_corner_corner='|'
+   let g:table_mode_header_fillchar='-'
+   let g:table_mode_sort_map = '<Leader>ts'
+'''
+
+
+# ========================== 代码类 ===========================
+[[plugins]]
+repo = 'w0rp/ale'
+on_path= '.*'
+hook_add = 'source ~/.config/nvim/config/ale.vim'
+
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+on_path ='.*'
+
+
+[[plugins]] 
+repo = 'tpope/vim-fugitive'        # Git集成
+on_cmd=['Gcommit','Gdiff', 'Gedit', 'Glog', 'Gread',
+    'Gstatus', 'Gwrite', 'Gitpush','Gstatus']
+
+
+[[plugins]] 
+repo = 'junegunn/gv.vim'           # Git方便看commit
+depends = 'vim-fugitive'
+on_cmd = ['GV','GV!']
+
+
+[[plugins]] 
+repo = 'Chandlercjy/git-blame.vim' # Git方便看每行commit信息
+on_cmd = ['GitBlame']
+
+
+[[plugins]]
+repo = 'skywind3000/asyncrun.vim'  # 异步运行
+on_cmd = ['AsyncRun','AsyncStop']
+on_func = ['AsyncRun_Code']
+hook_source = '''
+    let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml']
+    let g:asyncrun_open = 10
+    let $PYTHONUNBUFFERED=1
+    let g:asyncrun_save = 2 " non-zero to save current(1) or all(2) modified buffer(s) before executing
+'''
+
+
+# [[plugins]] 
+# repo = 'kassio/neoterm'       # REPL
+# on_ft = ['python']
+# hook_add = '''
+    # map <A-f> :TREPLSendFile<CR>
+    # vmap <A-CR> <Plug>(neoterm-repl-send)
+    # nmap <A-CR> <Plug>(neoterm-repl-send-line)j
+    # let g:neoterm_open_in_all_tabs = 0
+    # "let g:neoterm_position = 'vertical'
+    # let g:neoterm_autoscroll = 1
+    # let g:neoterm_fixedsize = 0
+    # let g:neoterm_size = '80'
+# '''
+
+# 自动生成ctags和查看
+# [[plugins]]
+# repo = 'ludovicchabant/vim-gutentags'
+# hook_source = 'source ~/.config/nvim/config/vim-gutentags.vim'
+
+# [[plugins]]
+# repo = 'skywind3000/gutentags_plus'
+# hook_source = 'source ~/.config/nvim/config/gutentags_plus.vim'
+
+
+#========================== 语言相关 ==========================
+[[plugins]]
+repo = 'sheerun/vim-polyglot'                 # 强大的各种语言高亮支持
+on_path = '.*'
+hook_source = '''
+   " Python
+   " let g:python_highlight_all = 1
+   " set re=1 " python语法高亮后会延迟,换用旧款正则表达式引擎即可修复
+   " set lazyredraw
+
+   " Cpp
+   let g:cpp_class_scope_highlight = 1
+   let g:cpp_member_variable_highlight = 1
+   let g:cpp_class_decl_highlight = 1
+   let g:cpp_experimental_simple_template_highlight = 1
+'''
+
+
+# [[plugins]]                                   # 快速编译cmake
+# repo = 'vhdirk/vim-cmake'   
+# on_ft = ['c','cpp','hpp','h']
+
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
+
+
+# [[plugins]]
+# repo = 'pangloss/vim-javascript'
+# on_ft = ['js']
+# hook_source = '''
+# let g:javascript_plugin_jsdoc = 1
+# let g:javascript_plugin_ngdoc = 1
+# let g:javascript_plugin_flow = 1
+# '''
+
+
+# [[plugins]]                                   # 高亮html/xml tags
+# repo = 'Valloric/MatchTagAlways'
+# on_ft =['html','tags']
+
+
+# [[plugins]]
+# repo = 'leafgarland/typescript-vim' 
+# on_cmd = ['typescript']
+
+
+# [[plugins]]
+# repo = 'fatih/vim-go'
+# on_ft = ['go']
+# hook_post_update = 'GoUpdateBinaries'
+# hook_add ='''
+# autocmd Filetype go nnoremap <buffer> <S-Tab> :GoDoc<CR>
+# '''
+
+
+# ======================== Markdown ========================
+# [[plugins]]
+# repo = 'tex/vimpreviewpandoc'
+# on_ft = ['markdown']
+
+
+# [[plugins]]
+# repo = 'Chandlercjy/vim-markdown-folding'         
+# on_ft = ['markdown']
+
+
+# [[plugins]]
+# repo = 'Chandlercjy/vim-markdown-edit-code-block' 
+# on_ft = ['markdown']
+
+
+# [[plugins]]
+# repo = 'iamcco/markdown-preview.vim'              
+# on_ft = ['markdown']
+# hook_source = '''
+    # augroup PrevimSettings
+        # autocmd!
+        # autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+    # augroup END
+
+    # autocmd FileType markdown nmap <buffer> <silent> o A<CR>
+    # autocmd FileType markdown nmap <buffer> <silent> <leader>m :MarkdownPreview<CR>
+    # autocmd FileType markdown nmap <buffer> <silent> <leader>s :MarkdownPreviewStop<CR>
+    # autocmd FileType markdown nmap <buffer> <silent> <leader>e :MarkdownEditBlock<CR>
+# '''
+
+
+# [[plugins]]
+# repo = 'iamcco/mathjax-support-for-mkdp'         
+# on_ft = ['markdown']
+# hook_source = '''
+    # let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
+    # let g:mkdp_refresh_slow = 0
+# '''
+
+
+# [[plugins]]
+# repo = 'mzlogin/vim-markdown-toc'                 
+# on_ft = ['markdown']
+
+
+# [[plugins]]
+# repo = 'plasticboy/vim-markdown'                  
+# on_ft = ['markdown']
+# hook_source ='''
+# let g:vim_markdown_fenced_languages = ['javascript=cpp',
+    # \ 'python=python'
+    # \ ]
+# '''
+
+
+# [[plugins]]
+# repo = 'lvht/tagbar-markdown'                     
+# on_ft = ['markdown']
+# depends = 'tagbar'
+
+
+# ======================== PlantUML ========================
+# [[plugins]]
+# repo = 'tyru/open-browser.vim'
+# on_ft =['plantuml']
+
+
+# [[plugins]]
+# repo = 'weirongxu/plantuml-previewer.vim' # 还需要安装 Graphviz 依赖
+# on_ft =['plantuml']
+# hook_source = 'autocmd FileType plantuml nmap <silent> <leader>m :PlantumlOpen<CR>'
+
+
+###############################################################################
+# Plugin Instruction                                                          #
+###############################################################################
+
+#  ========================== FZF ===========================
+    #  +----------------+-----------------------------------------------------+
+    #  | Command        | List                                                |
+    #  +================+=====================================================+
+    #  | Files [PATH]   | Files (similar to :FZF)                             |
+    #  | GFiles [OPTS]  | Git files (git ls-files)                            |
+    #  | GFiles?        | Git files (git status)                              |
+    #  | Buffers        | Open buffers                                        |
+    #  | Colors         | Color schemes                                       |
+    #  | Ag [PATTERN]   | Search (ALT-A to select all, ALT-D to deselect all) |
+    #  | Rg [PATTERN]   | Search (ALT-A to select all, ALT-D to deselect all) |
+    #  | Lines [QUERY]  | Lines in loaded buffers                             |
+    #  | BLines [QUERY] | Lines in the current buffer                         |
+    #  | Tags [QUERY]   | Tags in the project (ctags -R)                      |
+    #  | BTags [QUERY]  | Tags in the current buffer                          |
+    #  | Marks          | Marks                                               |
+    #  | Windows        | Windows                                             |
+    #  | Locate PATTERN | locate command output                               |
+    #  | History        | v:oldfiles and open buffers                         |
+    #  | History:       | Command history                                     |
+    #  | History/       | Search history                                      |
+    #  | Snippets       | Snippets (UltiSnips)                                |
+    #  | Commits        | Git commits (requires fugitive.vim)                 |
+    #  | BCommits       | Git commits for the current buffer                  |
+    #  | Commands       | Commands                                            |
+    #  | Maps           | Normal mode mappings                                |
+    #  | Helptags       | Help tags 1                                         |
+    #  | Filetypes      | File types                                          |
+    #  +----------------+-----------------------------------------------------+
+
+
+#  ======================= winteract ========================
+    #  +--------------------------+-----------------+
+    #  | Key                      | Action          |
+    #  +==========================+=================+
+    #  | j/k/h/l                  | resize          |
+    #  | F                        | fullwidth       |
+    #  | f                        | fullheight      |
+    #  | o (!closes all others)   | fullscreen      |
+    #  | =                        | equalize        |
+    #  | &                        | width=textwidth |
+    #  | s/v                      | [v]split        |
+    #  | x/c                      | close           |
+    #  | Alt + [jkhl]             | focus           |
+    #  | w/W                      | next/prev       |
+    #  | H/J/K/L                  | move window     |
+    #  | m{h/j/k/l} or g{h/j/k/l} |                 |
+    #  | mx or gx                 | exchange        |
+    #  | n/p, <S-TAB>/<TAB>       | change buffer   |
+    #  | <ESC>, <CR>              | exit mode       |
+    #  +--------------------------+-----------------+
+
+#  ===================== vim-table-mode =====================
+    #  +-------------+---------------------------------+
+    #  | Key         | Action                          |
+    #  +=============+=================================+
+    #  | <leader>t   | Prefix for table mode commands. |
+    #  | <leader>tt  | Tablelize                       |
+    #  | <leader>tm  | Toggle table mode               |
+    #  | <leader>ts  | Sort a column                   |
+    #  | <leader>tr  | Realigns table columns          |
+    #  | <leader>tdd | Delete the table row            |
+    #  | <leader>tdc | Delete table column             |
+    #  | <leader>tfa | Add a fomula for  table cell.   |
+    #  | <leader>tfe | Evaluate the formula line       |
+    #  | ||          | Expands to a header border.     |
+    #  | [|          | Move to previous cell           |
+    #  | ]|          | Move to next cell               |
+    #  | {|          | Move to the cell above          |
+    #  | }|          | Move to the cell below          |
+    #  +-------------+---------------------------------+
+
+
+#  ====================== vim-fugitive ======================
+    #  |-----|---------------------------------|
+    #  | Key | Action                          |
+    #  |-----|---------------------------------|
+    #  | -   | 添加/删除文件                   |
+    #  | \   | 向下分割一个窗口打开当前文件    |
+    #  | P   | 为当前文件运行 “git add -patch” |
+    #  | C   | 调用 :Gcommit                   |
+    #  |-----|---------------------------------|
+
+#  ======================= vim-eunuch =======================
+    #  |-------------------|----------------------------------------------------------------------|
+    #  | Key               | Action                                                               |
+    #  |-------------------|----------------------------------------------------------------------|
+    #  | :Delete           | Delete a buffer and the file on disk simultaneously.                 |
+    #  | :Unlink           | Like:Delete, but keeps the now empty buffer.                         |
+    #  | :Move             | Rename a buffer and the file on disk simultaneously.                 |
+    #  | :Rename           | Like: Move, but relative to the current file's containing directory. |
+    #  | :Chmod            | Change the permissions of the current file.                          |
+    #  | :Mkdir            | Create a directory, defaulting to the parent of the current file.    |
+    #  | :Cfind            | Run find and load the results into the quickfix list.                |
+    #  | :Clocate          | Run locate and load the results into the quickfix list.              |
+    #  | :Lfind / :Llocate | Like above, but use the location list.                               |
+    #  | :Wall             | Write every open window. Handy for kicking off tools like guard.     |
+    #  | :SudoWrite        | Write a privileged file with sudo.                                   |
+    #  | :SudoEdit         | Edit a privileged file with sudo.                                    |
+    #  |-------------------|----------------------------------------------------------------------|
+
+#  ================= plantuml-previewer.vim =================
+    #  +---------------------------+-------------+
+    #  | Command                   | Action      |
+    #  +===========================+=============+
+    #  | :PlantumlSave diagram.png | save to png |
+    #  | :PlantumlSave diagram.svg | save to svg |
+    #  +---------------------------+-------------+
+
+#  ====================================================== Plugin KeyBindings End
