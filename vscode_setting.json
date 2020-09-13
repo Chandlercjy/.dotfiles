@@ -1,0 +1,70 @@
+{
+  "window.zoomLevel": 0,
+  "workbench.colorTheme": "Palenight Theme",
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "Fira Code, retina",
+  "vim.easymotion": true,
+  "vim.enableNeovim": true,
+  "vim.foldfix": true,
+  "vim.hlsearch": true,
+  "vim.neovimPath": "/Users/chandler/.local/nvim-osx64/bin/nvim",
+  "vim.leader": "<space>",
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [";"],
+      "commands": ["editor.action.commentLine"]
+    }
+  ],
+
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [";"],
+      "commands": ["editor.action.commentLine"]
+    },
+    {
+      "before": ["?"],
+      "commands": ["editor.action.showHover"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["editor.action.formatDocument"]
+    },
+    {
+      "before": ["]", "b"],
+      "commands": ["workbench.action.nextEditor"]
+    },
+    {
+      "before": ["[", "b"],
+      "commands": ["workbench.action.previousEditor"]
+    },
+    {
+      "before": ["q"],
+      "commands": [":wq"]
+    },
+    {
+      "before": ["<leader>", "h"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["t"],
+      "after": ["<leader>", "<leader>", "s"]
+    },
+    {
+      "before": ["<C-w>", "m"],
+      "commands": ["workbench.action.maximizeEditor"]
+    },
+    {
+      "before": ["<leader>", "v", "d"],
+      "commands": ["workbench.action.openDefaultKeybindingsFile"]
+    },
+    {
+      "before": ["<leader>", "v", "i"],
+      "commands": ["workbench.action.openSettingsJson"]
+    }
+  ],
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.activityBar.visible": false,
+}
+
