@@ -1,5 +1,6 @@
-set ignorecase
+st ignorecase
 set incsearch
+set ic
 set history
 set viminfo+=!
 set undolevels=1000

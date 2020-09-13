@@ -1,68 +1,59 @@
 {
-    "printWidth": 80,
-    "eslintIntegration": true,
-    "stylelintIntegration": true,
-    "tabWidth": 4,
-    "singleQuote": true,
-    "semi": true,
-    "useTabs": false,
-    "proseWrap": "always",
+  "printWidth": 120,
+  "eslintIntegration": true,
+  "stylelintIntegration": true,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "semi": false,
+  "useTabs": false,
+  "proseWrap": "always",
 
-    "overrides": [
-        {
-            "files": [
-                "*.json",
-                ".eslintrc",
-                ".tslintrc",
-                ".prettierrc",
-                ".tern-project"
-            ],
-            "options": {
-                "parser": "json",
-                "tabWidth": 2
-            }
-        },
-        {
-            "files": "*.{css,sass,scss,less}",
-            "options": {
-                "parser": "css",
-                "tabWidth": 4
-            }
-        },
-        {
-            "files": "*.md",
-            "options": {
-                "parser": "markdown",
-                "semi": true,
-                "tabWidth": 2,
-                "jsxBracketSameLine": false,
-                "arrowParens": "avoid",
-                "bracketSpacing": true,
-                "singleQuote": true
-            }
-        },
-        {
-            "files": ["*.js"],
-            "options": {
-                "parser": "babylon",
-                "tabWidth": 4,
-                "singleQuote": true,
-                "bracketSpacing": true,
-                "jsxBracketSameLine": false,
-
-                "semi": true,
-                "useTabs": false
-            }
-        },
-        {
-            "files": ["*.ts"],
-            "options": {
-                "parser": "typescript",
-                "tabWidth": 4,
-                "singleQuote": true,
-                "semi": true,
-                "useTabs": false
-            }
-        }
-    ]
+  "overrides": [
+    {
+      "files": ["*.json", ".eslintrc", ".tslintrc", ".prettierrc", ".tern-project"],
+      "options": {
+        "parser": "json",
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.{css,sass,scss,less}",
+      "options": {
+        "parser": "css",
+        "tabWidth": 4
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown",
+        "printWidth": 200,
+        "tabWidth": 2,
+        "jsxBracketSameLine": false,
+        "arrowParens": "avoid",
+        "bracketSpacing": true,
+        "singleQuote": true
+      }
+    },
+    {
+      "files": ["*.js"],
+      "options": {
+        "parser": "babylon",
+        "tabWidth": 2,
+        "singleQuote": true,
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "useTabs": false
+      }
+    },
+    {
+      "files": ["*.ts"],
+      "options": {
+        "parser": "typescript",
+        "tabWidth": 2,
+        "singleQuote": true,
+        "useTabs": false
+      }
+    }
+  ]
 }
