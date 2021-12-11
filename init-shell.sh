@@ -8,25 +8,13 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 
-# Plugin
-if [[ $(ps $$ | grep $$ | awk '{print $5}') == '-zsh' ]]; then
-    DISABLE_AUTO_TITLE="true"
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-elif [[ $(ps $$ | grep $$ | awk '{print $5}') == 'bash' ]]; then
-    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-fi
-
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
-
 if [ -n "$TMUX" ]; then
     export TERM=screen-256color
 fi
 
 
-# =================== 取消brew自动更新 =====================
-export HOMEBREW_NO_AUTO_UPDATE=true
-
 # ========================= Alias ==========================
+alias lg="lazygit"
 alias v="nvim"
 alias ll="ls -la -h"
 

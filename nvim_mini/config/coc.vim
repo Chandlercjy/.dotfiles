@@ -3,7 +3,7 @@
 " curl --compressed -o- -L https://yarnpkg.com/install.sh | bash " Install yarn
 
 function! InstallCocPlugin()
-    :CocInstall coc-python
+    :CocInstall coc-pyright
                 \ coc-tsserver
                 \ coc-java
                 \ coc-yaml
@@ -16,6 +16,7 @@ function! InstallCocPlugin()
                 \ coc-json
                 \ coc-vimlsp
                 \ coc-imselect
+                \ coc-marketplace
 endf
 
 function! s:show_documentation()
