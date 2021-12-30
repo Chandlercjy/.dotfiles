@@ -34,8 +34,13 @@
 
     func! AsyncRun_Code()
         silent exec "w"
+        echo &filetype
         if &filetype == 'python'
             :AsyncRun -raw time python3 %
+        elseif &filetype == 'rust'
+            :AsyncRun -raw cargo run
+        elseif &filetype == 'rc'
+            :AsyncRun -raw rustc % && ./%<
         elseif &filetype == 'cpp'
             :AsyncRun -raw g++ -std=c++17 -Wall % -o %< && ./%<
         elseif &filetype == 'c'

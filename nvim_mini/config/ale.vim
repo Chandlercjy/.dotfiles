@@ -18,6 +18,7 @@
                 \   'go': ['gofmt','goimports','remove_trailing_lines','trim_whitespace'],
                 \   'cmake': ['cmakeformat','remove_trailing_lines','trim_whitespace'],
                 \   'yaml': ['prettier','remove_trailing_lines','trim_whitespace'],
+                \   'rust': ['rustfmt','remove_trailing_lines','trim_whitespace'],
                 \}
 
 
